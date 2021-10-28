@@ -61,7 +61,7 @@ void serialEvent3() {
         case midi:: AfterTouchPoly:
           noteByte = MIDI2.getData1();
           velocityByte = MIDI2.getData2();
-          parameterchange(noteByte, velocityByte);
+          parameterchange(noteByte, velocityByte); //paraméter setting!!!
           break;
         case midi:: ControlChange:
           noteByte = MIDI2.getData1();
@@ -262,23 +262,23 @@ void parameterchange(byte parameter, byte value) {
     case 107: reverbtime = value * 26; break;
     case 108: reverblevel = value; break;
     case 109: level = value; break;
-    case 110: volume = value * 9; break;
+    case 110: volume = value * 9; break; //correczion in 1024 value is overload
     case 111: alg = value; break;
     case 112: revalg = value; break;
     case 113: choruslevel = value; break;
     case 114: chorusalg = value; break;
-    case 115: chorustime = value; break;
-    case 116:  break;
-    case 117: break;
+    case 115: chorustime = value; break; //no soundbank parameter
+    case 116:  break; //free
+    case 117: break; //free
     case 118: oplfo = value; break;
     case 119: oplfo2max = value; break;
     case 120: oplfo4max = value; break;
     case 121: oplfo6max = value; break;
     case 122: lfofreq = value; break;
-    case 123: freq1 = value * 100;  break;
-    case 124: freq2 = value * 100;  break;
-    case 125: break;
-    case 126:
+    case 123: freq1 = value * 100;  break; //is not  soundbank parameter!
+    case 124: freq2 = value * 100;  break;c not//is not soundbank parameter!
+    case 125: break; //free
+    case 126: 
       if (value == 1) {
         sendparameter();
       }
