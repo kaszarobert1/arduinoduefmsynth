@@ -1,11 +1,13 @@
 //-----------------------------------SOUNDBANK----------------------------------------------
 void program0() {
-  //shift= 1;
+  fixfreqstep = 100;
   alg = 1;
   chorusalg = 64;
   choruslevel = 8;
   fixfreqstep = 100;
   frame = 2;
+  lfo1max = 64;
+  lfofreq = 1;
   level = 4;
   modulation = 3;
   notefixedop1 = true;
@@ -112,28 +114,28 @@ void program0() {
   pichop6 = 1;
   pichrl = 1;
   pichrr = 1;
+  revalg = 4;
   reverblevel = 62;
   reverbtime = 3000;
-  reverblevel2 = 17;
-  reverbtime2 = 3000;
   szorzo = 10;
   volume = 1024;
-
-
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
+  stepprogchanged = 1;
   pachname = "P0:BIG BEN      ";
   menuoldal = 1;
   menukiir();
 }
 
 void program1() {
-  //shift= 1;
+//shift=1;
   alg = 2;
   chorusalg = 64;
   choruslevel = 4;
   fixfreqstep = 101;
-  lfofreq = 1;
-  lfo1max = 64;
   frame = 1;
+  lfo1max = 64;
+  lfofreq = 1;
   level = 5;
   modulation = 12;
   notefixedop1 = true;
@@ -236,27 +238,32 @@ void program1() {
   pichop2 = 0;
   pichop3 = 0;
   pichop4 = 0;
-  pichop4 = 1;
-  pichop5 = 0;
+  pichop5 = 1;
   pichop6 = 0;
   pichrl = 1;
   pichrr = 1;
+  revalg = 4;
   reverblevel = 12;
   reverbtime = 3000;
   szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P1:KOTO1        ";
   menuoldal = 1;
   menukiir();
 }
+
 void program2() {
-  //shift= 1;
+//shift=1;
   alg = 1;
   chorusalg = 64;
   choruslevel = 4;
   fixfreqstep = 101;
   frame = 1;
+  lfo1max = 64;
+  lfofreq = 1;
   level = 6;
   modulation = 12;
   notefixedop1 = true;
@@ -359,15 +366,17 @@ void program2() {
   pichop2 = 0;
   pichop3 = 0;
   pichop4 = 0;
-  pichop4 = 1;
   pichop5 = 0;
   pichop6 = 0;
   pichrl = 1;
   pichrr = 1;
+  revalg = 4;
   reverblevel = 1;
   reverbtime = 3000;
   szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P2:KOTO2        ";
   menuoldal = 1;
@@ -375,12 +384,16 @@ void program2() {
 }
 
 void program3() {
-  fixfreqstep = 100;
+//shift=1;
   alg = 1;
   chorusalg = 64;
   choruslevel = 8;
+  fixfreqstep = 101;
   frame = 1;
+  lfo1max = 64;
+  lfofreq = 1;
   level = 8;
+  modulation=3;
   notefixedop1 = true;
   notefixedop2 = true;
   notefixedop3 = true;
@@ -394,6 +407,7 @@ void program3() {
   op1d2l = 30;
   op1d2r = 10;
   op1generatorfreq = 14;
+  op1generatorfreqfix = 127 * 40000;
   op1rl = 30;
   op1rr = 40;
   op1veloc = 16;
@@ -401,7 +415,12 @@ void program3() {
   op1waveform = 1;
   op2al = 200;
   op2ar = 5;
+  op2d1l = 82;
+  op2d1r = 127;
+  op2d2l = 127;
+  op2d2r = 127;
   op2generatorfreq = 28;
+  op2generatorfreqfix = 127 * 40000;
   op2rl = 10;
   op2rr = 1;
   op2veloc = 8;
@@ -409,7 +428,12 @@ void program3() {
   op2waveform = 2;
   op3al = 30;
   op3ar = 2;
+  op3d1l = 1;
+  op3d1r = 127;
+  op3d2l = 1;
+  op3d2r = 1;
   op3generatorfreq = 28;
+  op3generatorfreqfix = 127 * 40000;
   op3rl = 1;
   op3rr = 10;
   op3veloc = 16;
@@ -422,6 +446,7 @@ void program3() {
   op4d2l = 30;
   op4d2r = 10;
   op4generatorfreq = 14;
+  op4generatorfreqfix = 127 * 40000;
   op4rl = 20;
   op4rr = 10;
   op4veloc = 16;
@@ -434,6 +459,7 @@ void program3() {
   op5d2l = 14;
   op5d2r = 4;
   op5generatorfreq = 7;
+  op5generatorfreqfix = 127 * 40000;
   op5rl = 5;
   op5rr = 4;
   op5veloc = 8;
@@ -446,6 +472,7 @@ void program3() {
   op6d2l = 8;
   op6d2r = 5;
   op6generatorfreq = 14;
+  op6generatorfreqfix = 127 * 40000;
   op6rl = 7;
   op6rr = 9;
   op6veloc = 16;
@@ -471,10 +498,13 @@ void program3() {
   pichop6 = 0;
   pichrl = 0;
   pichrr = 30;
+  revalg = 4;
   reverblevel = 8;
   reverbtime = 3000;
   szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P3:PAN PIPE";
   menuoldal = 1;
@@ -482,11 +512,14 @@ void program3() {
 }
 
 void program4() {
-  fixfreqstep = 100;
+//shift=1;
   alg = 1;
   chorusalg = 64;
   choruslevel = 8;
+  fixfreqstep = 101;
   frame = 6;
+  lfo1max = 64;
+  lfofreq = 1;
   level = 10;
   modulation = 1;
   notefixedop1 = true;
@@ -502,26 +535,20 @@ void program4() {
   op1d2l = 40;
   op1d2r = 100;
   op1generatorfreq = 7;
+  op1generatorfreqfix = 127 * 40000;
   op1rl = 30;
   op1rr = 100;
   op1veloc = 8;
   op1volume = 8;
   op1waveform = 11;
-  op2al = 100;
   op2al = 6;
-  op2ar = 1;
   op2ar = 32;
-  op2d1l = 100;
   op2d1l = 45;
-  op2d1r = 100;
   op2d1r = 54;
-  op2d2l = 28;
   op2d2l = 80;
-  op2d2r = 100;
   op2d2r = 52;
   op2generatorfreq = 7;
   op2generatorfreqfix = 94 * 40000;
-  op2rl = 43;
   op2rl = 70;
   op2rr = 80;
   op2veloc = 2;
@@ -534,6 +561,7 @@ void program4() {
   op3d2l = 30;
   op3d2r = 100;
   op3generatorfreq = 7;
+  op3generatorfreqfix = 127 * 40000;
   op3rl = 1;
   op3rr = 100;
   op3veloc = 2;
@@ -546,16 +574,14 @@ void program4() {
   op4d2l = 80;
   op4d2r = 80;
   op4generatorfreq = 14;
+  op4generatorfreqfix = 127 * 40000;
   op4rl = 60;
   op4rr = 100;
   op4veloc = 8;
   op4volume = 8;
   op4waveform = 11;
-  op5al = 3;
   op5al = 40;
-  op5ar = 100;
   op5ar = 3;
-  op5d1l = 24;
   op5d1l = 50;
   op5d1r = 40;
   op5d2l = 14;
@@ -574,6 +600,7 @@ void program4() {
   op6d2l = 8;
   op6d2r = 5;
   op6generatorfreq = 7;
+  op6generatorfreqfix = 127 * 40000;
   op6rl = 7;
   op6rr = 9;
   op6veloc = 2;
@@ -599,22 +626,28 @@ void program4() {
   pichop6 = 0;
   pichrl = 50;
   pichrr = 20;
+revalg = 4;
   reverblevel = 9;
   reverbtime = 3000;
   szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
-
   pachname = "P4:BRASS TVA  ";
   menuoldal = 1;
   menukiir();
 }
 
 void program5() {
-  //shift= 1;
-  fixfreqstep = 100;
+//shift=1;
   alg = 1;
+  chorusalg = 64;
+  choruslevel = 8;
+  fixfreqstep = 100;
   frame = 1;
+  lfo1max = 64;
+  lfofreq = 1;
   level = 4;
   modulation = 13;
   notefixedop1 = true;
@@ -643,7 +676,6 @@ void program5() {
   op2d2l = 34;
   op2d2r = 39;
   op2generatorfreq = 7;
-  op2generatorfreqfix = 1 * 40000;
   op2generatorfreqfix = 127 * 40000;
   op2rl = 1;
   op2rr = 61;
@@ -654,9 +686,9 @@ void program5() {
   op3ar = 5;
   op3d1l = 74;
   op3d1r = 1;
+  op3d2l = 30;
   op3d2r = 1;
   op3generatorfreq = 1;
-  op3generatorfreqfix = 1 * 40000;
   op3generatorfreqfix = 66 * 40000;
   op3rl = 1;
   op3rr = 1;
@@ -711,6 +743,7 @@ void program5() {
   pichd1l = 1;
   pichd1r = 1;
   pichd2l = 1;
+  pichd2r = 20;
   picheglevel = 1 * 200;
   pichkezd = 1;
   pichop1 = 0;
@@ -721,19 +754,21 @@ void program5() {
   pichop6 = 0;
   pichrl = 1;
   pichrr = 1;
+  revalg = 4;
   reverblevel = 8;
   reverbtime = 3000;
   szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
-
   pachname = "P5:Horror Sound ";
   menuoldal = 1;
   menukiir();
 }
 
 void program6() {
-  szorzo = 15;
+//shift=1;
   alg = 4;
   chorusalg = 64;
   choruslevel = 8;
@@ -764,8 +799,14 @@ void program6() {
   op1waveform = 2;
   op2al = 127;
   op2ar = 1;
+  op2d1l = 62;
+  op2d1r = 37;
+  op2d2l = 34;
+  op2d2r = 39;
   op2generatorfreq = 12;
   op2generatorfreqfix = 1 * 40000;
+  op2rl = 1;
+  op2rr = 61;
   op2veloc = 61;
   op2volume = 36;
   op2waveform = 2;
@@ -794,7 +835,6 @@ void program6() {
   op4rr = 10;
   op4veloc = 44;
   op4volume = 19;
-  op4waveform = 4;
   op4waveform = 6;
   op5al = 127;
   op5ar = 1;
@@ -845,7 +885,10 @@ void program6() {
   revalg = 4;
   reverblevel = 8;
   reverbtime = 3000;
+  szorzo = 15;
   volume = 127 * 16;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P6:FM Bass";
   menuoldal = 1;
@@ -853,26 +896,21 @@ void program6() {
 }
 
 void program7() {
-  fixfreqstep = 100;
-  //shift= 1;
+//shift=1;
   alg = 1;
   chorusalg = 64;
   choruslevel = 8;
-  frame = 10;
+  fixfreqstep = 40;
   frame = 5;
   level = 6;
+  lfofreq = 1;
+  lfo1max = 103;
   modulation = 4;
-  notefixedop1 = 1;
   notefixedop1 = true;
-  notefixedop2 = 1;
   notefixedop2 = true;
-  notefixedop3 = 1;
   notefixedop3 = true;
-  notefixedop4 = 1;
   notefixedop4 = true;
-  notefixedop5 = 1;
   notefixedop5 = true;
-  notefixedop6 = 1;
   notefixedop6 = true;
   op1al = 104;
   op1ar = 0;
@@ -884,127 +922,84 @@ void program7() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 0;
   op1rr = 63;
-  op1veloc = 15;
   op1veloc = 16;
-  op1volume = 1;
   op1volume = 18;
-  op1waveform = 1;
   op1waveform = 7;
   op2al = 58;
   op2ar = 1;
   op2d1l = 56;
   op2d1r = 46;
+  op2d2l = 34;
   op2d2r = 42;
-  op2generatorfreq = 14;
   op2generatorfreq = 28;
   op2generatorfreqfix = 1 * 40000;
   op2rl = 1;
   op2rr = 44;
-  op2veloc = 28;
   op2veloc = 8;
-  op2volume = 17;
   op2volume = 34;
-  op2waveform = 2;
   op2waveform = 4;
   op3al = 76;
   op3ar = 1;
   op3d1l = 1;
-  op3generatorfreq = 1;
+  op3d1r = 127;
+  op3d2l = 127;
+  op3d2r = 127;
   op3generatorfreq = 70;
-  op3generatorfreqfix = 1 * 40000;
   op3generatorfreqfix = 41 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 16;
   op3veloc = 25;
-  op3volume = 1;
   op3volume = 4;
-  op3waveform = 2;
   op3waveform = 6;
   op4al = 101;
-  op4ar = 0;
   op4ar = 58;
-  op4d1l = 127;
   op4d1l = 83;
-  op4d1r = 127;
   op4d1r = 68;
-  op4d2l = 127;
   op4d2l = 58;
-  op4d2r = 127;
   op4d2r = 53;
   op4generatorfreq = 14;
   op4generatorfreqfix = 1 * 40000;
   op4rl = 0;
-  op4rr = 127;
   op4rr = 38;
   op4veloc = 16;
-  op4veloc = 22;
   op4volume = 40;
-  op4waveform = 1;
   op4waveform = 2;
-  op5al = 1;
-  op5al = 127;
   op5al = 59;
   op5ar = 1;
-  op5d1l = 1;
-  op5d1l = 34;
   op5d1l = 50;
-  op5d1r = 1;
-  op5d1r = 20;
   op5d1r = 50;
-  op5d2l = 1;
-  op5d2l = 22;
   op5d2l = 50;
-  op5d2r = 1;
-  op5d2r = 23;
   op5d2r = 50;
-  op5generatorfreq = 1;
-  op5generatorfreq = 28;
   op5generatorfreq = 70;
-  op5generatorfreqfix = 1 * 40000;
   op5generatorfreqfix = 10 * 40000;
   op5rl = 1;
-  op5rr = 1;
-  op5rr = 21;
   op5rr = 50;
   op5veloc = 2;
   op5volume = 2;
   op5waveform = 2;
-  op6al = 0;
-  op6al = 26;
   op6al = 50;
-  op6ar = 1;
   op6ar = 21;
-  op6d1l = 1;
   op6d1l = 45;
-  op6d1r = 1;
   op6d1r = 50;
-  op6d2l = 1;
   op6d2l = 50;
-  op6d2r = 1;
   op6d2r = 50;
-  op6generatorfreq = 1;
-  op6generatorfreq = 28;
   op6generatorfreq = 7;
-  op6generatorfreqfix = 1 * 40000;
-  op6generatorfreqfix = 102 * 40000;
   op6generatorfreqfix = 127 * 40000;
   op6rl = 1;
   op6rr = 1;
   op6veloc = 16;
   op6volume = 21;
-  op6waveform = 1;
   op6waveform = 2;
   oplfo = 1;
   oplfo2max = 127;
   oplfo4max = 127;
   oplfo6max = 127;
+  pichal = 0;
   pichal = 50;
   pichar = 20;
   pichd1l = 100;
   pichd1r = 20;
   pichd2l = 50;
-  picheglevel = 10 * 2000;
   picheglevel = 17 * 200;
   pichkezd = 1;
   pichop1 = 1;
@@ -1020,21 +1015,24 @@ void program7() {
   reverbtime = 3000;
   szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P7:Scotland Pipe";
   menuoldal = 1;
   menukiir();
 }
 
-
 void program8() {
-
+//shift=1;
   alg = 2;
   chorusalg = 64;
   choruslevel = 8;
   fixfreqstep = 40;
   frame = 1;
   level = 5;
+  lfofreq = 1;
+  lfo1max = 103;
   modulation = 3;
   notefixedop1 = true;
   notefixedop2 = true;
@@ -1056,6 +1054,11 @@ void program8() {
   op1waveform = 2;
   op2al = 127;
   op2ar = 1;
+  op2ar = 1;
+  op2d1l = 56;
+  op2d1r = 46;
+  op2d2l = 34;
+  op2d2r = 42;
   op2generatorfreq = 14;
   op2generatorfreqfix = 1 * 40000;
   op2veloc = 61;
@@ -1063,6 +1066,9 @@ void program8() {
   op3al = 127;
   op3ar = 1;
   op3d1l = 127;
+  op3d1r = 127;
+  op3d2l = 127;
+  op3d2r = 127;
   op3d1r = 127;
   op3d2l = 127;
   op3d2r = 127;
@@ -1135,21 +1141,26 @@ void program8() {
   revalg = 4;
   reverblevel = 8;
   reverbtime = 3000;
+  szorzo = 10;
   volume = 1024;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
-
   pachname = "P8:Brass 1";
   menuoldal = 1;
   menukiir();
 }
 
 void program9() {
-  fixfreqstep = 100;
+//shift=1;
   alg = 4;
   chorusalg = 64;
   choruslevel = 8;
+  fixfreqstep = 100;
   frame = 1;
   level = 1;
+  lfofreq = 1;
+  lfo1max = 103;
   modulation = 2;
   notefixedop1 = true;
   notefixedop2 = true;
@@ -1188,6 +1199,7 @@ void program9() {
   op3d1l = 74;
   op3d1r = 1;
   op3d2r = 1;
+  op3d2r = 127;
   op3generatorfreq = 1;
   op3generatorfreqfix = 1 * 40000;
   op3rl = 1;
@@ -1243,6 +1255,7 @@ void program9() {
   pichd1l = 1;
   pichd1r = 1;
   pichd2l = 1;
+  pichd2r = 100;
   picheglevel = 1 * 200;
   pichkezd = 1;
   pichop1 = 0;
@@ -1258,6 +1271,8 @@ void program9() {
   reverbtime = 3000;
   szorzo = 10;
   volume = 127 * 18;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P9:LFO Filter ";
   menuoldal = 1;
@@ -1265,6 +1280,7 @@ void program9() {
 }
 
 void program10() {
+//shift=1;
   alg = 4;
   chorusalg = 64;
   choruslevel = 8;
@@ -1295,6 +1311,10 @@ void program10() {
   op1waveform = 2;
   op2al = 127;
   op2ar = 1;
+  op2d1l = 62;
+  op2d1r = 37;
+  op2d2l = 34;
+  op2d2r = 39;
   op2generatorfreq = 14;
   op2generatorfreqfix = 1 * 40000;
   op2veloc = 61;
@@ -1305,6 +1325,8 @@ void program10() {
   op3d1l = 127;
   op3d1r = 127;
   op3d2l = 127;
+  op3d2r = 127;
+  op3d2r = 1;
   op3d2r = 127;
   op3generatorfreq = 28;
   op3generatorfreqfix = 1 * 40000;
@@ -1325,7 +1347,6 @@ void program10() {
   op4rr = 10;
   op4veloc = 44;
   op4volume = 19;
-  op4waveform = 4;
   op4waveform = 6;
   op5al = 127;
   op5ar = 1;
@@ -1376,7 +1397,10 @@ void program10() {
   revalg = 4;
   reverblevel = 8;
   reverbtime = 3000;
+  szorzo = 10;
   volume = 127 * 16;
+  reverblevel2 = 17;
+  reverbtime2 = 3000;
   stepprogchanged = 1;
   pachname = "P10:FM Bass";
   menuoldal = 1;
