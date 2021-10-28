@@ -276,7 +276,7 @@ void parameterchange(byte parameter, byte value) {
     case 121: oplfo6max = value; break;
     case 122: lfofreq = value; break;
     case 123: freq1 = value * 100;  break; //is not  soundbank parameter!
-    case 124: freq2 = value * 100;  break;c not//is not soundbank parameter!
+    case 124: freq2 = value * 100;  break; //is not soundbank parameter!
     case 125: break; //free
     case 126: 
       if (value == 1) {
