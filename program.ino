@@ -641,7 +641,7 @@ revalg = 4;
 
 void program5() {
 //shift=1;
-  alg = 1;
+  alg = 3;
   chorusalg = 64;
   choruslevel = 8;
   fixfreqstep = 100;
