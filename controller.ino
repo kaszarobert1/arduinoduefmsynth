@@ -10,9 +10,7 @@ bool elozogomb8val = true;
 
 void vezerlok() {
   //potik sorrendje: 4 3 2 1 5
-
-  volume = analogRead(analogPin0) << 4;
- 
+  volume = analogRead(analogPin0) << 4; 
   lfofreq = analogRead(analogPin2) >> 6;
   // op1generatorfreq = analogRead(analogPin1);
  // pichband( 0, analogRead(analogPin1)>>7);
@@ -47,9 +45,8 @@ void vezerlok() {
     int gomb6val = digitalRead(gomb5);
     int gomb7val = digitalRead(gomb7);
     int gomb8val = digitalRead(gomb8);
-  
-
 */
+  
   //menufel
   if (elozogomb1val != gomb1val) {
     if (gomb1val == false) {
@@ -67,7 +64,7 @@ void vezerlok() {
 
   //menule
   if (elozogomb2val != gomb2val) {
-    if (gomb1val == false) {
+    if (gomb2val == false) {
       if (menuoldal > 1)
       {
         menuoldal--;
@@ -86,12 +83,10 @@ void vezerlok() {
       {
         program++;
         programchange(program);
-
       } else {
         program = 0;
         programchange(program);
       }
-
     }
     elozogomb3val = gomb3val;
   }
@@ -104,12 +99,10 @@ void vezerlok() {
       {
         program--;
         programchange(program);
-
       } else {
         program = 10;
         programchange(program);
       }
-
     }
     elozogomb4val = gomb4val;
   }
@@ -117,13 +110,11 @@ void vezerlok() {
   //incrementvalue
   if (elozogomb5val != gomb5val) {
     if (gomb5val == false) {
-
       if (inc == false)
       {
         inc = true;
         menukiir();
       }
-
     }
     elozogomb5val = gomb5val;
   }
@@ -131,13 +122,11 @@ void vezerlok() {
   //decrementvalue
   if (elozogomb6val != gomb6val) {
     if (gomb6val == false) {
-
       if (dec == false)
       {
         dec = true;
         menukiir();
       }
-
     }
     elozogomb6val = gomb6val;
   }
@@ -169,6 +158,4 @@ void vezerlok() {
     }
     elozogomb8val = gomb8val;
   }
-
-
 }
