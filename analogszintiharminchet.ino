@@ -5,6 +5,7 @@
 */
 #include <Audio.h>
 #include <MIDI.h>
+//#include <MIDIUSB.h>
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial3, MIDI2);
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
@@ -12,6 +13,9 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 unsigned long starttime, stoptime, eltelttime, eltelttime2 ;
 
 //audio
+long portamento = 0;
+byte mosthang = 0;
+byte elozohang = 0;
 uint32_t maxminta = 65535;
 const uint16_t audiobuffersize = 32;
 uint16_t buffermeret = audiobuffersize;
@@ -22,7 +26,12 @@ short oldbufferbeLeft2 = 0;
 short oldbufferbeRight = 0;
 short oldbufferbeRight2 = 0;
 uint32_t mintavetelifreqstereo = 88200;
-
+int kitoltes0 = 1;
+int kitoltes1 = 1;
+int kitoltes2 = 1;
+int kitoltes3 = 1;
+int kitoltes4 = 1;
+int kitoltes5 = 1;
 //effect
 long delaybuffer[3000];
 uint16_t elozodelaybufferindex;
@@ -31,7 +40,8 @@ uint16_t delaybufferindex = 0;
 uint16_t delaybufferindex2 = 1;
 uint16_t reverblevel = 32;
 uint16_t reverblevel2 = 32;
-uint16_t choruslevel = 32;
+byte choruslevel = 3;
+byte chorusfreq = 2;
 uint16_t chorusalg = 64;
 uint16_t chorustime = 3000;
 uint16_t reverbtime = 1000;
@@ -93,6 +103,7 @@ byte midichan = 1;
 byte program = 8;
 byte alg = 1;
 #define GORBE_SIZE  2048
+//const uint16_t  GORBE_SIZE =16284;
 uint16_t op1gorbe[GORBE_SIZE];
 uint16_t op2gorbe[GORBE_SIZE];
 uint16_t op3gorbe[GORBE_SIZE];
@@ -169,7 +180,7 @@ uint16_t op6d2l = 30;
 uint16_t op6d2r = 10;
 uint16_t op6rl = 0;
 uint16_t op6rr = 10;
-int16_t pichkezd = 0;
+int16_t pichkezd = 63;
 int16_t pichal = 6;
 int16_t pichar = 10;
 int16_t pichd1l = 20;
@@ -201,6 +212,7 @@ uint16_t frame = 8;
 byte modulation = 1;
 unsigned long ido;
 unsigned long elozoido = 0;
+unsigned long elozoinit = 0;
 byte commandByte;
 byte noteByte;
 byte velocityByte;
@@ -216,7 +228,7 @@ int16_t zajfg[FG_SIZE];
 int16_t fmharomszogfg[FG_SIZE];
 int16_t fmfureszfg[FG_SIZE];
 int16_t fmnegyszogfg[FG_SIZE];
-int16_t fmzajfg[FG_SIZE];
+//int16_t fmzajfg[FG_SIZE];
 int16_t douplafg[FG_SIZE];
 int16_t triplafg[FG_SIZE];
 int16_t generator1[FG_SIZE];
@@ -225,10 +237,22 @@ int16_t generator3[FG_SIZE];
 int16_t generator4[FG_SIZE];
 int16_t generator5[FG_SIZE];
 int16_t generator6[FG_SIZE];
+int16_t pwmfg[FG_SIZE];
+//int16_t pwmfg2[FG_SIZE];
+
 //int16_t generator7[FG_SIZE];
 //int16_t generator8[FG_SIZE];
-//byte lfo4array[40]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
-//byte lfo4arrayindex=0;
+byte lfoarray[128] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+//  byte lfoarray[64] = { 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,22,23,24,25,26,27,28,29,30,31,32,31,30,29,28,27,26,25,24,23,22,21,20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+byte lfoarray2[64] = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10, 11, 13, 15, 18, 22, 26, 30, 34, 39, 44, 39, 34, 30, 26, 27, 26, 22, 18, 15, 13, 11, 10, 9, 8, 7, 6, 6, 5, 5, 4, 4, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
+byte lfoarray3[64] = { 1, 5, 3, 8, 2, 2, 32, 21, 3, 18, 25, 27, 21, 5, 9, 1, 6, 7, 18, 30, 24, 26, 10, 1, 5, 27, 19, 22, 6, 30, 34, 39, 17, 16, 19, 2, 26, 27, 2, 22, 18, 15, 13, 3, 15, 9, 8, 17, 26, 6, 15, 25, 4, 4, 33, 3, 3, 12, 24, 2, 11, 1, 19, 13 };
+byte lfoarrayindex = 0;
+byte lfofreq = 14;
+byte lfovolume = 0;
+byte lfo2arrayindex = 0;
+byte lfo2freq = 14;
+byte lfo2volume = 0;
+
 
 int16_t fixfreqstep;
 uint16_t volume = 1024;
@@ -289,7 +313,7 @@ uint32_t sinewave52freq;
 uint32_t sinewave53freq;
 uint32_t sinewave54freq;
 uint32_t wavefreq[8];
-uint16_t picheglevel = 16384;
+uint32_t picheglevel = 16384;
 byte pichop1 = 0;
 byte pichop2 = 0;
 byte pichop3 = 0;
@@ -320,12 +344,12 @@ byte lfo4step = 1;
 byte oplfo6max = 127;
 byte oplfo6min = 0;
 byte lfo6step = 1;
-byte lfofreq = 10;
+
 bool op2lfofel = true;
 bool op4lfofel = true;
 bool op6lfofel = true;
 byte lfo4volume = 0;
-
+byte lcdfreq = 5;
 //bufferbe += sinusfg[((sinewaveptr[1] >> 22) + fmsinusfg[sinewaveptr[9] >> 22] * op2gorbe[gorbetime[0]] / op2volume) % 1024] * op1gorbe[gorbetime[0]] / ALVOLUME;
 #define ketop(freqmutato1, freqmutato2,op1gorbelevel,op1level,op2gorbelevel, op2level) (sinusfg[((freqmutato1 >> 22) + fmsinusfg[freqmutato2 >> 22] * op2gorbelevel / op2level) % FG_SIZE ] * op1gorbelevel / op1level)
 //#define ketoplow(freqmutato1, freqmutato2,op1gorbetime,op1level,op2gorbetime, op2level) (fmsinusfg[((freqmutato1 >> 22) + fmsinusfg[freqmutato2 >> 22] * op2gorbetime / op2level) % FG_SIZE ] * op1gorbetime / op1level)
@@ -345,8 +369,8 @@ byte lfo4volume = 0;
 #define egyopgenF(freqmutato6,op6level)  (generator6[freqmutato6 >> 22] *op6level>>12)
 //#define haromop(freqmutato1, freqmutato2,freqmutato3,op1gorbelevel,op1level,op2gorbelevel, op2level,op3gorbelevel, op3level)  (fmsinusfg[((freqmutato1 >> 22) + fmsinusfg[((freqmutato2 >> 22)+fmsinusfg[freqmutato3 >> 22]*op3gorbelevel )% 1024] * op2gorbelevel ) % 1024] * op1gorbelevel/ op1level)
 //bufferbe = y + delaybuffer[(delaybufferindex + lfo1volume) % reverbtime];
-#define yadddelay(bufferbe,delaybufferindex,lfo1volume,reverbtime) (bufferbe + delaybuffer[(delaybufferindex + lfo1volume) % reverbtime])
-#define yadddelay2(bufferbe,delaybufferindex2,lfo1volume,reverbtime2) (bufferbe + delaybuffer[(delaybufferindex2 + lfo1volume) % reverbtime2])
+#define yadddelay(bufferbe,delaybufferindex,lfovolume,reverbtime) (bufferbe + delaybuffer[(delaybufferindex + lfo1volume) % reverbtime])
+#define yadddelay2(bufferbe,delaybufferindex2,lfovolume,reverbtime2) (bufferbe + delaybuffer[(delaybufferindex2 + lfo1volume) % reverbtime2])
 // y = (freq1 * y + freq2 * bufferbe) >> 14;
 #define equalizer(y, freq1, freq2, bufferbe)((freq1 * y + freq2 * bufferbe)/10000)
 #define equalizer2(y2, freq1, freq2, bufferbe)((freq1 * y2 + freq2 * bufferbe)/10000)
@@ -360,9 +384,6 @@ byte lfo4volume = 0;
 
 
 void setup() {
-
-
-
   pinMode(gomb1, INPUT);
   pinMode(gomb2, INPUT);
   pinMode(gomb3, INPUT);
@@ -380,11 +401,16 @@ void setup() {
   lcd.setCursor(0, 1);
   lcd.print("  DigitalSynth  ");
   delay(400);
+  lcd.setCursor(0, 0);
+  lcd.print(" Firmvare: 0.41 ");
+  lcd.setCursor(0, 1);
+  lcd.print("                ");
+  delay(800);
   MIDI2.begin(MIDI_CHANNEL_OMNI);
   MIDI2.turnThruOff();
-  //Serial.begin(115200);
+  Serial.begin(115200);
   Serial2.begin(31250);
- // maxtime = maxtime;
+  // maxtime = maxtime;
   op1gorbeinit();
   op2gorbeinit();
   op3gorbeinit();
@@ -404,6 +430,7 @@ void setup() {
   fmfureszoginit();
   duplafginit();
   triplafginit();
+  pwminit();
   Audio.begin(mintavetelifreqstereo, buffermeret);
   programchange(program);
 
@@ -417,88 +444,43 @@ void setup() {
   #pragma GCC push_options
   #pragma GCC optimize("Os")
 */
+short buffer[audiobuffersize];
 void loop() {
-  short buffer[audiobuffersize];
   while (true) {
+    ido = micros();
+    serialEvent();
+    // serialEventUSB();
+    if (ido - elozoido > frame*1000) {
 
-    ido = millis();
-    serialEvent3();
-    if (ido - elozoido > frame) {
-
-      if (szamlalo >= lfofreq) {
+      //
+        
+      //
+      elozoido = ido;
+      if (szamlalo >= lcdfreq) {
         vezerlok();
         initprog();
-        //lfo1
-        if (lfo1fel) {
-          lfo1volume += lfo1step;
-          if (lfo1volume >= lfo1max - lfo1step) {
-            lfo1fel = false;
-
-          }
-        } else {
-          lfo1volume -= lfo1step;
-          if (lfo1volume <= lfo1min + lfo1step) {
-            lfo1fel = true;
-          }
-
-        }
-        /*
-          //   corrlfo1volume =lfo1volume-64;
-          //  invlfo1volume = 127 - lfo1volume;
-          //lfoop2volume
-          if (oplfo & 2 ) {
-          if (op2lfofel) {
-            op2volume += lfo2step;
-            if (op2volume >= oplfo2max) {
-              op2lfofel = false;
-            }
-          } else
-          {
-            op2volume -= lfo2step;
-            if (op2volume <= 0) {
-              op2lfofel = true;
-            }
-          }
-          }
-        *//*
-  //lfoop4volume
-  if (oplfo & 4 ) {
-  if (lfo4arrayindex>39){
-    lfo4arrayindex=-0;
-    }else{ lfo4arrayindex++;}
-   pichband(0, lfo4array[lfo4arrayindex]);
-  }
-*/
-        /*
-                //lfoop6volume
-                if (oplfo & 8) {
-                  if (op6lfofel) {
-                    op6volume += lfo6step;
-                    if (op6volume >= oplfo6max) {
-                      op6lfofel = false;
-                    }
-                  } else {
-                    op6volume -= lfo6step;
-                    if (op6volume <= 0) {
-                      op6lfofel = true;
-                    }
-                  }
-
-                  //lfoopvolume End
-                } */
         szamlalo = 0;
       } else {
         szamlalo++;
       }
-      elozoido = ido;
+      //lfo
+      lfo1volume = (lfoarray[lfoarrayindex >> 1] >> choruslevel << 1) + 2;
+      lfoarrayindex += chorusfreq;
+      lfo2volume = lfoarray[lfo2arrayindex >> 1] << 1;
+      lfo2arrayindex += lfo2freq;
+      pichband(0, lfo2volume);
+      // picheglevel=picheglevel+lfo2volume*2000;
+
+      // Serial.println(String(lcdprint3( lfo2volume)) + " ");
+
+
       //gorbe leptetese ill leallitasa
       if (gorbetime[0] == maxtime0) {
         gorbetime[0] = -1;
+        ptrnullaz(0);
       } else {
         if (gorbetime[0] >= 0) {
-          if (gorbetime[0] == 0) {
-            ptrnullaz(0);
-          }
+
           if (gorbetime[0] != maxrelease0 - 1)  //what is the fuck :)
             gorbetime[0]++;
           op1level[0] = op1gorbe[gorbetime[0]] * op1volume * (waveveloc[0] / op1veloc);
@@ -512,11 +494,10 @@ void loop() {
 
       if (gorbetime[1] == maxtime1) {
         gorbetime[1] = -1;
+        ptrnullaz(1);
       } else {
         if (gorbetime[1] >= 0) {
-          if (gorbetime[1] == 0) {
-            ptrnullaz(1);
-          }
+
           if (gorbetime[1] != maxrelease1 - 1)
             gorbetime[1]++;
           op1level[1] = op1gorbe[gorbetime[1]] * op1volume * (waveveloc[1] / op1veloc);
@@ -530,11 +511,10 @@ void loop() {
 
       if (gorbetime[2] == maxtime2) {
         gorbetime[2] = -1;
+        ptrnullaz(2);
       } else {
         if (gorbetime[2] >= 0) {
-          if (gorbetime[2] == 0) {
-            ptrnullaz(2);
-          }
+
           if (gorbetime[2] != maxrelease2 - 1)
             gorbetime[2]++;
           op1level[2] = op1gorbe[gorbetime[2]] * op1volume * (waveveloc[2] / op1veloc);
@@ -545,14 +525,12 @@ void loop() {
           op6level[2] = op6gorbe[gorbetime[2]] * op6volume * (waveveloc[2] / op6veloc);
         }
       }
-
       if (gorbetime[3] == maxtime3) {
         gorbetime[3] = -1;
+        ptrnullaz(3);
       } else {
         if (gorbetime[3] >= 0) {
-          if (gorbetime[3] == 0) {
-            ptrnullaz(3);
-          }
+
           if (gorbetime[3] != maxrelease3 - 1)
             gorbetime[3]++;
           op1level[3] = op1gorbe[gorbetime[3]] * op1volume * (waveveloc[3] / op1veloc);
@@ -566,11 +544,10 @@ void loop() {
 
       if (gorbetime[4] == maxtime4) {
         gorbetime[4] = -1;
+        ptrnullaz(4);
       } else {
         if (gorbetime[4] >= 0) {
-          if (gorbetime[4] == 0) {
-            ptrnullaz(4);
-          }
+
           if (gorbetime[4] != maxrelease4 - 1)
             gorbetime[4]++;
           op1level[4] = op1gorbe[gorbetime[4]] * op1volume * (waveveloc[4] / op1veloc);
@@ -583,11 +560,10 @@ void loop() {
       }
       if (gorbetime[5] == maxtime5) {
         gorbetime[5] = -1;
+        ptrnullaz(5);
       } else {
         if (gorbetime[5] >= 0) {
-          if (gorbetime[5] == 0) {
-            ptrnullaz(5);
-          }
+
           if (gorbetime[5] != maxrelease5 - 1)
             gorbetime[5]++;
           op1level[5] = op1gorbe[gorbetime[5]] * op1volume * (waveveloc[5] / op1veloc);
@@ -598,305 +574,309 @@ void loop() {
           op6level[5] = op6gorbe[gorbetime[5]] * op6volume * (waveveloc[5] / op6veloc);
         }
       }
-    }
 
-    if (notefixedop1) {
-      sinewave1freq = wavefreq[0] * op1generatorfreq;
-      sinewave2freq = wavefreq[1] * op1generatorfreq;
-      sinewave3freq = wavefreq[2] * op1generatorfreq;
-      sinewave4freq = wavefreq[3] * op1generatorfreq;
-      sinewave5freq = wavefreq[4] * op1generatorfreq;
-      sinewave6freq = wavefreq[5] * op1generatorfreq;
-      // sinewave7freq = sinewave7freq * op1generatorfreq;
-      //sinewave8freq = sinewave8freq * op1generatorfreq;
-    } else {
-      sinewave1freq = op1generatorfreqfix * op1generatorfreq;
-      sinewave2freq = sinewave1freq;
-      sinewave3freq = sinewave1freq;
-      sinewave4freq = sinewave1freq;
-      sinewave5freq = sinewave1freq;
-      sinewave6freq = sinewave1freq;
-      // sinewave7freq = op1generatorfreqfix*op1generatorfreq;
-      //sinewave8freq =  op1generatorfreqfix*op1generatorfreq;
-    }
-    if (notefixedop2) {
-      sinewave9freq = wavefreq[0] * op2generatorfreq;
-      sinewave10freq = wavefreq[1] * op2generatorfreq;
-      sinewave11freq = wavefreq[2] * op2generatorfreq;
-      sinewave12freq = wavefreq[3] * op2generatorfreq;
-      sinewave13freq = wavefreq[4] * op2generatorfreq;
-      sinewave14freq = wavefreq[5] * op2generatorfreq;
-      // sinewave15freq = sinewave15freq * op1generatorfreq;
-      //sinewave16freq = sinewave16freq * op1generatorfreq;
-    } else {
-      sinewave9freq = op2generatorfreqfix * op2generatorfreq;
-      sinewave10freq = sinewave9freq;
-      sinewave11freq = sinewave9freq;
-      sinewave12freq = sinewave9freq;
-      sinewave13freq = sinewave9freq;
-      sinewave14freq = sinewave9freq;
-      // sinewave15freq = op2generatorfreqfix*op2generatorfreq;
-      //sinewave16freq = op2generatorfreqfix*op2generatorfreq;
-    }
-    if (notefixedop3) {
-      sinewave17freq = wavefreq[0] * op3generatorfreq;
-      sinewave18freq =  wavefreq[1] * op3generatorfreq;
-      sinewave19freq =  wavefreq[2] * op3generatorfreq;
-      sinewave20freq =  wavefreq[3] * op3generatorfreq;
-      sinewave21freq =  wavefreq[4] * op3generatorfreq;
-      sinewave22freq =  wavefreq[5] * op3generatorfreq;
-      // sinewave23freq = sinewave7freq * op3generatorfreq;
-      //sinewave24freq = sinewave8freq * op3generatorfreq;
-    } else {
-      sinewave17freq = op3generatorfreqfix * op3generatorfreq;
-      sinewave18freq = sinewave17freq;
-      sinewave19freq = sinewave17freq;
-      sinewave20freq = sinewave17freq;
-      sinewave21freq = sinewave17freq;
-      sinewave22freq = sinewave17freq;
-      // sinewave23freq = op3generatorfreqfix*op3generatorfreq;
-      //sinewave24freq = op3generatorfreqfix*op3generatorfreq;
-    }
-    if (notefixedop4) {
-      sinewave25freq = wavefreq[0] * op4generatorfreq;
-      sinewave26freq = wavefreq[1] * op4generatorfreq;
-      sinewave27freq = wavefreq[2] * op4generatorfreq;
-      sinewave28freq = wavefreq[3] * op4generatorfreq;
-      sinewave29freq = wavefreq[4] * op4generatorfreq;
-      sinewave30freq = wavefreq[5] * op4generatorfreq;
-      // sinewave31freq = sinewave7freq * op4generatorfreq;
-      //sinewave32freq = sinewave8freq * op4generatorfreq;
-    } else {
-      sinewave25freq = op4generatorfreqfix * op4generatorfreq;
-      sinewave26freq = sinewave25freq;
-      sinewave27freq = sinewave25freq;
-      sinewave28freq = sinewave25freq;
-      sinewave29freq = sinewave25freq;
-      sinewave30freq = sinewave25freq;
-      // sinewave31freq = sinewave7freqfix*op4generatorfreq;
-      //sinewave32freq = sinewave8freqfix*op4generatorfreq;
-    }
-    if (notefixedop5) {
-      sinewave33freq = wavefreq[0] * op5generatorfreq;
-      sinewave34freq = wavefreq[1] * op5generatorfreq;
-      sinewave35freq = wavefreq[2] * op5generatorfreq;
-      sinewave36freq = wavefreq[3] * op5generatorfreq;
-      sinewave37freq = wavefreq[4] * op5generatorfreq;
-      sinewave38freq = wavefreq[5] * op5generatorfreq;
-      // sinewave39freq = wavefreq[6] * op5generatorfreq;
-      //sinewave40freq = wavefreq[7] * op5generatorfreq;
-    } else {
-      sinewave33freq = op5generatorfreqfix * op5generatorfreq;
-      sinewave34freq =  sinewave33freq;
-      sinewave35freq =  sinewave33freq;
-      sinewave36freq =  sinewave33freq;
-      sinewave37freq =  sinewave33freq;
-      sinewave38freq =  sinewave33freq;
-      // sinewave38freq = sinewave33freq;
-      //sinewave40freq = sinewave33freq;
-    }
-    if (notefixedop6) {
-      sinewave41freq = wavefreq[0] * op6generatorfreq;
-      sinewave42freq = wavefreq[1] * op6generatorfreq;
-      sinewave43freq = wavefreq[2] * op6generatorfreq;
-      sinewave44freq = wavefreq[3] * op6generatorfreq;
-      sinewave45freq = wavefreq[4] * op6generatorfreq;
-      sinewave46freq = wavefreq[5] * op6generatorfreq;
-      // sinewave47freq = wavefreq[6] * op6generatorfreq;
-      // sinewave48freq = wavefreq[7] * op6generatorfreq;
-    } else {
-      sinewave41freq = op6generatorfreqfix * op6generatorfreq;
-      sinewave42freq = sinewave41freq;
-      sinewave43freq = sinewave41freq;
-      sinewave44freq = sinewave41freq;
-      sinewave45freq = sinewave41freq;
-      sinewave46freq = sinewave41freq;
-      // sinewave47freq = sinewave41freq;
-      //sinewave48freq =  sinewave41freq;
-    }
-    //picheg
+     
+   
+      
+     
+        
+      
 
-    switch (pichop1) {
-      case 0:
-        /*
-          for (int i=1;i<7;i++){
-          pich[i] = 0;
-          }
-        */
-        pich[1] = 0;
-        pich[2] = 0;
-        pich[3] = 0;
-        pich[4] = 0;
-        pich[5] = 0;
-        pich[6] = 0;
-        break;
-      case 1:
-        /*
-          for (int i=0;i<6;i++){
-          pich[i+1] = (pichgorbe[gorbetime[i]] - 50) * picheglevel;
-          }
-        */
-        pich[1] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-        pich[2] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-        pich[3] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-        pich[4] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-        pich[5] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-        pich[6] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
-        break;
-      case 2:
-        /*
-             for (int i=0;i<6;i++){
-                pich[i+1] = ~((pichgorbe[gorbetime[i]] - 50) * picheglevel - 1);
-               }
-        */
+      if (notefixedop1) {
+        sinewave1freq = wavefreq[0] * op1generatorfreq;
+        sinewave2freq = wavefreq[1] * op1generatorfreq;
+        sinewave3freq = wavefreq[2] * op1generatorfreq;
+        sinewave4freq = wavefreq[3] * op1generatorfreq;
+        sinewave5freq = wavefreq[4] * op1generatorfreq;
+        sinewave6freq = wavefreq[5] * op1generatorfreq;
+        //sinewave7freq = wavefreq[6] * op1generatorfreq;
+        //sinewave8freq = wavefreq[7] * op1generatorfreq;
+      } else {
+        sinewave1freq = op1generatorfreqfix * op1generatorfreq;
+        sinewave2freq = sinewave1freq;
+        sinewave3freq = sinewave1freq;
+        sinewave4freq = sinewave1freq;
+        sinewave5freq = sinewave1freq;
+        sinewave6freq = sinewave1freq;
+        //sinewave7freq = sinewave1freq;
+        //sinewave8freq = sinewave1freq;
+      }
+      if (notefixedop2) {
+        sinewave9freq = wavefreq[0] * op2generatorfreq;
+        sinewave10freq = wavefreq[1] * op2generatorfreq;
+        sinewave11freq = wavefreq[2] * op2generatorfreq;
+        sinewave12freq = wavefreq[3] * op2generatorfreq;
+        sinewave13freq = wavefreq[4] * op2generatorfreq;
+        sinewave14freq = wavefreq[5] * op2generatorfreq;
+        //sinewave15freq = wavefreq[6] * op2generatorfreq;
+        //sinewave16freq = wavefreq[7] * op2generatorfreq;
+      } else {
+        sinewave9freq = op2generatorfreqfix * op2generatorfreq;
+        sinewave10freq = sinewave9freq;
+        sinewave11freq = sinewave9freq;
+        sinewave12freq = sinewave9freq;
+        sinewave13freq = sinewave9freq;
+        sinewave14freq = sinewave9freq;
+        //sinewave15freq = sinewave9freq;
+        //sinewave16freq = sinewave9freq;
+      }
+      if (notefixedop3) {
+        sinewave17freq = wavefreq[0] * op3generatorfreq;
+        sinewave18freq =  wavefreq[1] * op3generatorfreq;
+        sinewave19freq =  wavefreq[2] * op3generatorfreq;
+        sinewave20freq =  wavefreq[3] * op3generatorfreq;
+        sinewave21freq =  wavefreq[4] * op3generatorfreq;
+        sinewave22freq =  wavefreq[5] * op3generatorfreq;
+        //sinewave23freq = wavefreq[6] * op3generatorfreq;
+        //sinewave24freq = wavefreq[7] * op3generatorfreq;
+      } else {
+        sinewave17freq = op3generatorfreqfix * op3generatorfreq;
+        sinewave18freq = sinewave17freq;
+        sinewave19freq = sinewave17freq;
+        sinewave20freq = sinewave17freq;
+        sinewave21freq = sinewave17freq;
+        sinewave22freq = sinewave17freq;
+        //sinewave23freq = sinewave17freq;
+        //sinewave24freq = sinewave17freq;
+      }
+      if (notefixedop4) {
+        sinewave25freq = wavefreq[0] * op4generatorfreq;
+        sinewave26freq = wavefreq[1] * op4generatorfreq;
+        sinewave27freq = wavefreq[2] * op4generatorfreq;
+        sinewave28freq = wavefreq[3] * op4generatorfreq;
+        sinewave29freq = wavefreq[4] * op4generatorfreq;
+        sinewave30freq = wavefreq[5] * op4generatorfreq;
+        //sinewave31freq = wavefreq[6] * op4generatorfreq;
+        //sinewave32freq = wavefreq[7] * op4generatorfreq;
+      } else {
+        sinewave25freq = op4generatorfreqfix * op4generatorfreq;
+        sinewave26freq = sinewave25freq;
+        sinewave27freq = sinewave25freq;
+        sinewave28freq = sinewave25freq;
+        sinewave29freq = sinewave25freq;
+        sinewave30freq = sinewave25freq;
+        //sinewave31freq = sinewave25freq;
+        //sinewave32freq =  sinewave25freq;
+      }
+      if (notefixedop5) {
+        sinewave33freq = wavefreq[0] * op5generatorfreq;
+        sinewave34freq = wavefreq[1] * op5generatorfreq;
+        sinewave35freq = wavefreq[2] * op5generatorfreq;
+        sinewave36freq = wavefreq[3] * op5generatorfreq;
+        sinewave37freq = wavefreq[4] * op5generatorfreq;
+        sinewave38freq = wavefreq[5] * op5generatorfreq;
+        // sinewave39freq = wavefreq[6] * op5generatorfreq;
+        //sinewave40freq = wavefreq[7] * op5generatorfreq;
+      } else {
+        sinewave33freq = op5generatorfreqfix * op5generatorfreq;
+        sinewave34freq =  sinewave33freq;
+        sinewave35freq =  sinewave33freq;
+        sinewave36freq =  sinewave33freq;
+        sinewave37freq =  sinewave33freq;
+        sinewave38freq =  sinewave33freq;
+        //sinewave39freq = sinewave33freq;
+        //sinewave40freq = sinewave33freq;
+      }
+      if (notefixedop6) {
+        sinewave41freq = wavefreq[0] * op6generatorfreq;
+        sinewave42freq = wavefreq[1] * op6generatorfreq;
+        sinewave43freq = wavefreq[2] * op6generatorfreq;
+        sinewave44freq = wavefreq[3] * op6generatorfreq;
+        sinewave45freq = wavefreq[4] * op6generatorfreq;
+        sinewave46freq = wavefreq[5] * op6generatorfreq;
+        // sinewave47freq = wavefreq[6] * op6generatorfreq;
+        // sinewave48freq = wavefreq[7] * op6generatorfreq;
+      } else {
+        sinewave41freq = op6generatorfreqfix * op6generatorfreq;
+        sinewave42freq = sinewave41freq;
+        sinewave43freq = sinewave41freq;
+        sinewave44freq = sinewave41freq;
+        sinewave45freq = sinewave41freq;
+        sinewave46freq = sinewave41freq;
+        // sinewave47freq = sinewave41freq;
+        //sinewave48freq =  sinewave41freq;
+      }
+      //picheg
 
-        pich[1] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-        pich[2] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-        pich[3] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-        pich[4] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-        pich[5] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-        pich[6] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
-        break;
-    }
-
-
-    switch (pichop2) {
-      case 0:
-        pich[9] = 0;
-        pich[10] = 0;
-        pich[11] = 0;
-        pich[12] = 0;
-        pich[13] = 0;
-        pich[14] = 0;
-        break;
-      case 1:
-        pich[9] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-        pich[10] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-        pich[11] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-        pich[12] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-        pich[13] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-        pich[14] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
-        break;
-      case 2:
-        pich[9] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-        pich[10] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-        pich[11] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-        pich[12] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-        pich[13] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-        pich[14] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
-        break;
-    }
-
-    switch (pichop3) {
-      case 0:
-        pich[17] = 0;
-        pich[18] = 0;
-        pich[19] = 0;
-        pich[20] = 0;
-        pich[21] = 0;
-        pich[22] = 0;
-        break;
-      case 1:
-        pich[17] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-        pich[18] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-        pich[19] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-        pich[20] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-        pich[21] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-        pich[22] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
-        break;
-      case 2:
-        pich[17] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-        pich[18] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-        pich[19] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-        pich[20] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-        pich[21] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-        pich[22] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
-        break;
-    }
-
-    switch (pichop4) {
-      case 0: break;
-        pich[25] = 0;
-        pich[26] = 0;
-        pich[27] = 0;
-        pich[28] = 0;
-        pich[29] = 0;
-        pich[30] = 0;
-      case 1:
-        pich[25] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-        pich[26] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-        pich[27] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-        pich[28] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-        pich[29] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-        pich[30] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
-        break;
-      case 2:
-        pich[25] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-        pich[26] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-        pich[27] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-        pich[28] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-        pich[29] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-        pich[30] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
-        break;
-    }
-    switch (pichop5) {
-      case 0:
-        pich[33] = 0;
-        pich[34] = 0;
-        pich[35] = 0;
-        pich[36] = 0;
-        pich[37] = 0;
-        pich[38] = 0; break;
-      case 1:
-        pich[33] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-        pich[34] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-        pich[35] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-        pich[36] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-        pich[37] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-        pich[38] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
-        break;
-      case 2:
-        pich[33] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-        pich[34] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-        pich[35] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-        pich[36] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-        pich[37] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-        pich[38] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
-        break;
-    }
-    switch (pichop6) {
-      case 0: break;
-        pich[41] = 0;
-        pich[42] = 0;
-        pich[43] = 0;
-        pich[44] = 0;
-        pich[45] = 0;
-        pich[46] = 0;
-      case 1: break;
-        pich[41] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-        pich[42] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-        pich[43] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-        pich[44] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-        pich[45] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-        pich[46] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
-      case 2:
-        pich[41] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-        pich[42] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-        pich[43] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-        pich[44] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-        pich[45] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-        pich[46] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
-        break;
-    }
-
-    for ( bufferindex = 0; bufferindex < buffermeret; bufferindex++) {
-      //algoritmus1
-      switch (alg) {
+      switch (pichop1) {
+        case 0:
+          /*
+            for (int i=1;i<7;i++){
+            pich[i] = 0;
+            }
+          */
+          pich[1] = 0;
+          pich[2] = 0;
+          pich[3] = 0;
+          pich[4] = 0;
+          pich[5] = 0;
+          pich[6] = 0;
+          break;
         case 1:
-          if ((bufferindex & 0x0001) == 1) {
-            bufferbe = 0;
-            if (gorbetime[0] > 0 ) {
+          /*
+            for (int i=0;i<6;i++){
+            pich[i+1] = (pichgorbe[gorbetime[i]] - 50) * picheglevel;
+            }
+          */
+          pich[1] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
+          pich[2] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
+          pich[3] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
+          pich[4] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
+          pich[5] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
+          pich[6] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          break;
+        case 2:
+          /*
+               for (int i=0;i<6;i++){
+                  pich[i+1] = ~((pichgorbe[gorbetime[i]] - 50) * picheglevel - 1);
+                 }
+          */
 
+          pich[1] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
+          pich[2] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
+          pich[3] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
+          pich[4] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
+          pich[5] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
+          pich[6] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          break;
+      }
+      switch (pichop2) {
+        case 0:
+          pich[9] = 0;
+          pich[10] = 0;
+          pich[11] = 0;
+          pich[12] = 0;
+          pich[13] = 0;
+          pich[14] = 0;
+          break;
+        case 1:
+          pich[9] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
+          pich[10] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
+          pich[11] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
+          pich[12] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
+          pich[13] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
+          pich[14] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          break;
+        case 2:
+          pich[9] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
+          pich[10] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
+          pich[11] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
+          pich[12] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
+          pich[13] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
+          pich[14] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          break;
+      }
+
+      switch (pichop3) {
+        case 0:
+          pich[17] = 0;
+          pich[18] = 0;
+          pich[19] = 0;
+          pich[20] = 0;
+          pich[21] = 0;
+          pich[22] = 0;
+          break;
+        case 1:
+          pich[17] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
+          pich[18] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
+          pich[19] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
+          pich[20] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
+          pich[21] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
+          pich[22] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          break;
+        case 2:
+          pich[17] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
+          pich[18] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
+          pich[19] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
+          pich[20] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
+          pich[21] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
+          pich[22] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          break;
+      }
+
+      switch (pichop4) {
+        case 0: break;
+          pich[25] = 0;
+          pich[26] = 0;
+          pich[27] = 0;
+          pich[28] = 0;
+          pich[29] = 0;
+          pich[30] = 0;
+        case 1:
+          pich[25] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
+          pich[26] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
+          pich[27] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
+          pich[28] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
+          pich[29] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
+          pich[30] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          break;
+        case 2:
+          pich[25] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
+          pich[26] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
+          pich[27] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
+          pich[28] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
+          pich[29] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
+          pich[30] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          break;
+      }
+      switch (pichop5) {
+        case 0:
+          pich[33] = 0;
+          pich[34] = 0;
+          pich[35] = 0;
+          pich[36] = 0;
+          pich[37] = 0;
+          pich[38] = 0; break;
+        case 1:
+          pich[33] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
+          pich[34] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
+          pich[35] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
+          pich[36] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
+          pich[37] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
+          pich[38] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          break;
+        case 2:
+          pich[33] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
+          pich[34] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
+          pich[35] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
+          pich[36] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
+          pich[37] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
+          pich[38] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          break;
+      }
+      switch (pichop6) {
+        case 0: break;
+          pich[41] = 0;
+          pich[42] = 0;
+          pich[43] = 0;
+          pich[44] = 0;
+          pich[45] = 0;
+          pich[46] = 0;
+        case 1: break;
+          pich[41] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
+          pich[42] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
+          pich[43] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
+          pich[44] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
+          pich[45] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
+          pich[46] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+        case 2:
+          pich[41] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
+          pich[42] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
+          pich[43] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
+          pich[44] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
+          pich[45] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
+          pich[46] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          break;
+      }
+      //picheglevel=picheglevel-lfo2volume*2000;
+    }
+    for ( bufferindex = 0; bufferindex < buffermeret; bufferindex++) {
+      bufferbe = 0;
+      if ((bufferindex & 0x0001) == 1) {
+        //Left
+        switch (alg) {
+          case 1:
+            if (gorbetime[0] > 0 ) {
               bufferbe += haromopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], op1level[0], op2level[0], op3level[0]);
               //bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[9], sinewaveptr[1], op3level[0], op2level[0], op1level[0]);
               //  bufferbe +=   ketop(sinewaveptr[1], sinewaveptr[33], op1gorbe[gorbetime[0]], ALVOLUME, op5gorbe[gorbetime[0]], op5volume);
@@ -926,93 +906,11 @@ void loop() {
               //     bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[14], sinewaveptr[6], op3level[5], op2level[5], op1level[5]);
               //   bufferbe +=   ketop(sinewaveptr[6], sinewaveptr[38], op2gorbe[gorbetime[5]],  op2volume, op5gorbe[gorbetime[5]], op5volume);
             }
-            sinewaveptr[1] += sinewave1freq + pich[1];
-            sinewaveptr[2] += sinewave2freq + pich[2];
-            sinewaveptr[3] += sinewave3freq + pich[3];
-            sinewaveptr[4] += sinewave4freq + pich[4];
-            sinewaveptr[5] += sinewave5freq + pich[5];
-            sinewaveptr[6] += sinewave6freq + pich[6];
-            //   sinewaveptr[7] += sinewave7freq + pich[7];
-            //   sinewaveptr[8] += sinewave8freq + pich[8];
-            sinewaveptr[9] += sinewave9freq + pich[9];
-            sinewaveptr[10] += sinewave10freq + pich[10];
-            sinewaveptr[11] += sinewave11freq + pich[11];
-            sinewaveptr[12] += sinewave12freq + pich[12];
-            sinewaveptr[13] += sinewave13freq + pich[13];
-            sinewaveptr[14] += sinewave14freq + pich[14];
-            //    sinewaveptr[15] += sinewave15freq + pich[15];
-            //     sinewaveptr[16] += sinewave16freq + pich[16];
-            sinewaveptr[17] += sinewave17freq + pich[17];
-            sinewaveptr[18] += sinewave18freq + pich[18];
-            sinewaveptr[19] += sinewave19freq + pich[19];
-            sinewaveptr[20] += sinewave20freq + pich[20];
-            sinewaveptr[21] += sinewave21freq + pich[21];
-            sinewaveptr[22] += sinewave22freq + pich[22];
-            //   sinewaveptr[23] += sinewave23freq + pich[23];
-            //   sinewaveptr[24] += sinewave24freq + pich[24];
-            sinewaveptr[25] += sinewave25freq + pich[25];
-            sinewaveptr[26] += sinewave26freq + pich[26];
-            sinewaveptr[27] += sinewave27freq + pich[27] ;
-            sinewaveptr[28] += sinewave28freq + pich[28];
-            sinewaveptr[29] += sinewave29freq + pich[29];
-            sinewaveptr[30] += sinewave30freq + pich[30] ;
-            //      sinewaveptr[31] += sinewave31freq + pich[31];
-            //      sinewaveptr[32] += sinewave32freq + pich[32];
-            sinewaveptr[33] += sinewave33freq + pich[33];
-            sinewaveptr[34] += sinewave34freq + pich[34];
-            sinewaveptr[35] += sinewave35freq + pich[35];
-            sinewaveptr[36] += sinewave36freq + pich[36];
-            sinewaveptr[37] += sinewave37freq + pich[37];
-            sinewaveptr[38] += sinewave38freq + pich[38];
-            //     sinewaveptr[39] += sinewave39freq + pich[39];
-            //     sinewaveptr[40] += sinewave40freq + pich[40];
-            sinewaveptr[41] += sinewave41freq + pich[41];
-            sinewaveptr[42] += sinewave42freq + pich[42];
-            sinewaveptr[43] += sinewave43freq + pich[43];
-            sinewaveptr[44] += sinewave44freq + pich[44];
-            sinewaveptr[45] += sinewave45freq + pich[45];
-            sinewaveptr[46] += sinewave46freq + pich[46];
-            //     sinewaveptr[47] += sinewave47freq + pich[47];
-            //     sinewaveptr[48] += sinewave48freq + pich[48];
-            //     sinewaveptr[49] += sinewave49freq + pich[49];
-            //     sinewaveptr[50] += sinewave50freq + pich[50];
-            //     sinewaveptr[51] += sinewave51freq + pich[51] ;
-            //      sinewaveptr[52] += sinewave52freq + pich[52];
-            //     sinewaveptr[53] += sinewave53freq + pich[53];
-            //      sinewaveptr[54] += sinewave54freq + pich[54] ;
-          }
-          else {
-            bufferbe = 0;
+            break;
+          //algoritmus1vege
+          //algoritmus2
+          case 2:
             if (gorbetime[0] > 0 ) {
-              bufferbe += haromopgenB(sinewaveptr[25], sinewaveptr[33], sinewaveptr[41], op4level[0], op5level[0], op6level[0]);
-            }
-            if (gorbetime[1] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[26], sinewaveptr[34], sinewaveptr[42], op4level[1], op5level[1], op6level[1]);
-            }
-            if (gorbetime[2] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[27], sinewaveptr[35], sinewaveptr[43],  op4level[2], op5level[2], op6level[2]);
-            }
-            if (gorbetime[3] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[28], sinewaveptr[36], sinewaveptr[44], op4level[3], op5level[3], op6level[3]);
-            }
-            if (gorbetime[4] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[29], sinewaveptr[37], sinewaveptr[45],  op4level[4], op5level[4], op6level[4]);
-            }
-            if (gorbetime[5] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[30], sinewaveptr[38], sinewaveptr[46],  op4level[5], op5level[5], op6level[5]);
-            }
-          }
-
-          break;
-        //algoritmus1vege
-        //algoritmus2
-        case 2:
-
-          if ((bufferindex & 0x0001) == 1) {
-            bufferbe = 0;
-
-            if (gorbetime[0] > 0 ) {
-
               bufferbe +=   ketopgenA(sinewaveptr[1], sinewaveptr[9], op1level[0], op2level[0]);
               bufferbe +=   ketopgenB(sinewaveptr[17], sinewaveptr[25], op3level[0], op4level[0]);
 
@@ -1042,88 +940,10 @@ void loop() {
               bufferbe +=   ketopgenB(sinewaveptr[22], sinewaveptr[30], op3level[5], op4level[5]);
 
             }
-            sinewaveptr[1] += sinewave1freq + pich[1];
-            sinewaveptr[2] += sinewave2freq + pich[2];
-            sinewaveptr[3] += sinewave3freq + pich[3];
-            sinewaveptr[4] += sinewave4freq + pich[4];
-            sinewaveptr[5] += sinewave5freq + pich[5];
-            sinewaveptr[6] += sinewave6freq + pich[6];
-            //   sinewaveptr[7] += sinewave7freq + pich[7];
-            //   sinewaveptr[8] += sinewave8freq + pich[8];
-            sinewaveptr[9] += sinewave9freq + pich[9];
-            sinewaveptr[10] += sinewave10freq + pich[10];
-            sinewaveptr[11] += sinewave11freq + pich[11];
-            sinewaveptr[12] += sinewave12freq + pich[12];
-            sinewaveptr[13] += sinewave13freq + pich[13];
-            sinewaveptr[14] += sinewave14freq + pich[14];
-            //    sinewaveptr[15] += sinewave15freq + pich[15];
-            //     sinewaveptr[16] += sinewave16freq + pich[16];
-            sinewaveptr[17] += sinewave17freq + pich[17];
-            sinewaveptr[18] += sinewave18freq + pich[18];
-            sinewaveptr[19] += sinewave19freq + pich[19];
-            sinewaveptr[20] += sinewave20freq + pich[20];
-            sinewaveptr[21] += sinewave21freq + pich[21];
-            sinewaveptr[22] += sinewave22freq + pich[22];
-            //   sinewaveptr[23] += sinewave23freq + pich[23];
-            //   sinewaveptr[24] += sinewave24freq + pich[24];
-            sinewaveptr[25] += sinewave25freq + pich[25];
-            sinewaveptr[26] += sinewave26freq + pich[26];
-            sinewaveptr[27] += sinewave27freq + pich[27] ;
-            sinewaveptr[28] += sinewave28freq + pich[28];
-            sinewaveptr[29] += sinewave29freq + pich[29];
-            sinewaveptr[30] += sinewave30freq + pich[30] ;
-            //      sinewaveptr[31] += sinewave31freq + pich[31];
-            //      sinewaveptr[32] += sinewave32freq + pich[32];
-            sinewaveptr[33] += sinewave33freq + pich[33];
-            sinewaveptr[34] += sinewave34freq + pich[34];
-            sinewaveptr[35] += sinewave35freq + pich[35];
-            sinewaveptr[36] += sinewave36freq + pich[36];
-            sinewaveptr[37] += sinewave37freq + pich[37];
-            sinewaveptr[38] += sinewave38freq + pich[38];
-            //     sinewaveptr[39] += sinewave39freq + pich[39];
-            //     sinewaveptr[40] += sinewave40freq + pich[40];
-            sinewaveptr[41] += sinewave41freq + pich[41];
-            sinewaveptr[42] += sinewave42freq + pich[42];
-            sinewaveptr[43] += sinewave43freq + pich[43];
-            sinewaveptr[44] += sinewave44freq + pich[44];
-            sinewaveptr[45] += sinewave45freq + pich[45];
-            sinewaveptr[46] += sinewave46freq + pich[46];
-            //     sinewaveptr[47] += sinewave47freq + pich[47];
-            //     sinewaveptr[48] += sinewave48freq + pich[48];
-            //     sinewaveptr[49] += sinewave49freq + pich[49];
-            //     sinewaveptr[50] += sinewave50freq + pich[50];
-            //     sinewaveptr[51] += sinewave51freq + pich[51] ;
-            //      sinewaveptr[52] += sinewave52freq + pich[52];
-            //     sinewaveptr[53] += sinewave53freq + pich[53];
-            //      sinewaveptr[54] += sinewave54freq + pich[54] ;
-          }
-          else {
-            bufferbe = 0;
-            if (gorbetime[0] > 0 ) {
-              bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
-            }
-            if (gorbetime[1] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
-            }
-            if (gorbetime[2] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
-            }
-            if (gorbetime[3] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
-            }
-            if (gorbetime[4] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
-            }
-            if (gorbetime[5] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
-            }
-          }
-          break;
-        //algoritmus2 vege
-        //algoritmus3
-        case 3:
-          if ((bufferindex & 0x0001) == 1) {
-            bufferbe = 0;
+            break;
+          //algoritmus3
+          case 3:
+
 
             if (gorbetime[0] > 0 ) {
               bufferbe +=   egyopgenA(sinewaveptr[1], op1level[0]);
@@ -1157,63 +977,407 @@ void loop() {
               bufferbe +=   egyopgenB(sinewaveptr[14], op2level[5]);
               bufferbe +=   egyopgenC(sinewaveptr[22], op3level[5]);
             }
-            sinewaveptr[1] += sinewave1freq + pich[1];
-            sinewaveptr[2] += sinewave2freq + pich[2];
-            sinewaveptr[3] += sinewave3freq + pich[3];
-            sinewaveptr[4] += sinewave4freq + pich[4];
-            sinewaveptr[5] += sinewave5freq + pich[5];
-            sinewaveptr[6] += sinewave6freq + pich[6];
-            //   sinewaveptr[7] += sinewave7freq + pich[7];
-            //   sinewaveptr[8] += sinewave8freq + pich[8];
-            sinewaveptr[9] += sinewave9freq + pich[9];
-            sinewaveptr[10] += sinewave10freq + pich[10];
-            sinewaveptr[11] += sinewave11freq + pich[11];
-            sinewaveptr[12] += sinewave12freq + pich[12];
-            sinewaveptr[13] += sinewave13freq + pich[13];
-            sinewaveptr[14] += sinewave14freq + pich[14];
-            //    sinewaveptr[15] += sinewave15freq + pich[15];
-            //     sinewaveptr[16] += sinewave16freq + pich[16];
-            sinewaveptr[17] += sinewave17freq + pich[17];
-            sinewaveptr[18] += sinewave18freq + pich[18];
-            sinewaveptr[19] += sinewave19freq + pich[19];
-            sinewaveptr[20] += sinewave20freq + pich[20];
-            sinewaveptr[21] += sinewave21freq + pich[21];
-            sinewaveptr[22] += sinewave22freq + pich[22];
-            //   sinewaveptr[23] += sinewave23freq + pich[23];
-            //   sinewaveptr[24] += sinewave24freq + pich[24];
-            sinewaveptr[25] += sinewave25freq + pich[25];
-            sinewaveptr[26] += sinewave26freq + pich[26];
-            sinewaveptr[27] += sinewave27freq + pich[27] ;
-            sinewaveptr[28] += sinewave28freq + pich[28];
-            sinewaveptr[29] += sinewave29freq + pich[29];
-            sinewaveptr[30] += sinewave30freq + pich[30] ;
-            //      sinewaveptr[31] += sinewave31freq + pich[31];
-            //      sinewaveptr[32] += sinewave32freq + pich[32];
-            sinewaveptr[33] += sinewave33freq + pich[33];
-            sinewaveptr[34] += sinewave34freq + pich[34];
-            sinewaveptr[35] += sinewave35freq + pich[35];
-            sinewaveptr[36] += sinewave36freq + pich[36];
-            sinewaveptr[37] += sinewave37freq + pich[37];
-            sinewaveptr[38] += sinewave38freq + pich[38];
-            //     sinewaveptr[39] += sinewave39freq + pich[39];
-            //     sinewaveptr[40] += sinewave40freq + pich[40];
-            sinewaveptr[41] += sinewave41freq + pich[41];
-            sinewaveptr[42] += sinewave42freq + pich[42];
-            sinewaveptr[43] += sinewave43freq + pich[43];
-            sinewaveptr[44] += sinewave44freq + pich[44];
-            sinewaveptr[45] += sinewave45freq + pich[45];
-            sinewaveptr[46] += sinewave46freq + pich[46];
-            //     sinewaveptr[47] += sinewave47freq + pich[47];
-            //     sinewaveptr[48] += sinewave48freq + pich[48];
-            //     sinewaveptr[49] += sinewave49freq + pich[49];
-            //     sinewaveptr[50] += sinewave50freq + pich[50];
-            //     sinewaveptr[51] += sinewave51freq + pich[51] ;
-            //      sinewaveptr[52] += sinewave52freq + pich[52];
-            //     sinewaveptr[53] += sinewave53freq + pich[53];
-            //      sinewaveptr[54] += sinewave54freq + pich[54] ;
-          }
-          else {
-            bufferbe = 0;
+            break;
+          //algoritmus4
+          case 4:
+            if (gorbetime[0] > 0 ) {
+              bufferbe +=   negyopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], sinewaveptr[25], op1level[0], op2level[0], op3level[0], op4level[0]);
+
+            }
+            if (gorbetime[1] > 0) {
+              bufferbe +=   negyopgenA(sinewaveptr[2], sinewaveptr[10], sinewaveptr[18], sinewaveptr[26], op1level[1], op2level[1], op3level[1], op4level[1]);
+
+            }
+            if (gorbetime[2] > 0) {
+              bufferbe +=   negyopgenA(sinewaveptr[3], sinewaveptr[11], sinewaveptr[19], sinewaveptr[27], op1level[2], op2level[2], op3level[2], op4level[2]);
+
+            }
+            if (gorbetime[3] > 0) {
+              bufferbe +=   negyopgenA(sinewaveptr[4], sinewaveptr[12], sinewaveptr[20], sinewaveptr[28], op1level[3], op2level[3], op3level[3], op4level[3]);
+
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe +=   negyopgenA(sinewaveptr[5], sinewaveptr[13], sinewaveptr[21], sinewaveptr[29], op1level[4], op2level[4], op3level[4], op4level[4]);
+
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe +=   negyopgenA(sinewaveptr[6], sinewaveptr[14], sinewaveptr[22], sinewaveptr[30], op1level[5], op2level[5], op3level[5], op4level[5]);
+            }
+            break;
+
+          //algoritmus5 pwm
+          case 5:
+
+            if (gorbetime[0] > 0 ) {
+              kitoltes0 = (op1gorbe[gorbetime[0]] >> 3) + 22;
+              if (kitoltes0 > 40) {
+                kitoltes0 = 40;
+              }
+              {
+                if (kitoltes0 >= 31) {
+                  if (sinewaveptr[1] >> kitoltes0 - ((kitoltes0 - 31) << 1) == 0)
+                  {
+                    bufferbe += -1 * (op1level[0] >> 3);
+                  }
+                  else
+                  {
+                    bufferbe += op1level[0] >> 3;
+                  }
+
+                }
+                else
+                {
+                  if (sinewaveptr[1] >> kitoltes0 == 0)
+                  {
+                    bufferbe += op1level[0] >> 3;
+                  }
+                  else
+                  {
+                    bufferbe += -1 * (op1level[0] >> 3);
+                  }
+
+
+                  //
+                }
+                //Serial.print( String(kitoltes0) + " buf: ");
+                //  Serial.println( String(bufferbe) + " ");
+              }
+            }
+            if (gorbetime[1] > 0 ) {
+              kitoltes1 = (op1gorbe[gorbetime[1]] >> 3) + 22;
+              if (kitoltes1 > 40) {
+                kitoltes1 = 40;
+              }
+
+              if (kitoltes1 >= 31) {
+
+                if (sinewaveptr[2] >> kitoltes1 - ((kitoltes1 - 31) << 1) == 0)
+                {
+                  bufferbe += -1 * (op1level[1] >> 3);
+                }
+                else
+                {
+                  bufferbe += op1level[1] >> 3;
+                }
+
+              }
+              else
+              {
+
+                if (sinewaveptr[2] >> kitoltes1 == 0)
+                {
+                  bufferbe += op1level[1] >> 3;
+                }
+                else
+                {
+                  bufferbe += -1 * (op1level[1] >> 3);
+                }
+
+              }
+
+            }
+            if (gorbetime[2] > 0 ) {
+              kitoltes2 = (op1gorbe[gorbetime[2]] >> 3) + 22;
+
+              if (kitoltes2 > 40) {
+                kitoltes2 = 40;
+              }
+
+              if (kitoltes2 >= 31) {
+
+
+                if (sinewaveptr[3] >> kitoltes2 - ((kitoltes2 - 31) << 1) == 0)
+                {
+                  bufferbe += -1 * (op1level[2] >> 3);
+                }
+                else
+                {
+                  bufferbe += op1level[2] >> 3;
+                }
+
+              }
+              else
+              {
+
+                if (sinewaveptr[3] >> kitoltes2 == 0)
+                {
+                  bufferbe += op1level[2] >> 3;
+                }
+                else
+                {
+                  bufferbe += -1 * (op1level[2] >> 3);
+                }
+
+              }
+
+            }
+            if (gorbetime[3] >= 0 ) {
+              kitoltes3 = (op1gorbe[gorbetime[3]] >> 3) + 22;
+              if (kitoltes3 > 40) {
+                kitoltes3 = 40;
+              }
+
+              if (kitoltes3 > 31) {
+
+                if (sinewaveptr[4] >> kitoltes3 - ((kitoltes3 - 31) << 1) == 0)
+                {
+                  bufferbe += -(1 * op1level[3] >> 3);
+                }
+                else
+                {
+                  bufferbe +=  op1level[3] >> 3;
+                }
+
+              }
+              else
+              {
+
+                if (sinewaveptr[4] >> kitoltes3 == 0)
+                {
+                  bufferbe += op1level[3] >> 3;
+                }
+                else
+                {
+                  bufferbe += -(1 * op1level[3] >> 3);
+                }
+
+
+              }
+            }
+            if (gorbetime[4] > 0 ) {
+              int kitoltes4 = (op1gorbe[gorbetime[4]] >> 3) + 22;
+
+              if (kitoltes4 > 40) {
+                kitoltes4 = 40;
+              }
+
+              if (kitoltes4 >= 31) {
+
+
+                if (sinewaveptr[5] >> kitoltes4 - ((kitoltes4 - 31) << 1) == 0)
+                {
+                  bufferbe += -(1 * op1level[4] >> 3);
+                }
+                else
+                {
+                  bufferbe +=  op1level[4] >> 3;
+                }
+
+              }
+              else
+              {
+
+
+                if (sinewaveptr[5] >> kitoltes4 == 0)
+                {
+                  bufferbe +=  op1level[4] >> 3;
+                }
+                else
+                {
+                  bufferbe += -1 *  op1level[4] >> 3;
+                }
+              }
+            }
+            if (gorbetime[5] > 0 ) {
+              kitoltes5 = (op1gorbe[gorbetime[5]] >> 3) + 22;
+              if (kitoltes5 > 40) {
+                kitoltes5 = 40;
+              }
+
+              if (kitoltes5 >= 31) {
+
+                if (sinewaveptr[6] >> kitoltes5 - ((kitoltes5 - 31) << 1) == 0)
+                {
+                  bufferbe += -1 * (op1level[5] >> 3);
+                }
+                else
+                {
+                  bufferbe += op1level[5] >> 3;
+                }
+
+              }
+              else
+              {
+                if (sinewaveptr[6] >> kitoltes5 == 0)
+                {
+                  bufferbe += op1level[5] >> 3;
+                }
+                else
+                {
+                  bufferbe += -1 * (op1level[5] >> 3);
+                }
+              }
+            }
+
+            break;
+          case 6:
+
+            byte kapcsolo;
+            if (generatornumber == 0) {
+              kapcsolo = 5;
+            }
+            else {
+              kapcsolo = generatornumber - 1;
+            }
+            //   Serial.println( String(kapcsolo) + " ");
+            switch (kapcsolo) {
+              case 0:
+                if (gorbetime[5] > 0 ) {
+                  bufferbe +=   negyopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], sinewaveptr[25], op1level[0], op2level[0], op3level[0], op4level[0]);
+                  bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
+                }
+                break;
+              case 1:
+                if (gorbetime[0] > 0 ) {
+
+                  bufferbe +=   negyopgenA(sinewaveptr[2], sinewaveptr[10], sinewaveptr[18], sinewaveptr[26], op1level[1], op2level[1], op3level[1], op4level[1]);
+                  bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
+                }
+                break;
+              case 2:
+                if (gorbetime[1] > 0 ) {
+                  bufferbe +=   negyopgenA(sinewaveptr[3], sinewaveptr[11], sinewaveptr[19], sinewaveptr[27], op1level[2], op2level[2], op3level[2], op4level[2]);
+                  bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
+                }
+                break;
+              case 3:
+                if (gorbetime[2] > 0 ) {
+                  bufferbe +=   negyopgenA(sinewaveptr[4], sinewaveptr[12], sinewaveptr[20], sinewaveptr[28], op1level[3], op2level[3], op3level[3], op4level[3]);
+                  bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+                }
+                break;
+              case 4:
+                if (gorbetime[3] > 0 ) {
+                  bufferbe +=   negyopgenA(sinewaveptr[5], sinewaveptr[13], sinewaveptr[21], sinewaveptr[29], op1level[4], op2level[4], op3level[4], op4level[4]);
+                  bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+                }
+                break;
+              case 5:
+                if (gorbetime[4] > 0 ) {
+                  bufferbe +=   negyopgenA(sinewaveptr[6], sinewaveptr[14], sinewaveptr[22], sinewaveptr[30], op1level[5], op2level[5], op3level[5], op4level[5]);
+                  bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+                }
+                break;
+            }
+
+
+            break;
+        }
+        sinewaveptr[1] += sinewave1freq + pich[1];
+        sinewaveptr[2] += sinewave2freq + pich[2];
+        sinewaveptr[3] += sinewave3freq + pich[3];
+        sinewaveptr[4] += sinewave4freq + pich[4];
+        sinewaveptr[5] += sinewave5freq + pich[5];
+        sinewaveptr[6] += sinewave6freq + pich[6];
+        //   sinewaveptr[7] += sinewave7freq + pich[7];
+        //   sinewaveptr[8] += sinewave8freq + pich[8];
+        sinewaveptr[9] += sinewave9freq + pich[9];
+        sinewaveptr[10] += sinewave10freq + pich[10];
+        sinewaveptr[11] += sinewave11freq + pich[11];
+        sinewaveptr[12] += sinewave12freq + pich[12];
+        sinewaveptr[13] += sinewave13freq + pich[13];
+        sinewaveptr[14] += sinewave14freq + pich[14];
+        //    sinewaveptr[15] += sinewave15freq + pich[15];
+        //     sinewaveptr[16] += sinewave16freq + pich[16];
+        sinewaveptr[17] += sinewave17freq + pich[17];
+        sinewaveptr[18] += sinewave18freq + pich[18];
+        sinewaveptr[19] += sinewave19freq + pich[19];
+        sinewaveptr[20] += sinewave20freq + pich[20];
+        sinewaveptr[21] += sinewave21freq + pich[21];
+        sinewaveptr[22] += sinewave22freq + pich[22];
+        //   sinewaveptr[23] += sinewave23freq + pich[23];
+        //   sinewaveptr[24] += sinewave24freq + pich[24];
+        sinewaveptr[25] += sinewave25freq + pich[25];
+        sinewaveptr[26] += sinewave26freq + pich[26];
+        sinewaveptr[27] += sinewave27freq + pich[27] ;
+        sinewaveptr[28] += sinewave28freq + pich[28];
+        sinewaveptr[29] += sinewave29freq + pich[29];
+        sinewaveptr[30] += sinewave30freq + pich[30] ;
+        //      sinewaveptr[31] += sinewave31freq + pich[31];
+        //      sinewaveptr[32] += sinewave32freq + pich[32];
+        sinewaveptr[33] += sinewave33freq + pich[33];
+        sinewaveptr[34] += sinewave34freq + pich[34];
+        sinewaveptr[35] += sinewave35freq + pich[35];
+        sinewaveptr[36] += sinewave36freq + pich[36];
+        sinewaveptr[37] += sinewave37freq + pich[37];
+        sinewaveptr[38] += sinewave38freq + pich[38];
+        //     sinewaveptr[39] += sinewave39freq + pich[39];
+        //     sinewaveptr[40] += sinewave40freq + pich[40];
+        sinewaveptr[41] += sinewave41freq + pich[41];
+        sinewaveptr[42] += sinewave42freq + pich[42];
+        sinewaveptr[43] += sinewave43freq + pich[43];
+        sinewaveptr[44] += sinewave44freq + pich[44];
+        sinewaveptr[45] += sinewave45freq + pich[45];
+        sinewaveptr[46] += sinewave46freq + pich[46];
+        //     sinewaveptr[47] += sinewave47freq + pich[47];
+        //     sinewaveptr[48] += sinewave48freq + pich[48];
+        //     sinewaveptr[49] += sinewave49freq + pich[49];
+        //     sinewaveptr[50] += sinewave50freq + pich[50];
+        //     sinewaveptr[51] += sinewave51freq + pich[51] ;
+        //      sinewaveptr[52] += sinewave52freq + pich[52];
+        //     sinewaveptr[53] += sinewave53freq + pich[53];
+        //      sinewaveptr[54] += sinewave54freq + pich[54] ;
+        bufferbe = bufferbe >> level;
+        //EQ +REVERB Left
+        //y3= equqlizerdelay1(y3,freq1,freq2,elozodelaybufferindex);
+        y3 = (freq1 * y3 + freq2 * delaybuffer[elozodelaybufferindex]) / 11500;
+        delaybuffer[elozodelaybufferindex] = y3;
+
+        //y = equalizer(y, freq1, freq2, bufferbe);
+        bufferbe =   yadddelay(bufferbe, elozodelaybufferindex, lfo1volume, reverbtime);
+        delaybuffer[delaybufferindex] = reverblevel1gain(reverblevel, bufferbe);
+        elozodelaybufferindex = delaybufferindex;
+        delaybufferindex += 2;
+        if (delaybufferindex >= reverbtime) {
+          delaybufferindex = 0;
+        }
+        buffer[ bufferindex] = bufferbe;
+      }
+      else {
+        //Right
+
+        switch (alg) {
+          case 1:
+            if (gorbetime[0] > 0 ) {
+              bufferbe += haromopgenB(sinewaveptr[25], sinewaveptr[33], sinewaveptr[41], op4level[0], op5level[0], op6level[0]);
+            }
+            if (gorbetime[1] > 0) {
+              bufferbe += haromopgenB(sinewaveptr[26], sinewaveptr[34], sinewaveptr[42], op4level[1], op5level[1], op6level[1]);
+            }
+            if (gorbetime[2] > 0) {
+              bufferbe += haromopgenB(sinewaveptr[27], sinewaveptr[35], sinewaveptr[43],  op4level[2], op5level[2], op6level[2]);
+            }
+            if (gorbetime[3] > 0) {
+              bufferbe += haromopgenB(sinewaveptr[28], sinewaveptr[36], sinewaveptr[44], op4level[3], op5level[3], op6level[3]);
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe += haromopgenB(sinewaveptr[29], sinewaveptr[37], sinewaveptr[45],  op4level[4], op5level[4], op6level[4]);
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe += haromopgenB(sinewaveptr[30], sinewaveptr[38], sinewaveptr[46],  op4level[5], op5level[5], op6level[5]);
+            }
+            break;
+          case 2:
+            if (gorbetime[0] > 0 ) {
+              bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
+            }
+            if (gorbetime[1] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
+            }
+            if (gorbetime[2] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
+            }
+            if (gorbetime[3] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+            }
+            break;
+          case 3:
             if (gorbetime[0] > 0 ) {
               bufferbe +=   egyopgenD(sinewaveptr[25], op4level[0]);
               bufferbe +=   egyopgenE(sinewaveptr[33], op5level[0]);
@@ -1245,95 +1409,8 @@ void loop() {
               bufferbe +=   egyopgenF(sinewaveptr[46], op6level[5]);
             }
 
-          }
-
-          break;
-        //algoritmus3 vege
-        //algoritmus4
-        case 4:
-
-          if ((bufferindex & 0x0001) == 1) {
-            bufferbe = 0;
-            if (gorbetime[0] > 0 ) {
-              bufferbe +=   negyopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], sinewaveptr[25], op1level[0], op2level[0], op3level[0], op4level[0]);
-
-            }
-            if (gorbetime[1] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[2], sinewaveptr[10], sinewaveptr[18], sinewaveptr[26], op1level[1], op2level[1], op3level[1], op4level[1]);
-
-            }
-            if (gorbetime[2] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[3], sinewaveptr[11], sinewaveptr[19], sinewaveptr[27], op1level[2], op2level[2], op3level[2], op4level[2]);
-
-            }
-            if (gorbetime[3] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[4], sinewaveptr[12], sinewaveptr[20], sinewaveptr[28], op1level[3], op2level[3], op3level[3], op4level[3]);
-
-            }
-            if (gorbetime[4] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[5], sinewaveptr[13], sinewaveptr[21], sinewaveptr[29], op1level[4], op2level[4], op3level[4], op4level[4]);
-
-            }
-            if (gorbetime[5] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[6], sinewaveptr[14], sinewaveptr[22], sinewaveptr[30], op1level[5], op2level[5], op3level[5], op4level[5]);
-            }
-            sinewaveptr[1] += sinewave1freq + pich[1];
-            sinewaveptr[2] += sinewave2freq + pich[2];
-            sinewaveptr[3] += sinewave3freq + pich[3];
-            sinewaveptr[4] += sinewave4freq + pich[4];
-            sinewaveptr[5] += sinewave5freq + pich[5];
-            sinewaveptr[6] += sinewave6freq + pich[6];
-            //   sinewaveptr[7] += sinewave7freq + pich[7];
-            //   sinewaveptr[8] += sinewave8freq + pich[8];
-            sinewaveptr[9] += sinewave9freq + pich[9];
-            sinewaveptr[10] += sinewave10freq + pich[10];
-            sinewaveptr[11] += sinewave11freq + pich[11];
-            sinewaveptr[12] += sinewave12freq + pich[12];
-            sinewaveptr[13] += sinewave13freq + pich[13];
-            sinewaveptr[14] += sinewave14freq + pich[14];
-            //    sinewaveptr[15] += sinewave15freq + pich[15];
-            //     sinewaveptr[16] += sinewave16freq + pich[16];
-            sinewaveptr[17] += sinewave17freq + pich[17];
-            sinewaveptr[18] += sinewave18freq + pich[18];
-            sinewaveptr[19] += sinewave19freq + pich[19];
-            sinewaveptr[20] += sinewave20freq + pich[20];
-            sinewaveptr[21] += sinewave21freq + pich[21];
-            sinewaveptr[22] += sinewave22freq + pich[22];
-            //   sinewaveptr[23] += sinewave23freq + pich[23];
-            //   sinewaveptr[24] += sinewave24freq + pich[24];
-            sinewaveptr[25] += sinewave25freq + pich[25];
-            sinewaveptr[26] += sinewave26freq + pich[26];
-            sinewaveptr[27] += sinewave27freq + pich[27] ;
-            sinewaveptr[28] += sinewave28freq + pich[28];
-            sinewaveptr[29] += sinewave29freq + pich[29];
-            sinewaveptr[30] += sinewave30freq + pich[30] ;
-            //      sinewaveptr[31] += sinewave31freq + pich[31];
-            //      sinewaveptr[32] += sinewave32freq + pich[32];
-            sinewaveptr[33] += sinewave33freq + pich[33];
-            sinewaveptr[34] += sinewave34freq + pich[34];
-            sinewaveptr[35] += sinewave35freq + pich[35];
-            sinewaveptr[36] += sinewave36freq + pich[36];
-            sinewaveptr[37] += sinewave37freq + pich[37];
-            sinewaveptr[38] += sinewave38freq + pich[38];
-            //     sinewaveptr[39] += sinewave39freq + pich[39];
-            //     sinewaveptr[40] += sinewave40freq + pich[40];
-            sinewaveptr[41] += sinewave41freq + pich[41];
-            sinewaveptr[42] += sinewave42freq + pich[42];
-            sinewaveptr[43] += sinewave43freq + pich[43];
-            sinewaveptr[44] += sinewave44freq + pich[44];
-            sinewaveptr[45] += sinewave45freq + pich[45];
-            sinewaveptr[46] += sinewave46freq + pich[46];
-            //     sinewaveptr[47] += sinewave47freq + pich[47];
-            //     sinewaveptr[48] += sinewave48freq + pich[48];
-            //     sinewaveptr[49] += sinewave49freq + pich[49];
-            //     sinewaveptr[50] += sinewave50freq + pich[50];
-            //     sinewaveptr[51] += sinewave51freq + pich[51] ;
-            //      sinewaveptr[52] += sinewave52freq + pich[52];
-            //     sinewaveptr[53] += sinewave53freq + pich[53];
-            //      sinewaveptr[54] += sinewave54freq + pich[54] ;
-          }
-          else {
-            bufferbe = 0;
+            break;
+          case 4:
             if (gorbetime[0] > 0 ) {
               bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
             }
@@ -1352,33 +1429,123 @@ void loop() {
             if (gorbetime[5] > 0) {
               bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
             }
-          }
-          break;
-      }
-      bufferbe = bufferbe >> level;
+            break;
+          //algoritmus5 pwm
+          case 5:
+            if (gorbetime[0] > 0 ) {
+              bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
+            }
+            if (gorbetime[1] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
+            }
+            if (gorbetime[2] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
+            }
+            if (gorbetime[3] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+            }
+            break;
+          case 6:
 
-      //EQ +REVERB:
-      if (bufferindex & 0x0001 == 1) {
+            //második
 
-        //y3= equqlizerdelay1(y3,freq1,freq2,elozodelaybufferindex);
-        y3 = (freq1 * y3 + freq2 * delaybuffer[elozodelaybufferindex]) / 11500;
-        delaybuffer[elozodelaybufferindex] = y3;
+            /*
 
-        //y = equalizer(y, freq1, freq2, bufferbe);
-        bufferbe =   yadddelay(bufferbe, elozodelaybufferindex, lfo1volume, reverbtime);
-        delaybuffer[delaybufferindex] = reverblevel1gain(reverblevel, bufferbe);
-        elozodelaybufferindex = delaybufferindex;
-        delaybufferindex += 2;
-        if (delaybufferindex >= reverbtime) {
-          delaybufferindex = 0;
+              if (gorbetime[0] > 0 ) {
+
+
+              }
+              if (gorbetime[1] > 0) {
+
+
+              }
+              if (gorbetime[2] > 0) {
+
+
+              }
+              if (gorbetime[3] > 0) {
+
+
+              }
+              if (gorbetime[4] > 0) {
+
+
+              }
+              if (gorbetime[5] > 0) {
+
+
+              }
+              break;
+            */
+            byte kapcsolo;
+            if (generatornumber == 0) {
+              kapcsolo = 5;
+            }
+            else {
+              kapcsolo = generatornumber - 1;
+            }
+            switch (kapcsolo) {
+              case 0:
+                if (gorbetime[5] > 0 ) {
+                  bufferbe +=   ketopgenA(sinewaveptr[1], sinewaveptr[9], op1level[0], op2level[0]);
+                  bufferbe +=   ketopgenB(sinewaveptr[17], sinewaveptr[25], op3level[0], op4level[0]);
+
+
+                }
+                break;
+              case 1:
+                if (gorbetime[0] > 0 ) {
+
+                  bufferbe +=   ketopgenA(sinewaveptr[2], sinewaveptr[10], op1level[1], op2level[1]);
+                  bufferbe +=   ketopgenB(sinewaveptr[18], sinewaveptr[26], op3level[1], op4level[1]);
+
+                }
+                break;
+              case 2:
+                if (gorbetime[1] > 0 ) {
+                  bufferbe +=   ketopgenA(sinewaveptr[3], sinewaveptr[11], op1level[2], op2level[2]);
+                  bufferbe +=   ketopgenB(sinewaveptr[19], sinewaveptr[27], op3level[2], op4level[2]);
+
+                }
+                break;
+              case 3:
+                if (gorbetime[2] > 0 ) {
+                  bufferbe +=   ketopgenA(sinewaveptr[4], sinewaveptr[12], op1level[3], op2level[3]);
+                  bufferbe +=   ketopgenB(sinewaveptr[20], sinewaveptr[28], op3level[3], op4level[3]);
+
+                }
+                break;
+              case 4:
+                if (gorbetime[3] > 0 ) {
+                  bufferbe +=   ketopgenA(sinewaveptr[5], sinewaveptr[13], op1level[4], op2level[4]);
+                  bufferbe +=   ketopgenB(sinewaveptr[21], sinewaveptr[29], op3level[4], op4level[4]);
+
+                }
+                break;
+              case 5:
+                if (gorbetime[4] > 0 ) {
+                  bufferbe +=   ketopgenA(sinewaveptr[6], sinewaveptr[14], op1level[5], op2level[5]);
+                  bufferbe +=   ketopgenB(sinewaveptr[22], sinewaveptr[30], op3level[5], op4level[5]);
+
+                }
+                break;
+            }
+
+
+            break;
         }
-        buffer[ bufferindex] = bufferbe;
-      } else {
 
+        //EQ +REVERB Right
+        bufferbe = bufferbe >> level;
         // y4= equqlizerdelay2(y4,freq1,freq2,elozodelaybufferindex);
         y4 = (freq1 * y4 + freq2 * delaybuffer[elozodelaybufferindex]) / 11500;
         delaybuffer[elozodelaybufferindex] = y4;
-
         //  y2 = equalizer2(y2, freq1, freq2, bufferbe);
         // bufferbe = y2 + delaybuffer[delaybufferindex];
         bufferbe =   yadddelay(bufferbe, elozodelaybufferindex, lfo1volume, reverbtime2);
@@ -1391,8 +1558,36 @@ void loop() {
         buffer[ bufferindex] = bufferbe;
       }
     }
-    //  lcdkiir (pachname, Audio.busy()+" ");
-    // Prepare samples
+
+    //13bit
+    /*
+      for (int i = 0; i < buffermeret; i += 2) {
+      long audiosignal = buffer[i] + buffer[i + 1];
+      if (audiosignal < 0) {
+        buffer[i] = audiosignal;
+      }
+      else {
+        buffer[i + 1] = audiosignal;
+      }
+      }
+    */
+    //dac++
+    /*
+      for (int i = 0; i < buffermeret; i += 2) {
+      long audiosignal = buffer[i] + buffer[i + 1];
+      if (audiosignal < 0) {
+        buffer[i] = audiosignal/4096;
+      }
+      else {
+        buffer[i + 1] = audiosignal%4096;
+      }
+      }
+    */
+    /*
+      for (int i = 0; i < buffermeret; i ++) {
+        buffer[i]=buffer[i]%1000;
+      }
+    */
 
     Audio.prepare(buffer, buffermeret, volume);
     // Feed samples to audio
@@ -1486,20 +1681,37 @@ void hangokinit() {
     int cisz = 6048; //5942,55
     int c = 5712;
     //int oszto2 = 10;
+    //7-es
+    int h = 10783;//10782,77
+    int b = 10178;//10177,56
+    int a = 9606;//9606,42
+    int gisz = 9067;//9067,26
+    int g = 8558;//8558,33
+    int fisz = 8078;//8078,01
+    int f = 7625;//7624,66
+    int e = 7197;// 7196,73
+    int disz = 6793; //6792,72
+    int d = 6412;//6411,52
+    int cisz = 6052; //6051,651716040021
+    int c = 5712;
+    //21,83272584945816
+
   */
-  int h = 10783;//10782,77
-  int b = 10178;//10177,56
-  int a = 9606;//9606,42
-  int gisz = 9067;//9067,26
-  int g = 8558;//8558,33
-  int fisz = 8078;//8078,01
-  int f = 7625;//7624,66
-  int e = 7197;// 7196,73
-  int disz = 6793; //6792,72
-  int d = 6412;//6411,52
-  int cisz = 6052; //6051,651716040021
-  int c = 5712;
+  //6os
+  int h = 10435;
+  int b = 9850;
+  int a = 9297;
+  int gisz = 8775;
+  int g = 8283;
+  int fisz = 7818;
+  int f = 7379;
+  int e = 6965;
+  int disz = 6574;
+  int d = 6205;
+  int cisz = 5857;
+  int c = 5528;
   //21,83272584945816
+  //5712->5528
   /*
     uint32_t c = 5712;
     int lepes = c / 12;
