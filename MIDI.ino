@@ -1,35 +1,5 @@
 //----------------------------MIDI-----------------------------------------------------------------
-/*
-  MIDI Command Novation X-Station 25
-  B0-6C Attack Dec: 108
-  B0-6D Decay Dec:109
-  B0-6E Sustain Dec: 110
-  B0-6F Release Dec: 111
-  B0-72 Attack2  Dec: 72
-  B0-73 Decay2   Dec: 73
-  B0-74 Sustain2 Dec: 74
-  B0-75 Release2 Dec: 75
-  B0-70 Velocity Dec: 70
-  B0-05 Portamento Dec: 05
-  B0-28 Semitone Dec: 28
-  B0-29 Detune Dec: 29
-  B0-48 Level Dec: 48
-  B0-2B LFO Depth Dec: 43
-  B0-2c Env Depth Dec: 44
-  B0-2D PWM Dec: 45
-  B0-69 Frequency Dec: 69
-  B0-6A Resonance Dec: 72
-  B0-6b ENV Depth Dec: 106
-  B0-66 LFO Depth Dec: 66
-  B0-68 Overdrive Dec: 68
-  B0-50 Speed Dec: 50
-  B0-52 Delay Amount LFO Dec: 52
-  B0-09 Tempo Dec: 09
-  B0-07 Effect Level Dec: 07
 
-
-
-*/
 void serialEvent() {
   if (MIDI2.read(midichan)) {
     switch (MIDI2.getType())     // Get the type of the message we caught
@@ -87,14 +57,12 @@ void serialEvent() {
         programchange(noteByte);
         break;
       case midi:: AfterTouchPoly:
-        noteByte = MIDI2.getData1();
-        velocityByte = MIDI2.getData2();
-        parameterchange(noteByte, velocityByte);
+
         break;
       case midi:: ControlChange:
         noteByte = MIDI2.getData1();
         velocityByte = MIDI2.getData2();
-        //pichband(noteByte, velocityByte);
+        //pichband(44, noteByte);
         parameterchange2(noteByte, velocityByte);
         break;
       case midi:: Clock:
@@ -169,7 +137,7 @@ void serialEventUSB() {
   */
 }
 
-void pichband(byte parameter, byte value) {
+void pichband( byte value) {
   switch (modulation) {
     case 1: op1volume = value; break;
     case 2: op2volume = value; break;
@@ -190,14 +158,24 @@ void pichband(byte parameter, byte value) {
     case 17: op2volume = value; op3volume = value; op5volume = value; break;
     case 18: op2volume = value; op3volume = value; op5volume = value; op6volume = value; break;
     case 19: op1volume = value; op2volume = value; op3volume = value; op4volume = value; op5volume = value; op6volume = value; break;
-
-
-
+    case 20: szorzo = value;  break;
+    case 21: op1generatorfreq = value; break;
+    case 22: op2generatorfreq = value; break;
+    case 23: op3generatorfreq = value; break;
+    case 24: op4generatorfreq = value; break;
+    case 25: op5generatorfreq = value; break;
+    case 26: op6generatorfreq = value; break;
+    case 27: op1generatorfreq = value; op2generatorfreq = value; break;
+    case 28: op1generatorfreq = value; op2generatorfreq = value;  op3generatorfreq = value; break;
+    case 29: op1generatorfreq = value;  op4generatorfreq = value; break;
+    case 30: op2generatorfreq = value;  op4generatorfreq = value; op6generatorfreq = value; break;
+    case 31: op1generatorfreq = value; op2generatorfreq = 127 - value; break;
+    case 32:  op1generatorfreq = value; op3generatorfreq = 127 - value; break;
   }
   //hangokinit();
 }
-
-void parameterchange(byte parameter, byte value) {
+/*
+  void parameterchange(byte parameter, byte value) {
   switch (parameter) {
     case 0: op1waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
     case 1: op2waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
@@ -367,7 +345,7 @@ void parameterchange(byte parameter, byte value) {
     case 119: oplfo2max = value; break;
     case 120: oplfo4max = value; break;
     case 121: oplfo6max = value; break;
-    case 122: lfofreq = value; break;
+    case 122: lfo2freq = value; break;
     case 123: freq1 = value * 100;  break;
     case 124: freq2 = value * 100;  break;
     case 125: break;
@@ -379,15 +357,58 @@ void parameterchange(byte parameter, byte value) {
     case 127: break;
       //MIDI!!!
   }
-}
-
+  }
+*/
 //----------------------------------------------------------------------
 //X-Novation Xstation 25 Controller
 //----------------------------------------------------------------------
+/*
+  MIDI Command Novation X-Station 25
+  B0-6C Attack Dec: 108
+  B0-6D Decay Dec:109
+  B0-6E Sustain Dec: 110
+  B0-6F Release Dec: 111
+  B0-72 Attack2  Dec: 114
+  B0-73 Decay2   Dec: 115
+  B0-74 Sustain2 Dec: 116
+  B0-75 Release2 Dec: 117
+  B0-70 Velocity Dec: 112
+  B0-05 Portamento Dec: 05
+  B0-28 Semitone Dec: 40
+  B0-29 Detune Dec: 29
+  B0-48 Level Dec: 72
+  B0-2B LFO Depth Dec: 43
+  B0-2c Env Depth Dec: 44
+  B0-2D PWM Dec: 45
+  B0-69 Frequency Dec: 105
+  B0-6A Resonance Dec: 106
+  B0-6b ENV Depth Dec: 107
+  B0-xx Key track:  006
+  B0-66 LFO Depth Dec: 102
+  B0-68 Overdrive Dec: 104
+  B0-50 Speed Dec: 80
+  B0-52 Delay Amount LFO Dec: 82
+  B0-09 Tempo Dec: 09
+  B0-07 Effect Level Dec: 07
+
+
+
+*/
 void parameterchange2(byte parameter, byte value) {
   switch (parameter) {
+    case 0:
+      switch (opmenuoldal) {
+        case 1: op1generatorfreqfix = value * 40000; break;
+        case 2: op2generatorfreqfix = value * 40000; break;
+        case 3: op3generatorfreqfix = value * 40000; break;
+        case 4: op4generatorfreqfix = value * 40000; break;
+        case 5: op5generatorfreqfix = value * 40000; break;
+        case 6: op6generatorfreqfix = value * 40000; break;
+      }
+      menuoldal = 15;
+      menukiir();
+      break;
 
-   
     case 5:
       switch (opmenuoldal) {
         case 1: op1volume = value; break;
@@ -401,28 +422,110 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 6:
-      switch (opmenuoldal) {
-        case 1: op1waveform = value; generatorinitone(op1waveform, generator1); break;
-        case 2: op2waveform = value; generatorinitone(op2waveform, generator2); break;
-        case 3: op3waveform = value; generatorinitone(op3waveform, generator3); break;
-        case 4: op4waveform = value; generatorinitone(op4waveform, generator4); break;
-        case 5: op5waveform = value; generatorinitone(op5waveform, generator5); break;
-        case 6: op6waveform = value; generatorinitone(op6waveform, generator6); break;
+      if (value < 17) {
+        switch (opmenuoldal)
+        {
+          case 1: op1waveform = value; generatorinitone(op1waveform, generator1); break;
+          case 2: op2waveform = value; generatorinitone(op2waveform, generator2); break;
+          case 3: op3waveform = value; generatorinitone(op3waveform, generator3); break;
+          case 4: op4waveform = value; generatorinitone(op4waveform, generator4); break;
+          case 5: op5waveform = value; generatorinitone(op5waveform, generator5); break;
+          case 6: op6waveform = value; generatorinitone(op6waveform, generator6); break;
+        }
+        menuoldal = 14;
       }
-      menuoldal = 14;
+      else
+      {
+        if (value == 28)
+        {
+          switch (opmenuoldal)
+          {
+            case 1: notefixedop1 = true; break;
+            case 2: notefixedop2 = true; break;
+            case 3: notefixedop3 = true; break;
+            case 4: notefixedop4 = true; break;
+            case 5: notefixedop5 = true; break;
+            case 6: notefixedop6 = true; break;
+          }
+          menuoldal = 13;
+        }
+        if (value == 29)
+        {
+          switch (opmenuoldal)
+          {
+            case 1: notefixedop1 = false; break;
+            case 2: notefixedop2 = false; break;
+            case 3: notefixedop3 = false; break;
+            case 4: notefixedop4 = false; break;
+            case 5: notefixedop5 = false; break;
+            case 6: notefixedop6 = false; break;
+          }
+          menuoldal = 13;
+        }
+        if (value == 52)
+        {
+          if (opmenuoldal < 7)
+          {
+            opmenuoldal++;
+          } else
+          {
+            opmenuoldal = 1;
+          }
+        }
+
+      }
       menukiir();
       break;
-    case 7: reverblevel = value; break;
-    case  9: op6generatorfreq = value;  break;
-
-    case 36: pichkezd = value; pichgorbeinit(); break;
-    case 37: pichal = value; pichgorbeinit(); break;
-    case 38: pichar = value; pichgorbeinit(); break;
-    case 39: pichd1l = value; pichgorbeinit(); break;
-    case 40: pichd1r = value; pichgorbeinit(); break;
-    case 41: pichd2l = value; pichgorbeinit(); break;
-    case 42: pichd2r = value; pichgorbeinit(); break;
-    case 43: pichrl = value; pichgorbeinit(); break;
+    case 7:
+      reverblevel = value;
+      menuoldal = 33;
+      menukiir();
+      break;
+    case  9:
+      choruslevel = value;
+      menuoldal = 34;
+      menukiir();
+      break;
+    case 35:
+      //button rew
+      break;
+    case 36:
+      //button forward
+      break;
+    case 37:
+    //button stop
+       Audio.end();
+      break;
+    case 38:
+    //button play
+    bufferindex=0;
+    szamlalo=0;
+    gorbetime[0]=-1;
+    gorbetime[1]=-1;
+    gorbetime[2]=-1;
+    gorbetime[3]=-1;
+    gorbetime[4]=-1;
+    gorbetime[5]=-1;
+    Audio.begin(mintavetelifreqstereo, buffermeret);
+      break;
+    case 39:
+    //button rec
+      break;
+    case 40:
+      alg = value - 52;
+      menuoldal = 18;
+      menukiir();
+      break;
+    case 41:
+      szorzo = value;
+      menuoldal = 17;
+      menukiir();
+      break;
+    case 43:
+      released = value / 8;
+      menuoldal = 39;
+      menukiir();
+      break;
     case 44:
       switch (opmenuoldal) {
         case 1: op1generatorfreq = value; break;
@@ -435,151 +538,51 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 12;
       menukiir();
       break;
-    case 45: alg = value; break;
-    case 48: level = value; break;
-    case 50: frame = value; break;
-    case 51: fixfreqstep = value * 40; break;
-    case 52: modulation = value; break;
-    case 57: szorzo = value; hangokinit();  break;
-    case 58: pichop1 = value; break;
-    case 59: pichop2 = value; break;
-    //   case 60: pichop3 = value;  break;
-    case 61: pichop4 = value;  break;
-    case 62: if (value == 1) {
-        notefixedop1 = true;
-      } else {
-        notefixedop1 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 63: if (value == 1) {
-        notefixedop2 = true;
-      } else {
-        notefixedop2 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 64: if (value == 1) {
-        notefixedop3 = true;
-      } else {
-        notefixedop3 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 65: if (value == 1) {
-        notefixedop4 = true;
-      } else {
-        notefixedop4 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    /*  case 66: if (value == 1) {
-          notefixedop5 = true;
-        } else {
-          notefixedop5 = false;
-        }
-        lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-        break;
-    */
-    case 66:
-
-      break;
-    case 67: if (value == 1) {
-        notefixedop6 = true;
-      } else {
-        notefixedop6 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 68: op2volume = value; break;
-
-
-    case 69: op2generatorfreqfix = value * 40000; break;
-    case 112:
-      switch (opmenuoldal) {
-        case 1: op1veloc = value; break;
-        case 2: op2veloc = value; break;
-        case 3: op3veloc = value; break;
-        case 4: op4veloc = value; break;
-        case 5: op5veloc = value; break;
-        case 6: op6veloc = value; break;
-      }
-      menuoldal = 10;
+    case 45:
+      gorbeszorzo = value / 2 + 1;
+      menuoldal = 38;
       menukiir();
       break;
-
-      op3generatorfreqfix = value * 40000; break;
-    //?miért nem megy?
-    case 71: op4generatorfreqfix = value * 40000;  break;
-
-    case 114: 
-    switch (opmenuoldal) {
-        case 1: op1ar = value; break;
-        case 2: op2ar = value; break;
-        case 3: op3ar = value; break;
-        case 4: op4ar = value; break;
-        case 5: op5ar = value; break;
-        case 6: op6ar = value; break;
-        case 7: pichar = value; break;      
-      }
-    menuoldal = 3;
-    opgorbeinittry();
-    break;
-    case 115:
-    
-     switch (opmenuoldal) {
-        case 1: op1d1r = value; break;
-        case 2: op2d1r = value; break;
-        case 3: op3d1r = value; break;
-        case 4: op4d1r = value; break;
-        case 5: op5d1r = value; break;
-        case 6: op6d1r = value; break;
-        case 7: pichd1r = value; break;      
-      }  
-    menuoldal = 5;  
-    opgorbeinittry(); 
-    break;
-    case 116: 
-    switch (opmenuoldal) {
-        case 1: op1d2r = value; break;
-        case 2: op2d2r = value; break;
-        case 3: op3d2r = value; break;
-        case 4: op4d2r = value; break;
-        case 5: op5d2r = value; break;
-        case 6: op6d2r = value; break;
-        case 7: pichd2r = value; break;      
-      }  
-    menuoldal = 7;  
-    opgorbeinittry();  
-    break;
-    case 117:
-    switch (opmenuoldal) {
-        case 1: op1rr = value; break;
-        case 2: op2rr = value; break;
-        case 3: op3rr = value; break;
-        case 4: op4rr = value; break;
-        case 5: op5rr = value; break;
-        case 6: op6rr = value; break;
-        case 7: pichrr = value; break;      
-      }  
-    menuoldal = 9;  
-    opgorbeinittry();  
-    break;
-
-
-    case 94: op5waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 95: op6waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 96: op5generatorfreqfix = value * 40000; break;
-    case 97: op6generatorfreqfix = value * 40000;  break;
+    case 72:
+      level = value / 8;
+      menuoldal = 19;
+      menukiir();
+      break;
+    case 80:
+      frame = value;
+      menuoldal = 17;
+      menukiir();
+      break;
+    case 82:
+      chorusfreq = value;
+      menuoldal = 41;
+      menukiir();
+      break;
+    case 102:
+      modulation = value / 4;
+      menuoldal = 40;
+      menukiir();
+      break;
+    case 104:
+      lfo2freq = value;
+      menuoldal = 37;
+      menukiir();
+      break;
+    case 105:
+      eqvalue = value * 96;
+      menuoldal = 32;
+      menukiir();
+      break;
     case 106:
-      switch (opmenuoldal) {
-        case 1: op1volume = value; break;
-        case 2: op2volume = value; break;
-        case 3: op3volume = value; break;
-        case 4: op4volume = value; break;
-        case 5: op5volume = value; break;
-        case 6: op6volume = value; break;
-      }
-    case 107: reverbtime = value * 26; break;
+      picheglevel = value* 8192;
+      menuoldal = 21;
+      menukiir();
+      break;
+    case 107:
+      lfo2volume = value;
+      menuoldal = 39;
+      menukiir();
+      break;
     case 108:
       switch (opmenuoldal) {
         case 1: op1al = value; break;
@@ -589,26 +592,24 @@ void parameterchange2(byte parameter, byte value) {
         case 5: op5al = value; break;
         case 6: op6al = value; break;
         case 7: pichal = value; break;
-        
+
       }
       menuoldal = 2;
       opgorbeinittry();
       break;
-
     case 109:
       switch (opmenuoldal) {
-        case 1: op1d1l = value; break;
+        case 1: op1d1l = value;  break;
         case 2: op2d1l = value; break;
-        case 3: op3d1l = value; break;
-        case 4: op4d1l = value; break;
-        case 5: op5d1l = value; break;
+        case 3: op3d1l = value;  break;
+        case 4: op4d1l = value;  break;
+        case 5: op5d1l = value;  break;
         case 6: op6d1l = value; break;
         case 7: pichd1l = value; break;
       }
       menuoldal = 4;
       opgorbeinittry();
       break;
-
     case 110:
       switch (opmenuoldal) {
         case 1: op1d2l = value; break;
@@ -622,7 +623,6 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 6;
       opgorbeinittry();
       break;
-
     case 111:
       switch (opmenuoldal) {
         case 1: op1rl = value; break;
@@ -636,29 +636,77 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 8;
       opgorbeinittry();
       break;
-
-
-
-    //  case 112: revalg = value; break;
-    case 113: choruslevel = value; break;
-    //  case 114: chorusalg = value; break;
-    // case 115: chorustime = value; break;
-
-    //    case 118: oplfo = value; break;
-    case 119: oplfo2max = value; break;
-    case 120: oplfo4max = value; break;
-    case 121: oplfo6max = value; break;
-    case 122: lfofreq = value; break;
-    case 123: freq1 = value * 100;  break;
-    case 124: freq2 = value * 100;  break;
-    case 125: break;
+    case 112:
+      switch (opmenuoldal) {
+        case 1: op1veloc = value; menuoldal = 10; break;
+        case 2: op2veloc = value; menuoldal = 10; break;
+        case 3: op3veloc = value; menuoldal = 10; break;
+        case 4: op4veloc = value; menuoldal = 10; break;
+        case 5: op5veloc = value; menuoldal = 10; break;
+        case 6: op6veloc = value; menuoldal = 10; break;
+        case 7: pichkezd = value;  menuoldal = 20; break;
+      }
+      menukiir();
+      break;
+    case 114:
+      switch (opmenuoldal) {
+        case 1: op1ar = value * 4; break;
+        case 2: op2ar = value * 4; break;
+        case 3: op3ar = value * 4; break;
+        case 4: op4ar = value * 4; break;
+        case 5: op5ar = value * 4; break;
+        case 6: op6ar = value * 4; break;
+        case 7: pichar = value * 4; break;
+      }
+      menuoldal = 3;
+      opgorbeinittry();
+      break;
+    case 115:
+      switch (opmenuoldal) {
+        case 1: op1d1r = value * 4; break;
+        case 2: op2d1r = value * 4; break;
+        case 3: op3d1r = value * 4; break;
+        case 4: op4d1r = value * 4; break;
+        case 5: op5d1r = value * 4; break;
+        case 6: op6d1r = value * 4; break;
+        case 7: pichd1r = value * 4; break;
+      }
+      menuoldal = 5;
+      opgorbeinittry();
+      break;
+    case 116:
+      switch (opmenuoldal) {
+        case 1: op1d2r = value * 4; break;
+        case 2: op2d2r = value * 4; break;
+        case 3: op3d2r = value * 4; break;
+        case 4: op4d2r = value * 4; break;
+        case 5: op5d2r = value * 4; break;
+        case 6: op6d2r = value * 4; break;
+        case 7: pichd2r = value * 4; break;
+      }
+      menuoldal = 7;
+      opgorbeinittry();
+      break;
+    case 117:
+      switch (opmenuoldal) {
+        case 1:  op1rr = value * 4; break;
+        case 2:  op2rr = value * 4; break;
+        case 3: op3rr = value * 4; break;
+        case 4:  op4rr = value * 4; break;
+        case 5:  op5rr = value * 4; break;
+        case 6: op6rr = value * 4; break;
+        case 7: pichrr = value * 4; break;
+      }
+      menuoldal = 9;
+      opgorbeinittry();
+      break;
     case 126:
       if (value == 1) {
         sendparameter();
       }
       break;
     case 127: break;
-      //MIDI!!!
+
   }
 }
 
@@ -673,10 +721,10 @@ void opgorbeinittry() {
       case 6: op6gorbeinit(); break;
       case 7: pichgorbeinit(); break;
     }
-    //lcdkiir(pachname, op1kiir());
+    maxreleaseset();
     menukiir();
     elozoinit = ido;
-    // audiorestart();
+
   }
 }
 
@@ -840,7 +888,7 @@ void sendparameter() {
   MIDI2.sendPolyPressure (119, oplfo2max, 1);
   MIDI2.sendPolyPressure (120, oplfo4max, 1);
   MIDI2.sendPolyPressure (121, oplfo6max, 1);
-  MIDI2.sendPolyPressure (122, lfofreq, 1);
+  MIDI2.sendPolyPressure (122, lfo2freq, 1);
   MIDI2.sendPolyPressure (123, freq1 / 100, 1);
   MIDI2.sendPolyPressure (124, freq2 / 100, 1);
   MIDI2.sendPolyPressure (125, 0, 1);
@@ -928,7 +976,7 @@ void initprog() {
     case 16: stepprogchanged++; break;
     case 17: op6gorbeinit(); stepprogchanged++; break;
     case 18: stepprogchanged++; break;
-    case 19: maxtimeset(); stepprogchanged++; break;
+    case 19: stepprogchanged++; break;
     case 20: stepprogchanged++; break;
     case 21: maxreleaseset(); stepprogchanged++; break;
     case 22: stepprogchanged++; break;
