@@ -52,21 +52,27 @@ Serial.println(hang);
     hangon=false;
     
     }
-    */
-  volume = analogRead(analogPin0) << 4;
+   */
+   /*
+ // volume = analogRead(analogPin0) << 4;
  
-  lfo2freq = analogRead(analogPin2) >> 5;
-  chorusfreq = analogRead(analogPin1)>>5;
+ // lfo2freq = analogRead(analogPin2) >> 5;
+  
+//  chorusfreq = analogRead(analogPin1)>>5;
   // op1generatorfreq = analogRead(analogPin1);
  // pichband( 0, analogRead(analogPin1)>>7);
   //gorbeszorzo = analogRead(analogPin3) >> 7;
-  eqvalue = analogRead(analogPin4) * 12;
-  reverblevel = analogRead(analogPin3) >>3;
-  reverblevel2 = analogRead(analogPin5) >>3;
+  
+ // eqvalue = analogRead(analogPin4) * 12;
+  
+ // reverblevel = analogRead(analogPin3) >>3;
+
+ // reverblevel2 = analogRead(analogPin5) >>3;
+  
   freq1 = (eqvalue / 123) * 100;
   freq2 = (127 - eqvalue / 99) * 100;
 
-  
+  */
     // controller-ben digitalRead(gomb1);gyorsítása:
     // Be olvassa a GPIO regisztert és kimaskolja a megfelelő bitet
     uint8_t  gomb1val = ((uint32_t)PIOB->PIO_PDSR & 1u << 25)>> 25  ;// D2 = B.25
