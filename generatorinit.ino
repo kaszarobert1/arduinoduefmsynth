@@ -150,6 +150,10 @@ void zajinit() {
   for (int i = 0; i < db; i++) {
     zajfg[i] = random(-10000, 10000);
   }
+  for (int i = FG_SIZE/2; i < db; i++) {
+    zajfg[i] += random(-5, 5);
+  }
+  
 }
 
 void duplafginit() {
@@ -246,6 +250,34 @@ void generatorinitone(byte opwaveform, int16_t generator[]) {
     case 12:
       for (int i = 0; i < FG_SIZE; i++) {
         generator[i] = triplafg[i];
+      }
+    break;
+      case 13:
+      for (int i = 0; i < FG_SIZE; i++) {
+        generator[i] = triplafg[i]/2;
+        generator[i]+= fureszfg[i];
+      }
+      break;
+      case 14:
+      for (int i = 0; i < FG_SIZE; i++) {
+        generator[i] = triplafg[i]/3;
+         generator[i]+= fureszfg[i];
+       // generator[i]+= zajfg[i]/2;
+      }
+      break;
+      case 15:
+      for (int i = 0; i < FG_SIZE; i++) {
+        generator[i] = triplafg[i]/3;
+        generator[i]+= fureszfg[i];
+      generator[i] += negyszogfg[i]/6;
+      }
+      break;
+      case 16:
+      for (int i = 0; i < FG_SIZE; i++) {
+        generator[i] = triplafg[i]/4;
+        generator[i]+= fureszfg[i]/4;
+       // generator[i]+= zajfg[i]/4;
+        generator[i] += negyszogfg[i]/4;
       }
       break;
   }
