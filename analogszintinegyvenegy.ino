@@ -6,7 +6,7 @@
 #include <Audio.h>
 #include <MIDI.h>
 //#include <MIDIUSB.h>
-MIDI_CREATE_INSTANCE(HardwareSerial, Serial3, MIDI2);
+MIDI_CREATE_INSTANCE(HardwareSerial, Serial2, MIDI2);
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -41,7 +41,7 @@ uint16_t delaybufferindex2 = 1;
 uint16_t reverblevel = 32;
 uint16_t reverblevel2 = 32;
 byte choruslevel = 3;
-byte chorusfreq = 2;
+byte chorusfreq = 0;
 uint16_t chorusalg = 64;
 uint16_t chorustime = 3000;
 uint16_t reverbtime = 1000;
@@ -244,13 +244,13 @@ int16_t pwmfg[FG_SIZE];
 //int16_t generator8[FG_SIZE];
 byte lfoarray[128] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 //  byte lfoarray[64] = { 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,22,23,24,25,26,27,28,29,30,31,32,31,30,29,28,27,26,25,24,23,22,21,20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-byte lfoarray2[64] = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10, 11, 13, 15, 18, 22, 26, 30, 34, 39, 44, 39, 34, 30, 26, 27, 26, 22, 18, 15, 13, 11, 10, 9, 8, 7, 6, 6, 5, 5, 4, 4, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
+byte lfoarray2[128] = { 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 10, 10, 11, 11, 13, 13, 15, 15, 18, 18, 22, 22, 26, 26, 30, 30, 34, 34, 39, 39, 44, 45, 44, 39, 39, 34, 34, 30, 30, 26, 26, 22, 22, 18, 18, 15, 15, 13, 13, 11, 11, 10, 10, 9, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0  };
 byte lfoarray3[64] = { 1, 5, 3, 8, 2, 2, 32, 21, 3, 18, 25, 27, 21, 5, 9, 1, 6, 7, 18, 30, 24, 26, 10, 1, 5, 27, 19, 22, 6, 30, 34, 39, 17, 16, 19, 2, 26, 27, 2, 22, 18, 15, 13, 3, 15, 9, 8, 17, 26, 6, 15, 25, 4, 4, 33, 3, 3, 12, 24, 2, 11, 1, 19, 13 };
 byte lfoarrayindex = 0;
-byte lfofreq = 14;
+//byte lfo2freq = 14;
 byte lfovolume = 0;
 byte lfo2arrayindex = 0;
-byte lfo2freq = 14;
+byte lfo2freq = 0;
 byte lfo2volume = 0;
 
 
@@ -360,6 +360,10 @@ byte lcdfreq = 5;
 #define ketopgenA(freqmutato1, freqmutato2,op1level,op2level)  (generator1[((freqmutato1 >> 22) + generator2[freqmutato2 >> 22] * op2level/4096) % FG_SIZE ] *op1level>>12)
 #define ketopgenB(freqmutato3, freqmutato4,op3level,op4level)  (generator3[((freqmutato3 >> 22) + generator4[freqmutato4 >> 22] * op4level/4096) % FG_SIZE ] *op3level>>12)
 #define ketopgenC(freqmutato5, freqmutato6,op5level,op6level)  (generator5[((freqmutato5 >> 22) + generator6[freqmutato6 >> 22] * op6level/4096) % FG_SIZE ] *op5level>>12)
+#define ketopgenA24(freqmutato1, freqmutato2,op1level,op2level)  (generator1[((freqmutato1 >> 24) + generator2[freqmutato2 >> 24] * op2level/4096) % FG_SIZE ] *op1level>>12)
+#define ketopgenB24(freqmutato3, freqmutato4,op3level,op4level)  (generator3[((freqmutato3 >> 24) + generator4[freqmutato4 >> 24] * op4level/4096) % FG_SIZE ] *op3level>>12)
+#define ketopgenC24(freqmutato5, freqmutato6,op5level,op6level)  (generator5[((freqmutato5 >> 24) + generator6[freqmutato6 >> 24] * op6level/4096) % FG_SIZE ] *op5level>>12)
+#define ketopgenC25(freqmutato5, freqmutato6,op5level,op6level)  (generator5[((freqmutato5 >> 25) + generator6[freqmutato6 >> 25] * op6level/4096) % FG_SIZE ] *op5level>>12)
 #define ketopgenA2(freqmutato1, freqmutato2,op1level,op2level)  (generator1[((freqmutato1 >> 22)+generator2[freqmutato2 >> 22]* op2level/4096)% FG_SIZE ] * op1level/4096)
 #define egyopgenA(freqmutato1,op1level)  (generator1[freqmutato1 >> 22] *op1level>>12)
 #define egyopgenB(freqmutato2,op2level)  (generator2[freqmutato2 >> 22] *op2level>>12)
@@ -409,6 +413,7 @@ void setup() {
   MIDI2.begin(MIDI_CHANNEL_OMNI);
   MIDI2.turnThruOff();
   Serial.begin(115200);
+  Serial.print("Start serial!");
   Serial2.begin(31250);
   // maxtime = maxtime;
   op1gorbeinit();
@@ -450,28 +455,26 @@ void loop() {
     ido = micros();
     serialEvent();
     // serialEventUSB();
-    if (ido - elozoido > frame*1000) {
-
-      //
-        
-      //
+    if (ido - elozoido > frame << 9) {
       elozoido = ido;
       if (szamlalo >= lcdfreq) {
-        vezerlok();
-        initprog();
+        vezerlok(); //read buttons and ptenciometers, controlled the button system
+        initprog(); //Step initialize, and refrish lcd end controlled generator system!!!
         szamlalo = 0;
+
+
       } else {
+        if (szamlalo == 1)
+        {
+          //lfo generator step:
+          lfo1volume = (lfoarray[lfoarrayindex >> 1] >> choruslevel << 1) + 2;
+          lfoarrayindex += chorusfreq;
+          pichband(lfoarray[lfo2arrayindex >> 1] >> lfo2volume);
+          lfo2arrayindex += lfo2freq;
+        }
         szamlalo++;
       }
-      //lfo
-      lfo1volume = (lfoarray[lfoarrayindex >> 1] >> choruslevel << 1) + 2;
-      lfoarrayindex += chorusfreq;
-      lfo2volume = lfoarray[lfo2arrayindex >> 1] << 1;
-      lfo2arrayindex += lfo2freq;
-      pichband(0, lfo2volume);
-      // picheglevel=picheglevel+lfo2volume*2000;
 
-      // Serial.println(String(lcdprint3( lfo2volume)) + " ");
 
 
       //gorbe leptetese ill leallitasa
@@ -517,7 +520,7 @@ void loop() {
 
           if (gorbetime[2] != maxrelease2 - 1)
             gorbetime[2]++;
-          op1level[2] = op1gorbe[gorbetime[2]] * op1volume * (waveveloc[2] / op1veloc);
+          op1level[2] = op1gorbe[gorbetime[2]] * op1volume * (waveveloc[2] / op1veloc) ;
           op2level[2] = op2gorbe[gorbetime[2]] * op2volume * (waveveloc[2] / op2veloc);
           op3level[2] = op3gorbe[gorbetime[2]] * op3volume * (waveveloc[2] / op3veloc);
           op4level[2] = op4gorbe[gorbetime[2]] * op4volume * (waveveloc[2] / op4veloc);
@@ -533,7 +536,7 @@ void loop() {
 
           if (gorbetime[3] != maxrelease3 - 1)
             gorbetime[3]++;
-          op1level[3] = op1gorbe[gorbetime[3]] * op1volume * (waveveloc[3] / op1veloc);
+          op1level[3] = op1gorbe[gorbetime[3]] * op1volume * (waveveloc[3] / op1veloc) ;
           op2level[3] = op2gorbe[gorbetime[3]] * op2volume * (waveveloc[3] / op2veloc);
           op3level[3] = op3gorbe[gorbetime[3]] * op3volume * (waveveloc[3] / op3veloc);
           op4level[3] = op4gorbe[gorbetime[3]] * op4volume * (waveveloc[3] / op4veloc);
@@ -566,7 +569,7 @@ void loop() {
 
           if (gorbetime[5] != maxrelease5 - 1)
             gorbetime[5]++;
-          op1level[5] = op1gorbe[gorbetime[5]] * op1volume * (waveveloc[5] / op1veloc);
+          op1level[5] = op1gorbe[gorbetime[5]] * op1volume * (waveveloc[5] / op1veloc) ;
           op2level[5] = op2gorbe[gorbetime[5]] * op2volume * (waveveloc[5] / op2veloc);
           op3level[5] = op3gorbe[gorbetime[5]] * op3volume * (waveveloc[5] / op3veloc);
           op4level[5] = op4gorbe[gorbetime[5]] * op4volume * (waveveloc[5] / op4veloc);
@@ -575,12 +578,12 @@ void loop() {
         }
       }
 
-     
-   
-      
-     
-        
-      
+
+
+
+
+
+
 
       if (notefixedop1) {
         sinewave1freq = wavefreq[0] * op1generatorfreq;
@@ -718,12 +721,12 @@ void loop() {
             pich[i+1] = (pichgorbe[gorbetime[i]] - 50) * picheglevel;
             }
           */
-          pich[1] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-          pich[2] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-          pich[3] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-          pich[4] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-          pich[5] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-          pich[6] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          pich[1] = (pichgorbe[gorbetime[0]]) * picheglevel;
+          pich[2] = (pichgorbe[gorbetime[1]]) * picheglevel;
+          pich[3] = (pichgorbe[gorbetime[2]]) * picheglevel;
+          pich[4] = (pichgorbe[gorbetime[3]]) * picheglevel;
+          pich[5] = (pichgorbe[gorbetime[4]]) * picheglevel;
+          pich[6] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
           /*
@@ -1212,52 +1215,35 @@ void loop() {
             break;
           case 6:
 
-            byte kapcsolo;
-            if (generatornumber == 0) {
-              kapcsolo = 5;
-            }
-            else {
-              kapcsolo = generatornumber - 1;
-            }
-            //   Serial.println( String(kapcsolo) + " ");
-            switch (kapcsolo) {
-              case 0:
-                if (gorbetime[5] > 0 ) {
-                  bufferbe +=   negyopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], sinewaveptr[25], op1level[0], op2level[0], op3level[0], op4level[0]);
-                  bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
-                }
-                break;
-              case 1:
-                if (gorbetime[0] > 0 ) {
+            if (gorbetime[0] > 0 ) {
+              bufferbe +=   ketopgenA24(sinewaveptr[1], sinewaveptr[9], op1level[0], op2level[0])-op1level[0];
+              bufferbe -=   ketopgenB24(sinewaveptr[17], sinewaveptr[25], op3level[0], op4level[0])+op1level[0];
 
-                  bufferbe +=   negyopgenA(sinewaveptr[2], sinewaveptr[10], sinewaveptr[18], sinewaveptr[26], op1level[1], op2level[1], op3level[1], op4level[1]);
-                  bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
-                }
-                break;
-              case 2:
-                if (gorbetime[1] > 0 ) {
-                  bufferbe +=   negyopgenA(sinewaveptr[3], sinewaveptr[11], sinewaveptr[19], sinewaveptr[27], op1level[2], op2level[2], op3level[2], op4level[2]);
-                  bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
-                }
-                break;
-              case 3:
-                if (gorbetime[2] > 0 ) {
-                  bufferbe +=   negyopgenA(sinewaveptr[4], sinewaveptr[12], sinewaveptr[20], sinewaveptr[28], op1level[3], op2level[3], op3level[3], op4level[3]);
-                  bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
-                }
-                break;
-              case 4:
-                if (gorbetime[3] > 0 ) {
-                  bufferbe +=   negyopgenA(sinewaveptr[5], sinewaveptr[13], sinewaveptr[21], sinewaveptr[29], op1level[4], op2level[4], op3level[4], op4level[4]);
-                  bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
-                }
-                break;
-              case 5:
-                if (gorbetime[4] > 0 ) {
-                  bufferbe +=   negyopgenA(sinewaveptr[6], sinewaveptr[14], sinewaveptr[22], sinewaveptr[30], op1level[5], op2level[5], op3level[5], op4level[5]);
-                  bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
-                }
-                break;
+            }
+            if (gorbetime[1] > 0) {
+              bufferbe +=   ketopgenA24(sinewaveptr[2], sinewaveptr[10], op1level[1], op2level[1]-op1level[1]);
+              bufferbe -=   ketopgenB24(sinewaveptr[18], sinewaveptr[26], op3level[1], op4level[1])+op1level[1];
+
+            }
+            if (gorbetime[2] > 0) {
+              bufferbe +=   ketopgenA24(sinewaveptr[3], sinewaveptr[11], op1level[2], op2level[2])-op1level[2];
+              bufferbe -=   ketopgenB24(sinewaveptr[19], sinewaveptr[27], op3level[2], op4level[2])+op1level[2];
+
+            }
+            if (gorbetime[3] > 0) {
+              bufferbe +=   ketopgenA24(sinewaveptr[4], sinewaveptr[12], op1level[3], op2level[3])-op1level[3];
+              bufferbe -=   ketopgenB24(sinewaveptr[20], sinewaveptr[28], op3level[3], op4level[3])+op1level[3];
+
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe +=   ketopgenA24(sinewaveptr[5], sinewaveptr[13], op1level[4], op2level[4])-op1level[4];
+              bufferbe -=   ketopgenB24(sinewaveptr[21], sinewaveptr[29], op3level[4], op4level[4])+op1level[4];
+
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe +=   ketopgenA24(sinewaveptr[6], sinewaveptr[14], op1level[5], op2level[5])-op1level[5];
+              bufferbe -=   ketopgenB24(sinewaveptr[22], sinewaveptr[30], op3level[5], op4level[5])+op1level[5];
+
             }
 
 
@@ -1317,6 +1303,8 @@ void loop() {
         //      sinewaveptr[52] += sinewave52freq + pich[52];
         //     sinewaveptr[53] += sinewave53freq + pich[53];
         //      sinewaveptr[54] += sinewave54freq + pich[54] ;
+
+ 
         bufferbe = bufferbe >> level;
         //EQ +REVERB Left
         //y3= equqlizerdelay1(y3,freq1,freq2,elozodelaybufferindex);
@@ -1331,6 +1319,7 @@ void loop() {
         if (delaybufferindex >= reverbtime) {
           delaybufferindex = 0;
         }
+
         buffer[ bufferindex] = bufferbe;
       }
       else {
@@ -1433,115 +1422,49 @@ void loop() {
           //algoritmus5 pwm
           case 5:
             if (gorbetime[0] > 0 ) {
-              bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
+              bufferbe +=   ketopgenC25(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
             }
             if (gorbetime[1] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
+              bufferbe +=   ketopgenC25(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
             }
             if (gorbetime[2] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
+              bufferbe +=   ketopgenC25(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
             }
             if (gorbetime[3] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+              bufferbe +=   ketopgenC25(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
             }
             if (gorbetime[4] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+              bufferbe +=   ketopgenC25(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
             }
             if (gorbetime[5] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+              bufferbe +=   ketopgenC25(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
             }
             break;
           case 6:
 
-            //második
-
-            /*
-
-              if (gorbetime[0] > 0 ) {
-
-
-              }
-              if (gorbetime[1] > 0) {
-
-
-              }
-              if (gorbetime[2] > 0) {
-
-
-              }
-              if (gorbetime[3] > 0) {
-
-
-              }
-              if (gorbetime[4] > 0) {
-
-
-              }
-              if (gorbetime[5] > 0) {
-
-
-              }
-              break;
-            */
-            byte kapcsolo;
-            if (generatornumber == 0) {
-              kapcsolo = 5;
+            if (gorbetime[0] > 0 ) {
+              bufferbe +=   ketopgenC24(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
             }
-            else {
-              kapcsolo = generatornumber - 1;
+            if (gorbetime[1] > 0) {
+              bufferbe +=   ketopgenC24(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
             }
-            switch (kapcsolo) {
-              case 0:
-                if (gorbetime[5] > 0 ) {
-                  bufferbe +=   ketopgenA(sinewaveptr[1], sinewaveptr[9], op1level[0], op2level[0]);
-                  bufferbe +=   ketopgenB(sinewaveptr[17], sinewaveptr[25], op3level[0], op4level[0]);
-
-
-                }
-                break;
-              case 1:
-                if (gorbetime[0] > 0 ) {
-
-                  bufferbe +=   ketopgenA(sinewaveptr[2], sinewaveptr[10], op1level[1], op2level[1]);
-                  bufferbe +=   ketopgenB(sinewaveptr[18], sinewaveptr[26], op3level[1], op4level[1]);
-
-                }
-                break;
-              case 2:
-                if (gorbetime[1] > 0 ) {
-                  bufferbe +=   ketopgenA(sinewaveptr[3], sinewaveptr[11], op1level[2], op2level[2]);
-                  bufferbe +=   ketopgenB(sinewaveptr[19], sinewaveptr[27], op3level[2], op4level[2]);
-
-                }
-                break;
-              case 3:
-                if (gorbetime[2] > 0 ) {
-                  bufferbe +=   ketopgenA(sinewaveptr[4], sinewaveptr[12], op1level[3], op2level[3]);
-                  bufferbe +=   ketopgenB(sinewaveptr[20], sinewaveptr[28], op3level[3], op4level[3]);
-
-                }
-                break;
-              case 4:
-                if (gorbetime[3] > 0 ) {
-                  bufferbe +=   ketopgenA(sinewaveptr[5], sinewaveptr[13], op1level[4], op2level[4]);
-                  bufferbe +=   ketopgenB(sinewaveptr[21], sinewaveptr[29], op3level[4], op4level[4]);
-
-                }
-                break;
-              case 5:
-                if (gorbetime[4] > 0 ) {
-                  bufferbe +=   ketopgenA(sinewaveptr[6], sinewaveptr[14], op1level[5], op2level[5]);
-                  bufferbe +=   ketopgenB(sinewaveptr[22], sinewaveptr[30], op3level[5], op4level[5]);
-
-                }
-                break;
+            if (gorbetime[2] > 0) {
+              bufferbe +=   ketopgenC24(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
             }
-
-
+            if (gorbetime[3] > 0) {
+              bufferbe +=   ketopgenC24(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe +=   ketopgenC24(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe +=   ketopgenC24(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+            }
             break;
         }
 
         //EQ +REVERB Right
+     
         bufferbe = bufferbe >> level;
         // y4= equqlizerdelay2(y4,freq1,freq2,elozodelaybufferindex);
         y4 = (freq1 * y4 + freq2 * delaybuffer[elozodelaybufferindex]) / 11500;
@@ -1555,7 +1478,26 @@ void loop() {
         if (delaybufferindex2 >= reverbtime2) {
           delaybufferindex2 = 1;
         }
-        buffer[ bufferindex] = bufferbe;
+
+
+
+    
+
+
+        //mono mode
+    
+        if (bufferindex != 0)
+        {
+          buffer[bufferindex] = bufferbe + buffer[bufferindex - 1];
+        }
+        else
+        {
+          buffer[ bufferindex] = bufferbe + buffer[buffermeret ];
+        }
+        /*
+          //stereo mode
+          buffer[bufferindex] = bufferbe;
+        */
       }
     }
 
@@ -1590,6 +1532,16 @@ void loop() {
     */
 
     Audio.prepare(buffer, buffermeret, volume);
+    /*
+      for (int i=0; i<buffermeret; i++) {
+            // set volume amplitude (signed multiply)
+          //  buffer[i] = buffer[i] * volume / 1024;
+            // convert from signed 16 bit to unsigned 12 bit for DAC.
+            buffer[i] += 0x8000;
+            buffer[i] >>= 4;
+        }
+    */
+
     // Feed samples to audio
     Audio.write(buffer, buffermeret);
   }
