@@ -536,7 +536,7 @@ void loop() {
 
           if (gorbetime[2] != maxrelease2 - 1)
             gorbetime[2]++;
-          op1level[2] = op1gorbe[gorbetime[2]] * op1volume * (waveveloc[2] >> op1veloc) ;
+          op1level[2] = op1gorbe[gorbetime[2]] * op1volume * (waveveloc[2] >> op1veloc);
           op2level[2] = op2gorbe[gorbetime[2]] * op2volume * (waveveloc[2] >> op2veloc);
           op3level[2] = op3gorbe[gorbetime[2]] * op3volume * (waveveloc[2] >> op3veloc);
           op4level[2] = op4gorbe[gorbetime[2]] * op4volume * (waveveloc[2] >> op4veloc);
@@ -552,7 +552,7 @@ void loop() {
 
           if (gorbetime[3] != maxrelease3 - 1)
             gorbetime[3]++;
-          op1level[3] = op1gorbe[gorbetime[3]] * op1volume * (waveveloc[3] >> op1veloc) ;
+          op1level[3] = op1gorbe[gorbetime[3]] * op1volume * (waveveloc[3] >> op1veloc);
           op2level[3] = op2gorbe[gorbetime[3]] * op2volume * (waveveloc[3] >> op2veloc);
           op3level[3] = op3gorbe[gorbetime[3]] * op3volume * (waveveloc[3] >> op3veloc);
           op4level[3] = op4gorbe[gorbetime[3]] * op4volume * (waveveloc[3] >> op4veloc);

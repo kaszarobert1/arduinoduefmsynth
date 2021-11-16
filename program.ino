@@ -1061,7 +1061,7 @@ void program8() {
   op1generatorfreqfix = 1 << 15;
   op1rl = 0;
   op1rr = 127;
-  op1veloc = 36;
+  op1veloc = 3;
   op1volumeorig = 82;
   op1waveform = 2;
   op2al = 127;
@@ -1073,7 +1073,7 @@ void program8() {
   op2d2r = 42;
   op2generatorfreq = 14;
   op2generatorfreqfix = 1 << 15;
-  op2veloc = 61;
+  op2veloc = 3;
   op2volume = 25;
   op2waveform = 2;
   op3al = 127;
