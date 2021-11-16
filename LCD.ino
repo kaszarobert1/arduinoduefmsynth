@@ -1288,7 +1288,7 @@ void menukiir() {
             if (pichrr < 127) {
               pichrr++;
             } else {
-              pichrr = 0;
+              pichrr = 1;
             }
             inc = false;
           }
@@ -1309,7 +1309,7 @@ void menukiir() {
       switch (opmenuoldal) {
         case 1:
           if (inc) {
-            if (op1veloc < 127) {
+            if (op1veloc < 32) {
               op1veloc++;
             } else {
               op1veloc = 0;
@@ -1320,7 +1320,7 @@ void menukiir() {
             if (op1veloc > 0) {
               op1veloc--;
             } else {
-              op1veloc = 127;
+              op1veloc = 32;
             }
             dec = false;
           }
@@ -1328,7 +1328,7 @@ void menukiir() {
           break;
         case 2:
           if (inc) {
-            if (op2veloc < 127) {
+            if (op2veloc < 32) {
               op2veloc++;
             } else {
               op2veloc = 0;
@@ -1339,7 +1339,7 @@ void menukiir() {
             if (op2veloc > 0) {
               op2veloc--;
             } else {
-              op2veloc = 127;
+              op2veloc = 32;
             }
             dec = false;
           }
@@ -1347,7 +1347,7 @@ void menukiir() {
           break;
         case 3:
           if (inc) {
-            if (op3veloc < 127) {
+            if (op3veloc < 32) {
               op3veloc++;
             } else {
               op3veloc = 0;
@@ -1358,7 +1358,7 @@ void menukiir() {
             if (op3veloc > 0) {
               op3veloc--;
             } else {
-              op3veloc = 127;
+              op3veloc = 32;
             }
             dec = false;
           }
@@ -1366,7 +1366,7 @@ void menukiir() {
           break;
         case 4:
           if (inc) {
-            if (op4veloc < 127) {
+            if (op4veloc < 32) {
               op4veloc++;
             } else {
               op4veloc = 0;
@@ -1377,7 +1377,7 @@ void menukiir() {
             if (op4veloc > 0) {
               op4veloc--;
             } else {
-              op4veloc = 127;
+              op4veloc = 32;
             }
             dec = false;
           }
@@ -1385,7 +1385,7 @@ void menukiir() {
           break;
         case 5:
           if (inc) {
-            if (op5veloc < 127) {
+            if (op5veloc < 32) {
               op5veloc++;
             } else {
               op5veloc = 0;
@@ -1396,7 +1396,7 @@ void menukiir() {
             if (op5veloc > 0) {
               op5veloc--;
             } else {
-              op5veloc = 127;
+              op5veloc = 32;
             }
             dec = false;
           }
@@ -1404,7 +1404,7 @@ void menukiir() {
           break;
         case 6:
           if (inc) {
-            if (op6veloc < 127) {
+            if (op6veloc < 32) {
               op6veloc++;
             } else {
               op6veloc = 0;
@@ -1415,7 +1415,7 @@ void menukiir() {
             if (op6veloc > 0) {
               op6veloc--;
             } else {
-              op6veloc = 127;
+              op6veloc = 32;
             }
             dec = false;
           }
@@ -1462,110 +1462,110 @@ void menukiir() {
             }
             dec = false;
           }
-          op1volume=op1volumeorig;
+          op1volume = op1volumeorig;
           lcdkiir("Op1: VEL >VOL    ", "     " + String(lcdprint3(op1veloc)) + "  " + String(lcdprint3(op1volume)) + "    ");
-          
+
           break;
         case 2:
           if (inc) {
-            if (op2volume < 127) {
-              op2volume++;
+            if (op2volumeorig < 127) {
+              op2volumeorig++;
             } else {
-              op2volume = 0;
+              op2volumeorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op2volume > 0) {
+            if (op2volumeorig > 0) {
               op2volume--;
             } else {
-              op2volume = 127;
+              op2volumeorig = 127;
             }
             dec = false;
           }
-
+          op2volume = op2volumeorig;
           lcdkiir("Op2: VEL >VOL    ", "     " + String(lcdprint3(op2veloc)) + "  " + String(lcdprint3(op2volume)) + "    ");
           break;
         case 3:
           if (inc) {
-            if (op3volume < 127) {
-              op3volume++;
+            if (op3volumeorig < 127) {
+              op3volumeorig++;
             } else {
-              op3volume = 0;
+              op3volumeorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op3volume > 0) {
-              op3volume--;
+            if (op3volumeorig > 0) {
+              op3volumeorig--;
             } else {
-              op3volume = 127;
+              op3volumeorig = 127;
             }
             dec = false;
           }
-
-          lcdkiir("Op3: VEL >VOL    ", "     " + String(lcdprint3(op3veloc)) + "  " + String(lcdprint3(op3volume)) + "    ");
+          op3volume=op3volumeorig;
+          lcdkiir("Op3: VEL >VOL    ", "     " + String(lcdprint3(op3veloc)) + "  " + String(lcdprint3(op3volumeorig)) + "    ");
           break;
         case 4:
           if (inc) {
-            if (op4volume < 127) {
-              op4volume++;
+            if (op4volumeorig < 127) {
+              op4volumeorig++;
             } else {
-              op4volume = 0;
+              op4volumeorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op4volume > 0) {
-              op4volume--;
+            if (op4volumeorig > 0) {
+              op4volumeorig--;
             } else {
-              op4volume = 127;
+              op4volumeorig = 127;
             }
             dec = false;
           }
-
-          lcdkiir("Op4: VEL >VOL    ", "     " + String(lcdprint3(op4veloc)) + "  " + String(lcdprint3(op4volume)) + "    ");
+          op4volume=op4volumeorig;
+          lcdkiir("Op4: VEL >VOL    ", "     " + String(lcdprint3(op4veloc)) + "  " + String(lcdprint3(op4volumeorig)) + "    ");
 
           break;
         case 5:
           if (inc) {
-            if (op5volume < 127) {
-              op5volume++;
+            if (op5volumeorig < 127) {
+              op5volumeorig++;
             } else {
-              op5volume = 0;
+              op5volumeorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op5volume > 0) {
-              op5volume--;
+            if (op5volumeorig > 0) {
+              op5volumeorig--;
             } else {
-              op5volume = 127;
+              op5volumeorig = 127;
             }
             dec = false;
           }
-
-          lcdkiir("Op5: VEL >VOL    ", "     " + String(lcdprint3(op5veloc)) + "  " + String(lcdprint3(op5volume)) + "    ");
+          op5volume=op5volumeorig;
+          lcdkiir("Op5: VEL >VOL    ", "     " + String(lcdprint3(op5veloc)) + "  " + String(lcdprint3(op5volumeorig)) + "    ");
           break;
         case 6:
           if (inc) {
-            if (op6volume < 127) {
-              op6volume++;
+            if (op6volumeorig < 127) {
+              op6volumeorig++;
             } else {
-              op6volume = 0;
+              op6volumeorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op6volume > 0) {
-              op6volume--;
+            if (op6volumeorig > 0) {
+              op6volumeorig--;
             } else {
-              op6volume = 127;
+              op6volumeorig = 127;
             }
             dec = false;
           }
-
-          lcdkiir("Op6: VEL >VOL    ", "     " + String(lcdprint3(op6veloc)) + "  " + String(lcdprint3(op6volume)) + "    ");
+          op6volume=op6volumeorig;
+          lcdkiir("Op6: VEL >VOL    ", "     " + String(lcdprint3(op6veloc)) + "  " + String(lcdprint3(op6volumeorig)) + "    ");
           break;
         case 7:
           if (inc) {
@@ -1609,103 +1609,108 @@ void menukiir() {
             }
             dec = false;
           }
-          op1generatorfreq=op1generatorfreqorig;
+          op1generatorfreq = op1generatorfreqorig;
           lcdkiir("Op1: FRQ< FIX    ", "     " + String(lcdprint3(op1generatorfreq)) + "  " + String(lcdprint3(notefixedop1)) + "    ");
           break;
         case 2:
           if (inc) {
-            if (op2generatorfreq < 127) {
-              op2generatorfreq++;
+            if (op2generatorfreqorig < 127) {
+              op2generatorfreqorig++;
             } else {
-              op2generatorfreq = 0;
+              op2generatorfreqorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op2generatorfreq > 0) {
-              op2generatorfreq--;
+            if (op2generatorfreqorig > 0) {
+              op2generatorfreqorig--;
             } else {
-              op2generatorfreq = 127;
+              op2generatorfreqorig = 127;
             }
             dec = false;
           }
-          lcdkiir("Op2: FRQ< FIX    ", "     " + String(lcdprint3(op2generatorfreq)) + "  " + String(lcdprint3(notefixedop2)) + "    ");
+          op2generatorfreq = op2generatorfreqorig;
+          lcdkiir("Op2: FRQ< FIX    ", "     " + String(lcdprint3(op2generatorfreqorig)) + "  " + String(lcdprint3(notefixedop2)) + "    ");
           break;
         case 3:
           if (inc) {
-            if (op3generatorfreq < 127) {
-              op3generatorfreq++;
+            if (op3generatorfreqorig < 127) {
+              op3generatorfreqorig++;
             } else {
-              op3generatorfreq = 0;
+              op3generatorfreqorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op3generatorfreq > 0) {
-              op3generatorfreq--;
+            if (op3generatorfreqorig > 0) {
+              op3generatorfreqorig--;
             } else {
-              op3generatorfreq = 127;
+              op3generatorfreqorig = 127;
             }
             dec = false;
           }
-          lcdkiir("Op3: FRQ< FIX    ", "     " + String(lcdprint3(op3generatorfreq)) + "  " + String(lcdprint3(notefixedop3)) + "    ");
+          op3generatorfreq = op3generatorfreqorig;
+          lcdkiir("Op3: FRQ< FIX    ", "     " + String(lcdprint3(op3generatorfreqorig)) + "  " + String(lcdprint3(notefixedop3)) + "    ");
           break;
         case 4:
           if (inc) {
-            if (op4generatorfreq < 127) {
-              op4generatorfreq++;
+            if (op4generatorfreqorig < 127) {
+              op4generatorfreqorig++;
             } else {
-              op4generatorfreq = 0;
+              op4generatorfreqorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op4generatorfreq > 0) {
-              op4generatorfreq--;
+            if (op4generatorfreqorig > 0) {
+              op4generatorfreqorig--;
             } else {
-              op4generatorfreq = 127;
+              op4generatorfreqorig = 127;
             }
             dec = false;
           }
-          lcdkiir("Op4: FRQ< FIX    ", "     " + String(lcdprint3(op4generatorfreq)) + "  " + String(lcdprint3(notefixedop4)) + "    ");
+          op4generatorfreq = op4generatorfreqorig;
+          lcdkiir("Op4: FRQ< FIX    ", "     " + String(lcdprint3(op4generatorfreqorig)) + "  " + String(lcdprint3(notefixedop4)) + "    ");
           break;
         case 5:
           if (inc) {
-            if (op5generatorfreq < 127) {
-              op5generatorfreq++;
+            if (op5generatorfreqorig < 127) {
+              op5generatorfreqorig++;
             } else {
-              op5generatorfreq = 0;
+              op5generatorfreqorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op5generatorfreq > 0) {
-              op5generatorfreq--;
+            if (op5generatorfreqorig > 0) {
+              op5generatorfreqorig--;
             } else {
-              op5generatorfreq = 127;
+              op5generatorfreqorig = 127;
             }
             dec = false;
           }
-          lcdkiir("Op5: FRQ< FIX    ", "     " + String(lcdprint3(op5generatorfreq)) + "  " + String(lcdprint3(notefixedop5)) + "    ");
+          op5generatorfreq = op5generatorfreqorig;
+          lcdkiir("Op5: FRQ< FIX    ", "     " + String(lcdprint3(op5generatorfreqorig)) + "  " + String(lcdprint3(notefixedop5)) + "    ");
           break;
         case 6:
           if (inc) {
-            if (op6generatorfreq < 127) {
-              op6generatorfreq++;
+            if (op6generatorfreqorig < 127) {
+              op6generatorfreqorig++;
             } else {
-              op6generatorfreq = 0;
+              op6generatorfreqorig = 0;
             }
             inc = false;
           }
           if (dec) {
-            if (op6generatorfreq > 0) {
-              op6generatorfreq--;
+            if (op6generatorfreqorig > 0) {
+              op6generatorfreqorig--;
             } else {
-              op6generatorfreq = 127;
+              op6generatorfreqorig = 127;
             }
             dec = false;
           }
-          lcdkiir("Op6: FRQ< FIX    ", "     " + String(lcdprint3(op6generatorfreq)) + "  " + String(lcdprint3(notefixedop6)) + "    ");
+          op6generatorfreq = op6generatorfreqorig;
+          lcdkiir("Op6: FRQ< FIX    ", "     " + String(lcdprint3(op6generatorfreqorig)) + "  " + String(lcdprint3(notefixedop6)) + "    ");
           break;
         case 7:
           if (inc) {
@@ -1888,7 +1893,7 @@ void menukiir() {
             }
             dec = false;
           }
-          
+
           switch (op1waveform)
           {
             case 0: wavestring = "NONE        "; break;
@@ -1901,16 +1906,16 @@ void menukiir() {
             case 7: wavestring = "SQUARE HIGH "; break;
             case 8: wavestring = "SQUARE LOW  "; break;
             case 9: wavestring = "NOISE 1     "; break;
-            case 10: wavestring ="NOISE 2     "; break;
-            case 11: wavestring ="DOUBLE SINE "; break;
-            case 12: wavestring ="TRIPLE SINE "; break;
-            case 13: wavestring ="USER WAVE 1 "; break;
-            case 14: wavestring ="USER WAVE 2 "; break;
-            case 15: wavestring ="USER WAVE 3 "; break;
-            case 16: wavestring ="USER WAVE 4 "; break;
+            case 10: wavestring = "NOISE 2     "; break;
+            case 11: wavestring = "DOUBLE SINE "; break;
+            case 12: wavestring = "TRIPLE SINE "; break;
+            case 13: wavestring = "USER WAVE 1 "; break;
+            case 14: wavestring = "USER WAVE 2 "; break;
+            case 15: wavestring = "USER WAVE 3 "; break;
+            case 16: wavestring = "USER WAVE 4 "; break;
           }
           lcdkiir("Op1: Wav ", "    " + wavestring);
-           generatorinitone(op1waveform, generator1);
+          generatorinitone(op1waveform, generator1);
           break;
         case 2:
           if (inc) {
@@ -1930,7 +1935,7 @@ void menukiir() {
             dec = false;
           }
           lcdkiir("Op2: Wav< FRQFix ", "     " + String(lcdprint3(op2waveform)) + "  " + String(lcdprint3(op2generatorfreqfix >> 9)) + "    ");
-         switch (op2waveform)
+          switch (op2waveform)
           {
             case 0: wavestring = "NONE        "; break;
             case 1: wavestring = "SINE HIGH   "; break;
@@ -1942,13 +1947,13 @@ void menukiir() {
             case 7: wavestring = "SQUARE HIGH "; break;
             case 8: wavestring = "SQUARE LOW  "; break;
             case 9: wavestring = "NOISE 1     "; break;
-            case 10: wavestring ="NOISE 2     "; break;
-            case 11: wavestring ="DOUBLE SINE "; break;
-            case 12: wavestring ="TRIPLE SINE "; break;
-            case 13: wavestring ="USER WAVE 1 "; break;
-            case 14: wavestring ="USER WAVE 2 "; break;
-            case 15: wavestring ="USER WAVE 3 "; break;
-            case 16: wavestring ="USER WAVE 4 "; break;
+            case 10: wavestring = "NOISE 2     "; break;
+            case 11: wavestring = "DOUBLE SINE "; break;
+            case 12: wavestring = "TRIPLE SINE "; break;
+            case 13: wavestring = "USER WAVE 1 "; break;
+            case 14: wavestring = "USER WAVE 2 "; break;
+            case 15: wavestring = "USER WAVE 3 "; break;
+            case 16: wavestring = "USER WAVE 4 "; break;
           }
           lcdkiir("Op2: Wav ", "    " + wavestring);
           generatorinitone(op2waveform, generator2);
@@ -1982,16 +1987,16 @@ void menukiir() {
             case 7: wavestring = "SQUARE HIGH "; break;
             case 8: wavestring = "SQUARE LOW  "; break;
             case 9: wavestring = "NOISE 1     "; break;
-            case 10: wavestring ="NOISE 2     "; break;
-            case 11: wavestring ="DOUBLE SINE "; break;
-            case 12: wavestring ="TRIPLE SINE "; break;
-            case 13: wavestring ="USER WAVE 1 "; break;
-            case 14: wavestring ="USER WAVE 2 "; break;
-            case 15: wavestring ="USER WAVE 3 "; break;
-            case 16: wavestring ="USER WAVE 4 "; break;
+            case 10: wavestring = "NOISE 2     "; break;
+            case 11: wavestring = "DOUBLE SINE "; break;
+            case 12: wavestring = "TRIPLE SINE "; break;
+            case 13: wavestring = "USER WAVE 1 "; break;
+            case 14: wavestring = "USER WAVE 2 "; break;
+            case 15: wavestring = "USER WAVE 3 "; break;
+            case 16: wavestring = "USER WAVE 4 "; break;
           }
           lcdkiir("Op3: Wav ", "    " + wavestring);
-           generatorinitone(op3waveform, generator3);
+          generatorinitone(op3waveform, generator3);
           break;
         case 4:
           if (inc) {
@@ -2010,7 +2015,7 @@ void menukiir() {
             }
             dec = false;
           }
-           switch (op4waveform)
+          switch (op4waveform)
           {
             case 0: wavestring = "NONE        "; break;
             case 1: wavestring = "SINE HIGH   "; break;
@@ -2022,13 +2027,13 @@ void menukiir() {
             case 7: wavestring = "SQUARE HIGH "; break;
             case 8: wavestring = "SQUARE LOW  "; break;
             case 9: wavestring = "NOISE 1     "; break;
-            case 10: wavestring ="NOISE 2     "; break;
-            case 11: wavestring ="DOUBLE SINE "; break;
-            case 12: wavestring ="TRIPLE SINE "; break;
-            case 13: wavestring ="USER WAVE 1 "; break;
-            case 14: wavestring ="USER WAVE 2 "; break;
-            case 15: wavestring ="USER WAVE 3 "; break;
-            case 16: wavestring ="USER WAVE 4 "; break;
+            case 10: wavestring = "NOISE 2     "; break;
+            case 11: wavestring = "DOUBLE SINE "; break;
+            case 12: wavestring = "TRIPLE SINE "; break;
+            case 13: wavestring = "USER WAVE 1 "; break;
+            case 14: wavestring = "USER WAVE 2 "; break;
+            case 15: wavestring = "USER WAVE 3 "; break;
+            case 16: wavestring = "USER WAVE 4 "; break;
           }
           lcdkiir("Op4: Wav ", "    " + wavestring);
           generatorinitone(op4waveform, generator4);
@@ -2050,7 +2055,7 @@ void menukiir() {
             }
             dec = false;
           }
-        switch (op5waveform)
+          switch (op5waveform)
           {
             case 0: wavestring = "NONE        "; break;
             case 1: wavestring = "SINE HIGH   "; break;
@@ -2062,13 +2067,13 @@ void menukiir() {
             case 7: wavestring = "SQUARE HIGH "; break;
             case 8: wavestring = "SQUARE LOW  "; break;
             case 9: wavestring = "NOISE 1     "; break;
-            case 10: wavestring ="NOISE 2     "; break;
-            case 11: wavestring ="DOUBLE SINE "; break;
-            case 12: wavestring ="TRIPLE SINE "; break;
-            case 13: wavestring ="USER WAVE 1 "; break;
-            case 14: wavestring ="USER WAVE 2 "; break;
-            case 15: wavestring ="USER WAVE 3 "; break;
-            case 16: wavestring ="USER WAVE 4 "; break;
+            case 10: wavestring = "NOISE 2     "; break;
+            case 11: wavestring = "DOUBLE SINE "; break;
+            case 12: wavestring = "TRIPLE SINE "; break;
+            case 13: wavestring = "USER WAVE 1 "; break;
+            case 14: wavestring = "USER WAVE 2 "; break;
+            case 15: wavestring = "USER WAVE 3 "; break;
+            case 16: wavestring = "USER WAVE 4 "; break;
           }
           lcdkiir("Op5: Wav ", "    " + wavestring);
           generatorinitone(op5waveform, generator5);
@@ -2102,16 +2107,16 @@ void menukiir() {
             case 7: wavestring = "SQUARE HIGH "; break;
             case 8: wavestring = "SQUARE LOW  "; break;
             case 9: wavestring = "NOISE 1     "; break;
-            case 10: wavestring ="NOISE 2     "; break;
-            case 11: wavestring ="DOUBLE SINE "; break;
-            case 12: wavestring ="TRIPLE SINE "; break;
-            case 13: wavestring ="USER WAVE 1 "; break;
-            case 14: wavestring ="USER WAVE 2 "; break;
-            case 15: wavestring ="USER WAVE 3 "; break;
-            case 16: wavestring ="USER WAVE 4 "; break;
+            case 10: wavestring = "NOISE 2     "; break;
+            case 11: wavestring = "DOUBLE SINE "; break;
+            case 12: wavestring = "TRIPLE SINE "; break;
+            case 13: wavestring = "USER WAVE 1 "; break;
+            case 14: wavestring = "USER WAVE 2 "; break;
+            case 15: wavestring = "USER WAVE 3 "; break;
+            case 16: wavestring = "USER WAVE 4 "; break;
           }
           lcdkiir("Op6: Wav ", "    " + wavestring);
-           generatorinitone(op6waveform, generator6);
+          generatorinitone(op6waveform, generator6);
           break;
         case 7:
           if (inc) {
@@ -2796,122 +2801,122 @@ void menukiir() {
 
       break;
     case 41:
- switch (opmenuoldal) {
-  case 1:
-      if (inc) {
-        if (lep1  < 127) {
-          lep1 ++;
-        } else {
-          lep1  = 13;
-        }
-        inc = false;
+      switch (opmenuoldal) {
+        case 1:
+          if (inc) {
+            if (lep1  < 127) {
+              lep1 ++;
+            } else {
+              lep1  = 13;
+            }
+            inc = false;
+          }
+          if (dec) {
+            if (lep1  > 13) {
+              lep1  --;
+            } else {
+              lep1  = 127;
+            }
+            dec = false;
+          }
+          lcdkiir("OP1: lep1<       ", "     " + String(lcdprint3(lep1 )) + "      "  + "    ");
+          break;
+        case 2:
+          if (inc) {
+            if (lep2  < 127) {
+              lep2 ++;
+            } else {
+              lep2  = 13;
+            }
+            inc = false;
+          }
+          if (dec) {
+            if (lep2  > 13) {
+              lep2  --;
+            } else {
+              lep2  = 127;
+            }
+            dec = false;
+          }
+          lcdkiir("OP2: lep2<       ", "     " + String(lcdprint3(lep2 )) + "      "  + "    ");
+          break;
+        case 3:
+          if (inc) {
+            if (lep3  < 127) {
+              lep3 ++;
+            } else {
+              lep3  = 13;
+            }
+            inc = false;
+          }
+          if (dec) {
+            if (lep3  > 13) {
+              lep3  --;
+            } else {
+              lep3  = 127;
+            }
+            dec = false;
+          }
+          lcdkiir("OP3: lep3<       ", "     " + String(lcdprint3(lep3 )) + "      "  + "    ");
+          break;
+        case 4:
+          if (inc) {
+            if (lep4  < 127) {
+              lep4 ++;
+            } else {
+              lep4  = 13;
+            }
+            inc = false;
+          }
+          if (dec) {
+            if (lep4  > 13) {
+              lep4  --;
+            } else {
+              lep4  = 127;
+            }
+            dec = false;
+          }
+          lcdkiir("OP4: lep4<       ", "     " + String(lcdprint3(lep4 )) + "      "  + "    ");
+          break;
+        case 5:
+          if (inc) {
+            if (lep5  < 127) {
+              lep5 ++;
+            } else {
+              lep5  = 13;
+            }
+            inc = false;
+          }
+          if (dec) {
+            if (lep5  > 13) {
+              lep5  --;
+            } else {
+              lep5  = 127;
+            }
+            dec = false;
+          }
+          lcdkiir("OP5: lep5<       ", "     " + String(lcdprint3(lep5 )) + "      "  + "    ");
+          break;
+        case 6:
+          if (inc) {
+            if (lep6  < 127) {
+              lep6 ++;
+            } else {
+              lep6  = 13;
+            }
+            inc = false;
+          }
+          if (dec) {
+            if (lep6  > 13) {
+              lep6  --;
+            } else {
+              lep6  = 127;
+            }
+            dec = false;
+          }
+          lcdkiir("OP6: lep6<       ", "     " + String(lcdprint3(lep6 )) + "      "  + "    ");
+          break;
       }
-      if (dec) {
-        if (lep1  > 13) {
-          lep1  --;
-        } else {
-          lep1  = 127;
-        }
-        dec = false;
-      }
-      lcdkiir("OP1: lep1<       ", "     " + String(lcdprint3(lep1 )) + "      "  + "    ");
-      break;
-       case 2:
-      if (inc) {
-        if (lep2  < 127) {
-          lep2 ++;
-        } else {
-          lep2  = 13;
-        }
-        inc = false;
-      }
-      if (dec) {
-        if (lep2  > 13) {
-          lep2  --;
-        } else {
-          lep2  = 127;
-        }
-        dec = false;
-      }
-      lcdkiir("OP2: lep2<       ", "     " + String(lcdprint3(lep2 )) + "      "  + "    ");
-      break;
-       case 3:
-      if (inc) {
-        if (lep3  < 127) {
-          lep3 ++;
-        } else {
-          lep3  = 13;
-        }
-        inc = false;
-      }
-      if (dec) {
-        if (lep3  > 13) {
-          lep3  --;
-        } else {
-          lep3  = 127;
-        }
-        dec = false;
-      }
-      lcdkiir("OP3: lep3<       ", "     " + String(lcdprint3(lep3 )) + "      "  + "    ");
-      break;
-       case 4:
-      if (inc) {
-        if (lep4  < 127) {
-          lep4 ++;
-        } else {
-          lep4  = 13;
-        }
-        inc = false;
-      }
-      if (dec) {
-        if (lep4  > 13) {
-          lep4  --;
-        } else {
-          lep4  = 127;
-        }
-        dec = false;
-      }
-      lcdkiir("OP4: lep4<       ", "     " + String(lcdprint3(lep4 )) + "      "  + "    ");     
-      break;
-       case 5:
-      if (inc) {
-        if (lep5  < 127) {
-          lep5 ++;
-        } else {
-          lep5  = 13;
-        }
-        inc = false;
-      }
-      if (dec) {
-        if (lep5  > 13) {
-          lep5  --;
-        } else {
-          lep5  = 127;
-        }
-        dec = false;
-      }
-      lcdkiir("OP5: lep5<       ", "     " + String(lcdprint3(lep5 )) + "      "  + "    ");
-      break;
-       case 6:
-      if (inc) {
-        if (lep6  < 127) {
-          lep6 ++;
-        } else {
-          lep6  = 13;
-        }
-        inc = false;
-      }
-      if (dec) {
-        if (lep6  > 13) {
-          lep6  --;
-        } else {
-          lep6  = 127;
-        }
-        dec = false;
-      }
-      lcdkiir("OP6: lep6<       ", "     " + String(lcdprint3(lep6 )) + "      "  + "    ");
-      break;
- }
       break;
     case 42:
       if (inc) {

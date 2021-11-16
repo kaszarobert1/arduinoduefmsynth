@@ -140,42 +140,71 @@ void serialEventUSB() {
 
 void pichband( byte value) {
   switch (modulation) {
-    case 1: op1volume =op1volumeorig+value;   break;
-    /*
-    case 2:  op2volume = value;  break;
-    case 3:  op3volume = value;  break;
-    case 4:  op4volume = value; break;
-    case 5:  op5volume = value;  break;
-    case 6:  op6volume = value;  break;
-    case 7: op1volume = value; op3volume = value; break;
-    case 8: op2volume = value; op4volume = value; break;
-    case 9: op3volume = value; op5volume = value; break;
-    case 10: op4volume = value; op6volume = value; break;
-    case 11: op1volume = value; op5volume = value; break;
-    case 12: op3volume = value; op6volume = value; break;
-    case 13: op2volume = value; op5volume = value; break;
-    case 14: op2volume = value; op6volume = value; break;
-    case 15: op1volume = value; op3volume = value; op5volume = value; break;
-    case 16: op2volume = value; op4volume = value; op6volume = value; break;
-    case 17: op2volume = value; op3volume = value; op5volume = value; break;
-    case 18: op2volume = value; op3volume = value; op5volume = value; op6volume = value; break;
-    case 19: op1volume = value; op2volume = value; op3volume = value; op4volume = value; op5volume = value; op6volume = value; break;
-    case 20: szorzo = value;  break;
-    */
-    case 21: op1generatorfreq = op1generatorfreqorig+value; break;
-   /*
-    case 22: op2generatorfreq = value; break;
-    case 23: op3generatorfreq = value; break;
-    case 24: op4generatorfreq = value; break;
-    case 25: op5generatorfreq = value; break;
-    case 26: op6generatorfreq = value; break;
-    case 27: op1generatorfreq = value; op2generatorfreq = value; break;
-    case 28: op1generatorfreq = value; op2generatorfreq = value;  op3generatorfreq = value; break;
-    case 29: op1generatorfreq = value;  op4generatorfreq = value; break;
-    case 30: op2generatorfreq = value;  op4generatorfreq = value; op6generatorfreq = value; break;
-    case 31: op1generatorfreq = value; op2generatorfreq = 127 - value; break;
-    case 32:  op1generatorfreq = value; op3generatorfreq = 127 - value; break;
-    */
+    case 1:  op1volume = op1volumeorig + value;  break;
+    case 2:  op2volume = op2volumeorig + value;  break;
+    case 3:  op3volume = op3volumeorig + value;  break;
+    case 4:  op4volume = op4volumeorig + value;  break;
+    case 5:  op5volume = op5volumeorig + value;  break;
+    case 6:  op6volume = op6volumeorig + value;  break;
+    case 7:  op1volume = op1volumeorig + value; op2volume = op2volumeorig + value;  break;
+    case 8:  op1volume = op1volumeorig + value; op2volume = op2volumeorig - value;  break;
+    case 9:  op1volume = op1volumeorig + value; op3volume = op3volumeorig + value;  break;
+    case 10: op1volume = op1volumeorig + value; op3volume = op3volumeorig - value;  break;
+    case 11: op1volume = op1volumeorig + value; op3volume = op4volumeorig + value;  break;
+    case 12: op1volume = op1volumeorig + value; op3volume = op4volumeorig - value;  break;
+    case 13: op1volume = op1volumeorig + value; op3volume = op5volumeorig + value;  break;
+    case 14: op1volume = op1volumeorig + value; op3volume = op5volumeorig + value;  break;
+    case 15: op1volume = op1volumeorig + value; op2volume = op2volumeorig + value; op3volume = op3volumeorig + value; break;
+    case 16: op1volume = op1volumeorig + value; op2volume = op2volumeorig - value; op3volume = op3volumeorig + value; break;
+    case 17: op2volume = op2volumeorig + value; op4volume = op4volumeorig + value; op6volume = op6volumeorig + value; break;
+    case 18: op2volume = op2volumeorig + value; op4volume = op4volumeorig - value; op6volume = op6volumeorig + value; break;
+    case 19: op2volume = op2volumeorig + value; op3volume = op3volumeorig + value; op5volume = op5volumeorig + value; break;
+    case 20: op2volume = op2volumeorig + value; op3volume = op3volumeorig - value; op5volume = op5volumeorig + value; break;
+    case 21: op1generatorfreq = op1generatorfreqorig + value; break;
+    case 22: op2generatorfreq = op2generatorfreqorig + value; break;
+    case 23: op3generatorfreq = op3generatorfreqorig + value; break;
+    case 24: op4generatorfreq = op4generatorfreqorig + value; break;
+    case 25: op5generatorfreq = op5generatorfreqorig + value; break;
+    case 26: op6generatorfreq = op6generatorfreqorig + value; break;
+    case 27: op1generatorfreq = op1generatorfreqorig + value; op2generatorfreq = op2generatorfreqorig + value; break;
+    case 28: op1generatorfreq = op1generatorfreqorig + value; op2generatorfreq = op2generatorfreqorig - value; break;
+    case 29: op1generatorfreq = op1generatorfreqorig + value; op3generatorfreq = op3generatorfreqorig + value; break;
+    case 30: op1generatorfreq = op1generatorfreqorig + value; op3generatorfreq = op3generatorfreqorig - value; break;
+    case 31: op1generatorfreq = op1generatorfreqorig + value; op4generatorfreq = op4generatorfreqorig + value; break;
+    case 32: op1generatorfreq = op1generatorfreqorig + value; op4generatorfreq = op4generatorfreqorig - value; break;
+    case 33: op1generatorfreq = op1generatorfreqorig + value; op4generatorfreq = op4generatorfreqorig + value; op3generatorfreq = op3generatorfreqorig + value; break;
+    case 34: op1generatorfreq = op1generatorfreqorig + value; op4generatorfreq = op4generatorfreqorig - value; op3generatorfreq = op3generatorfreqorig + value; break;
+      /*
+
+        case 7: op1volume = value; op3volume = value; break;
+        case 8: op2volume = value; op4volume = value; break;
+        case 9: op3volume = value; op5volume = value; break;
+        case 10: op4volume = value; op6volume = value; break;
+        case 11: op1volume = value; op5volume = value; break;
+        case 12: op3volume = value; op6volume = value; break;
+        case 13: op2volume = value; op5volume = value; break;
+        case 14: op2volume = value; op6volume = value; break;
+        case 15: op1volume = value; op3volume = value; op5volume = value; break;
+        case 16: op2volume = value; op4volume = value; op6volume = value; break;
+        case 17: op2volume = value; op3volume = value; op5volume = value; break;
+        case 18: op2volume = value; op3volume = value; op5volume = value; op6volume = value; break;
+        case 19: op1volume = value; op2volume = value; op3volume = value; op4volume = value; op5volume = value; op6volume = value; break;
+        case 20: szorzo = value;  break;
+      */
+
+      /*
+        case 22: op2generatorfreq = value; break;
+        case 23: op3generatorfreq = value; break;
+        case 24: op4generatorfreq = value; break;
+        case 25: op5generatorfreq = value; break;
+        case 26: op6generatorfreq = value; break;
+        case 27: op1generatorfreq = value; op2generatorfreq = value; break;
+        case 28: op1generatorfreq = value; op2generatorfreq = value;  op3generatorfreq = value; break;
+        case 29: op1generatorfreq = value;  op4generatorfreq = value; break;
+        case 30: op2generatorfreq = value;  op4generatorfreq = value; op6generatorfreq = value; break;
+        case 31: op1generatorfreq = value; op2generatorfreq = 127 - value; break;
+        case 32:  op1generatorfreq = value; op3generatorfreq = 127 - value; break;
+      */
   }
   //hangokinit();
 }
@@ -417,11 +446,11 @@ void parameterchange2(byte parameter, byte value) {
     case 5:
       switch (opmenuoldal) {
         case 1: op1volumeorig = value;  break;
-        case 2: op2volume = value; break;
-        case 3: op3volume = value; break;
-        case 4: op4volume = value; break;
-        case 5: op5volume = value; break;
-        case 6: op6volume = value; break;
+        case 2: op2volumeorig = value; break;
+        case 3: op3volumeorig = value; break;
+        case 4: op4volumeorig = value; break;
+        case 5: op5volumeorig = value; break;
+        case 6: op6volumeorig = value; break;
       }
       menuoldal = 11;
       menukiir();
@@ -491,8 +520,8 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 34;
       menukiir();
       break;
-      case 25:
-     
+    case 25:
+
 
       break;
     case 35:
@@ -548,11 +577,11 @@ void parameterchange2(byte parameter, byte value) {
     case 44:
       switch (opmenuoldal) {
         case 1: op1generatorfreqorig = value;  break;
-        case 2: op2generatorfreq = value; break;
-        case 3: op3generatorfreq = value; break;
-        case 4: op4generatorfreq = value; break;
-        case 5: op5generatorfreq = value; break;
-        case 6: op6generatorfreq = value; break;
+        case 2: op2generatorfreqorig = value; break;
+        case 3: op3generatorfreqorig = value; break;
+        case 4: op4generatorfreqorig = value; break;
+        case 5: op5generatorfreqorig = value; break;
+        case 6: op6generatorfreqorig = value; break;
       }
       menuoldal = 12;
       menukiir();
@@ -573,13 +602,13 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 82:
-     switch (opmenuoldal) {
-        case 1: lep1=value/8+13; break;
-        case 2:  lep2=value/8+13; break;
-        case 3: lep3=value/8+13; break;
-        case 4:  lep4=value/8+13; break;
-        case 5:  lep5=value/8+13; break;
-        case 6:  lep6=value/8+13; break;
+      switch (opmenuoldal) {
+        case 1: lep1 = value / 8 + 13; break;
+        case 2:  lep2 = value / 8 + 13; break;
+        case 3: lep3 = value / 8 + 13; break;
+        case 4:  lep4 = value / 8 + 13; break;
+        case 5:  lep5 = value / 8 + 13; break;
+        case 6:  lep6 = value / 8 + 13; break;
       }
       menuoldal = 41;
       menukiir();
@@ -664,12 +693,12 @@ void parameterchange2(byte parameter, byte value) {
       break;
     case 112:
       switch (opmenuoldal) {
-        case 1: op1veloc = value; menuoldal = 10; break;
-        case 2: op2veloc = value; menuoldal = 10; break;
-        case 3: op3veloc = value; menuoldal = 10; break;
-        case 4: op4veloc = value; menuoldal = 10; break;
-        case 5: op5veloc = value; menuoldal = 10; break;
-        case 6: op6veloc = value; menuoldal = 10; break;
+        case 1: op1veloc = value>>2+1; menuoldal = 10; break;
+        case 2: op2veloc = value>>2+1; menuoldal = 10; break;
+        case 3: op3veloc = value>>2+1; menuoldal = 10; break;
+        case 4: op4veloc = value>>2+1; menuoldal = 10; break;
+        case 5: op5veloc = value>>2+1; menuoldal = 10; break;
+        case 6: op6veloc = value>>2+1; menuoldal = 10; break;
         case 7: pichkezd = value;  menuoldal = 20; break;
       }
       menukiir();

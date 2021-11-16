@@ -27,7 +27,7 @@ void program0() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 127;
   op1rr = 127;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 1;
   op1waveform = 1;
   op2al = 127;
@@ -40,7 +40,7 @@ void program0() {
   op2generatorfreqfix = 1 * 40000;
   op2rl = 127;
   op2rr = 127;
-  op2veloc = 8;
+  op2veloc = 3;
   op2volume = 1;
   op2waveform = 2;
   op3al = 1;
@@ -53,7 +53,7 @@ void program0() {
   op3generatorfreqfix = 1 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 16;
+  op3veloc = 3;
   op3volume = 10;
   op3waveform = 3;
   op4al = 127;
@@ -66,7 +66,7 @@ void program0() {
   op4generatorfreqfix = 127 * 40000;
   op4rl = 127;
   op4rr = 125;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 1;
   op4waveform = 1;
   op5al = 62;
@@ -92,7 +92,7 @@ void program0() {
   op6generatorfreqfix = 127 *  40000;
   op6rl = 1;
   op6rr = 1;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 1;
   op6waveform = 2;
   oplfo = 1;
@@ -125,6 +125,18 @@ void program0() {
   stepprogchanged = 1;
   pachname = "P0:BIG BEN      ";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -156,7 +168,7 @@ void program1() {
   op1generatorfreqfix = 127 * 40000;
   op1rl = 127;
   op1rr = 127;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 1;
   op1waveform = 1;
   op2al = 127;
@@ -169,7 +181,7 @@ void program1() {
   op2generatorfreqfix = 127 * 40000;
   op2rl = 127;
   op2rr = 127;
-  op2veloc = 64;
+  op2veloc = 3;
   op2volume = 10;
   op2waveform = 2;
   op3al = 65;
@@ -182,7 +194,7 @@ void program1() {
   op3generatorfreqfix = 127 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 16;
+  op3veloc = 3;
   op3volume = 127;
   op3waveform = 4;
   op4al = 127;
@@ -195,7 +207,7 @@ void program1() {
   op4generatorfreqfix = 127 * 40000;
   op4rl = 127;
   op4rr = 125;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 1;
   op4waveform = 1;
   op5al = 62;
@@ -208,7 +220,7 @@ void program1() {
   op5generatorfreqfix = 127 * 40000;
   op5rl = 50;
   op5rr = 50;
-  op5veloc = 8;
+  op5veloc = 3;
   op5volume = 9;
   op5waveform = 2;
   op6al = 1;
@@ -221,7 +233,7 @@ void program1() {
   op6generatorfreqfix = 127 * 40000;
   op6rl = 1;
   op6rr = 1;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 2;
   op6waveform = 2;
   oplfo = 1;
@@ -254,6 +266,18 @@ void program1() {
   stepprogchanged = 1;
   pachname = "P1:KOTO1        ";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -285,7 +309,7 @@ void program2() {
   op1generatorfreqfix = 127 * 40000;
   op1rl = 127;
   op1rr = 127;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 1;
   op1waveform = 1;
   op2al = 127;
@@ -298,7 +322,7 @@ void program2() {
   op2generatorfreqfix = 127 * 40000;
   op2rl = 127;
   op2rr = 127;
-  op2veloc = 64;
+  op2veloc = 3;
   op2volume = 10;
   op2waveform = 2;
   op3al = 65;
@@ -311,7 +335,7 @@ void program2() {
   op3generatorfreqfix = 127 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 16;
+  op3veloc = 3;
   op3volume = 127;
   op3waveform = 4;
   op4al = 127;
@@ -324,7 +348,7 @@ void program2() {
   op4generatorfreqfix = 127 * 40000;
   op4rl = 127;
   op4rr = 125;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 1;
   op4waveform = 1;
   op5al = 62;
@@ -337,7 +361,7 @@ void program2() {
   op5generatorfreqfix = 127 * 40000;
   op5rl = 50;
   op5rr = 50;
-  op5veloc = 8;
+  op5veloc = 3;
   op5volume = 9;
   op5waveform = 2;
   op6al = 1;
@@ -350,7 +374,7 @@ void program2() {
   op6generatorfreqfix = 127 * 40000;
   op6rl = 1;
   op6rr = 1;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 2;
   op6waveform = 2;
   oplfo = 1;
@@ -383,6 +407,18 @@ void program2() {
   stepprogchanged = 1;
   pachname = "P2:KOTO2        ";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -414,7 +450,7 @@ void program3() {
   op1generatorfreqfix = 127 * 40000;
   op1rl = 30;
   op1rr = 40;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 1;
   op1waveform = 1;
   op2al = 200;
@@ -427,7 +463,7 @@ void program3() {
   op2generatorfreqfix = 127 * 40000;
   op2rl = 10;
   op2rr = 1;
-  op2veloc = 8;
+  op2veloc = 3;
   op2volume = 1;
   op2waveform = 2;
   op3al = 30;
@@ -440,7 +476,7 @@ void program3() {
   op3generatorfreqfix = 127 * 40000;
   op3rl = 1;
   op3rr = 10;
-  op3veloc = 16;
+  op3veloc = 3;
   op3volume = 4;
   op3waveform = 4;
   op4al = 40;
@@ -453,7 +489,7 @@ void program3() {
   op4generatorfreqfix = 127 * 40000;
   op4rl = 20;
   op4rr = 10;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 126;
   op4waveform = 1;
   op5al = 4;
@@ -466,7 +502,7 @@ void program3() {
   op5generatorfreqfix = 127 * 40000;
   op5rl = 5;
   op5rr = 4;
-  op5veloc = 8;
+  op5veloc = 3;
   op5volume = 4;
   op5waveform = 5;
   op6al = 7;
@@ -479,7 +515,7 @@ void program3() {
   op6generatorfreqfix = 127 * 40000;
   op6rl = 7;
   op6rr = 9;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 4;
   op6waveform = 2;
   oplfo = 1;
@@ -512,6 +548,18 @@ void program3() {
   stepprogchanged = 1;
   pachname = "P3:PAN PIPE";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -543,7 +591,7 @@ void program4() {
   op1generatorfreqfix = 127 * 40000;
   op1rl = 30;
   op1rr = 100;
-  op1veloc = 8;
+  op1veloc = 3;
   op1volume = 8;
   op1waveform = 11;
   op2al = 6;
@@ -556,7 +604,7 @@ void program4() {
   op2generatorfreqfix = 94 * 40000;
   op2rl = 70;
   op2rr = 80;
-  op2veloc = 2;
+  op2veloc = 3;
   op2volume = 8;
   op2waveform = 2;
   op3al = 0;
@@ -569,7 +617,7 @@ void program4() {
   op3generatorfreqfix = 127 * 40000;
   op3rl = 1;
   op3rr = 100;
-  op3veloc = 2;
+  op3veloc = 3;
   op3volume = 1;
   op3waveform = 0;
   op4al = 100;
@@ -582,7 +630,7 @@ void program4() {
   op4generatorfreqfix = 127 * 40000;
   op4rl = 60;
   op4rr = 100;
-  op4veloc = 8;
+  op4veloc = 3;
   op4volume = 8;
   op4waveform = 11;
   op5al = 40;
@@ -641,6 +689,18 @@ revalg = 4;
   stepprogchanged = 1;
   pachname = "P4:BRASS TVA  ";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -672,7 +732,7 @@ void program5() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 1;
   op1rr = 71;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 2;
   op1waveform = 1;
   op2al = 101;
@@ -685,7 +745,7 @@ void program5() {
   op2generatorfreqfix = 127 * 40000;
   op2rl = 1;
   op2rr = 61;
-  op2veloc = 64;
+  op2veloc = 3;
   op2volume = 2;
   op2waveform = 2;
   op3al = 47;
@@ -698,7 +758,7 @@ void program5() {
   op3generatorfreqfix = 66 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 16;
+  op3veloc = 3;
   op3volume = 50;
   op3waveform = 2;
   op4al = 63;
@@ -711,7 +771,7 @@ void program5() {
   op4generatorfreqfix = 1 * 40000;
   op4rl = 0;
   op4rr = 32;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 2;
   op4waveform = 1;
   op5al = 104;
@@ -724,7 +784,7 @@ void program5() {
   op5generatorfreqfix = 1 * 40000;
   op5rl = 1;
   op5rr = 30;
-  op5veloc = 64;
+  op5veloc = 3;
   op5volume = 6;
   op5waveform = 2;
   op6al = 22;
@@ -737,7 +797,7 @@ void program5() {
   op6generatorfreqfix = 1 * 40000;
   op6rl = 1;
   op6rr = 28;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 42;
   op6waveform = 2;
   oplfo = 1;
@@ -770,6 +830,18 @@ void program5() {
   stepprogchanged = 1;
   pachname = "P5:Horror Sound ";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -801,7 +873,7 @@ void program6() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 0;
   op1rr = 127;
-  op1veloc = 36;
+  op1veloc = 3;
   op1volume = 127;
   op1waveform = 2;
   op2al = 127;
@@ -814,7 +886,7 @@ void program6() {
   op2generatorfreqfix = 1 * 40000;
   op2rl = 1;
   op2rr = 61;
-  op2veloc = 61;
+  op2veloc = 3;
   op2volume = 36;
   op2waveform = 2;
   op3al = 127;
@@ -827,7 +899,7 @@ void program6() {
   op3generatorfreqfix = 1 * 40000;
   op3rl = 0;
   op3rr = 127;
-  op3veloc = 26;
+  op3veloc = 3;
   op3volume = 36;
   op3waveform = 6;
   op4al = 127;
@@ -840,7 +912,7 @@ void program6() {
   op4generatorfreqfix = 119 * 40000;
   op4rl = 0;
   op4rr = 10;
-  op4veloc = 44;
+  op4veloc = 3;
   op4volume = 19;
   op4waveform = 6;
   op5al = 127;
@@ -853,7 +925,7 @@ void program6() {
   op5generatorfreqfix = 1 * 40000;
   op5rl = 0;
   op5rr = 50;
-  op5veloc = 41;
+  op5veloc = 3;
   op5volume = 113;
   op5waveform = 2;
   op6al = 50;
@@ -866,7 +938,7 @@ void program6() {
   op6generatorfreqfix = 1 * 40000;
   op6rl = 0;
   op6rr = 50;
-  op6veloc = 64;
+  op6veloc = 3;
   op6volume = 21;
   op6waveform = 2;
   oplfo = 1;
@@ -899,6 +971,18 @@ void program6() {
   stepprogchanged = 1;
   pachname = "P6:FM Bass";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -930,7 +1014,7 @@ void program7() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 0;
   op1rr = 63;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 18;
   op1waveform = 7;
   op2al = 58;
@@ -943,7 +1027,7 @@ void program7() {
   op2generatorfreqfix = 1 * 40000;
   op2rl = 1;
   op2rr = 44;
-  op2veloc = 8;
+  op2veloc = 3;
   op2volume = 34;
   op2waveform =6;
   op3al = 76;
@@ -956,7 +1040,7 @@ void program7() {
   op3generatorfreqfix = 41 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 25;
+  op3veloc = 3;
   op3volume = 4;
   op3waveform = 6;
   op4al = 101;
@@ -969,7 +1053,7 @@ void program7() {
   op4generatorfreqfix = 1 * 40000;
   op4rl = 0;
   op4rr = 38;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 40;
   op4waveform = 2;
   op5al = 59;
@@ -982,7 +1066,7 @@ void program7() {
   op5generatorfreqfix = 10 * 40000;
   op5rl = 1;
   op5rr = 50;
-  op5veloc = 2;
+  op5veloc = 3;
   op5volume = 2;
   op5waveform = 2;
   op6al = 50;
@@ -995,7 +1079,7 @@ void program7() {
   op6generatorfreqfix = 127 * 40000;
   op6rl = 1;
   op6rr = 1;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 21;
   op6waveform = 2;
   oplfo = 1;
@@ -1028,6 +1112,18 @@ void program7() {
   stepprogchanged = 1;
   pachname = "P7:Scotland Pipe";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -1056,13 +1152,12 @@ void program8() {
   op1d1r = 127;
   op1d2l = 47;
   op1d2r = 127;
-  op1generatorfreqorig = 14;
-  op1generatorfreq = op1generatorfreqorig;
+  op1generatorfreq = 14;
   op1generatorfreqfix = 1 << 15;
   op1rl = 0;
   op1rr = 127;
   op1veloc = 3;
-  op1volumeorig = 82;
+  op1volume = 82;  
   op1waveform = 2;
   op2al = 127;
   op2ar = 32;
@@ -1089,7 +1184,7 @@ void program8() {
   op3generatorfreqfix = 1 << 15;
   op3rl = 0;
   op3rr = 127;
-  op3veloc = 26;
+  op3veloc = 3;
   op3volume = 11;
   op3waveform = 2;
   op4al = 127;
@@ -1102,7 +1197,7 @@ void program8() {
   op4generatorfreqfix = 192 << 15;
   op4rl = 62;
   op4rr = 1;
-  op4veloc = 44;
+  op4veloc = 3;
   op4volume = 68;
   op4waveform = 2;
   op5al = 127;
@@ -1115,7 +1210,7 @@ void program8() {
   op5generatorfreqfix = 1 << 15;
   op5rl = 1;
   op5rr = 50;
-  op5veloc = 30;
+  op5veloc = 3;
   op5volume = 24;
   op5waveform = 2;
   op6al = 50;
@@ -1128,7 +1223,7 @@ void program8() {
   op6generatorfreqfix = 1 << 15;
   op6rl = 1;
   op6rr = 50;
-  op6veloc = 64;
+  op6veloc = 3;
   op6volume = 59;
   op6waveform = 2;
   oplfo = 1;
@@ -1161,6 +1256,18 @@ void program8() {
   stepprogchanged = 1;
   pachname = "P8:Brass 1";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -1192,7 +1299,7 @@ void program9() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 1;
   op1rr = 71;
-  op1veloc = 16;
+  op1veloc = 3;
   op1volume = 32;
   op1waveform = 0;
   op2al = 101;
@@ -1205,7 +1312,7 @@ void program9() {
   op2generatorfreqfix = 1 * 40000;
   op2rl = 1;
   op2rr = 61;
-  op2veloc = 16;
+  op2veloc = 3;
   op2volume = 32;
   op2waveform = 4;
   op3al = 47;
@@ -1218,7 +1325,7 @@ void program9() {
   op3generatorfreqfix = 1 * 40000;
   op3rl = 1;
   op3rr = 1;
-  op3veloc = 16;
+  op3veloc = 3;
   op3volume = 32;
   op3waveform = 7;
   op4al = 63;
@@ -1231,7 +1338,7 @@ void program9() {
   op4generatorfreqfix = 1 * 40000;
   op4rl = 0;
   op4rr = 32;
-  op4veloc = 16;
+  op4veloc = 3;
   op4volume = 32;
   op4waveform = 2;
   op5al = 104;
@@ -1244,7 +1351,7 @@ void program9() {
   op5generatorfreqfix = 1 * 40000;
   op5rl = 1;
   op5rr = 30;
-  op5veloc = 16;
+  op5veloc = 3;
   op5volume = 34;
   op5waveform = 4;
   op6al = 22;
@@ -1257,7 +1364,7 @@ void program9() {
   op6generatorfreqfix = 1 * 40000;
   op6rl = 1;
   op6rr = 28;
-  op6veloc = 16;
+  op6veloc = 3;
   op6volume = 88;
   op6waveform = 2;
   oplfo = 8;
@@ -1290,6 +1397,18 @@ void program9() {
   stepprogchanged = 1;
   pachname = "P9:LFO Filter ";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
 
@@ -1321,7 +1440,7 @@ void program10() {
   op1generatorfreqfix = 1 * 40000;
   op1rl = 0;
   op1rr = 127;
-  op1veloc = 36;
+  op1veloc = 3;
   op1volume = 127;
   op1waveform = 2;
   op2al = 127;
@@ -1332,7 +1451,7 @@ void program10() {
   op2d2r = 39;
   op2generatorfreq = 14;
   op2generatorfreqfix = 1 * 40000;
-  op2veloc = 61;
+  op2veloc = 3;
   op2volume = 36;
   op2waveform = 2;
   op3al = 127;
@@ -1347,7 +1466,7 @@ void program10() {
   op3generatorfreqfix = 1 * 40000;
   op3rl = 0;
   op3rr = 127;
-  op3veloc = 26;
+  op3veloc = 2;
   op3volume = 36;
   op3waveform = 6;
   op4al = 127;
@@ -1360,7 +1479,7 @@ void program10() {
   op4generatorfreqfix = 119 * 40000;
   op4rl = 0;
   op4rr = 10;
-  op4veloc = 44;
+  op4veloc = 4;
   op4volume = 19;
   op4waveform = 6;
   op5al = 127;
@@ -1373,7 +1492,7 @@ void program10() {
   op5generatorfreqfix = 1 * 40000;
   op5rl = 0;
   op5rr = 50;
-  op5veloc = 41;
+  op5veloc = 4;
   op5volume = 113;
   op5waveform = 2;
   op6al = 50;
@@ -1386,7 +1505,7 @@ void program10() {
   op6generatorfreqfix = 1 * 40000;
   op6rl = 0;
   op6rr = 50;
-  op6veloc = 64;
+  op6veloc = 6;
   op6volume = 21;
   op6waveform = 2;
   oplfo = 1;
@@ -1419,5 +1538,17 @@ void program10() {
   stepprogchanged = 1;
   pachname = "P10:FM Bass";
   menuoldal = 1;
+  op1volumeorig=op1volume;
+  op2volumeorig=op2volume;
+  op3volumeorig=op3volume;
+  op4volumeorig=op4volume;
+  op5volumeorig=op5volume;
+  op6volumeorig=op6volume;
+  op1generatorfreqorig = op1generatorfreq;
+  op2generatorfreqorig = op2generatorfreq;
+  op3generatorfreqorig = op3generatorfreq;
+  op4generatorfreqorig = op4generatorfreq;
+  op5generatorfreqorig = op5generatorfreq;
+  op6generatorfreqorig = op6generatorfreq;
   menukiir();
 }
