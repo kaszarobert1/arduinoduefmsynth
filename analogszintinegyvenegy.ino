@@ -381,7 +381,6 @@ byte lcdfreq = 8;
 #define ketopgenA24(freqmutato1, freqmutato2,op1level,op2level,lep,lep2)  (generator1[((freqmutato1 >> lep) + generator2[freqmutato2 >> lep2] * op2level/4096) % FG_SIZE ] *op1level>>12)
 #define ketopgenC25(freqmutato5, freqmutato6,op5level,op6level)  (generator5[((freqmutato5 >> 25) + generator6[freqmutato6 >> 25] * op6level/4096) % FG_SIZE ] *op5level>>11)
 #define egyopgenA(freqmutato1,op1level,lep)  (generator1[freqmutato1 >> lep] *op1level)
-#define egyopgenA2(freqmutato1,lep)  (generator1[freqmutato1 >> lep])
 #define egyopgenB(freqmutato2,op2level,lep)  (generator2[freqmutato2 >> lep] *op2level)
 #define egyopgenC(freqmutato3,op3level,lep)  (generator3[freqmutato3 >> lep] *op3level)
 #define egyopgenD(freqmutato4,op4level,lep)  (generator4[freqmutato4 >> lep] *op4level)
@@ -906,151 +905,129 @@ void loop() {
         switch (alg) {
           case 1:
             if (gorbetime[0] > 0 ) {
-              bufferbe += haromopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], op1level[0], op2level[0], op3level[0]);
-              //bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[9], sinewaveptr[1], op3level[0], op2level[0], op1level[0]);
-              //  bufferbe +=   ketop(sinewaveptr[1], sinewaveptr[33], op1gorbe[gorbetime[0]], ALVOLUME, op5gorbe[gorbetime[0]], op5volume);
+              bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9] + egyopgenC(sinewaveptr[17] + egyopgenD(sinewaveptr[25], op4level[0], lep2), op3level[0], lep1), op2level[0], lep2), op1level[0], lep1);
+
+
             }
             if (gorbetime[1] > 0) {
-              bufferbe += haromopgenA(sinewaveptr[2], sinewaveptr[10], sinewaveptr[18], op1level[1], op2level[1], op3level[1]);
-              //bufferbe += haromopgenA(sinewaveptr[18], sinewaveptr[10], sinewaveptr[2], op3level[1], op2level[1], op1level[1]);
-              //   bufferbe +=   ketop(sinewaveptr[2], sinewaveptr[34], op2gorbe[gorbetime[1]],  op2volume, op5gorbe[gorbetime[1]], op5volume);
+              bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10] + egyopgenC(sinewaveptr[18] + egyopgenD(sinewaveptr[26], op4level[1], lep2), op3level[1], lep1), op2level[1], lep2), op1level[1], lep1);
+
+
             }
             if (gorbetime[2] > 0) {
-              bufferbe += haromopgenA(sinewaveptr[3], sinewaveptr[11], sinewaveptr[19], op1level[2], op2level[2], op3level[2]);
-              //bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[11], sinewaveptr[3], op3level[2], op2level[2], op1level[2]);
-              //  bufferbe +=   ketop(sinewaveptr[3], sinewaveptr[35], op2gorbe[gorbetime[2]],  op2volume, op5gorbe[gorbetime[2]], op5volume);
+              bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11] + egyopgenC(sinewaveptr[19] + egyopgenD(sinewaveptr[27], op4level[2], lep2), op3level[2], lep1), op2level[2], lep2), op1level[2], lep1);
+
             }
             if (gorbetime[3] > 0) {
-              bufferbe += haromopgenA(sinewaveptr[4], sinewaveptr[12], sinewaveptr[20], op1level[3], op2level[3], op3level[3]);
-              //bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[12], sinewaveptr[4], op3level[3], op2level[3], op1level[3]);
-              //  bufferbe +=   ketop(sinewaveptr[4], sinewaveptr[36], op2gorbe[gorbetime[3]],  op2volume, op5gorbe[gorbetime[3]], op5volume);
+              bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12] + egyopgenC(sinewaveptr[20] + egyopgenD(sinewaveptr[28], op4level[3], lep2), op3level[3], lep1), op2level[3], lep2), op1level[3], lep1);
+
+
             }
             if (gorbetime[4] > 0) {
-              bufferbe += haromopgenA(sinewaveptr[5], sinewaveptr[13], sinewaveptr[21], op1level[4], op2level[4], op3level[4]);
-              //bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[13], sinewaveptr[5], op3level[4], op2level[4], op1level[4]);
-              // bufferbe +=   ketop(sinewaveptr[5], sinewaveptr[37], op2gorbe[gorbetime[4]],  op2volume, op5gorbe[gorbetime[4]], op5volume);
+              bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13] + egyopgenC(sinewaveptr[21] + egyopgenD(sinewaveptr[29], op4level[4], lep2), op3level[4], lep1), op2level[4], lep2), op1level[4], lep1);
+
             }
             if (gorbetime[5] > 0) {
-              bufferbe += haromopgenA(sinewaveptr[6], sinewaveptr[14], sinewaveptr[22], op1level[5], op2level[5], op3level[5]);
-              //     bufferbe += haromopgenA(sinewaveptr[17], sinewaveptr[14], sinewaveptr[6], op3level[5], op2level[5], op1level[5]);
-              //   bufferbe +=   ketop(sinewaveptr[6], sinewaveptr[38], op2gorbe[gorbetime[5]],  op2volume, op5gorbe[gorbetime[5]], op5volume);
+              bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14] + egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep2), op3level[5], lep1), op2level[5], lep2), op1level[5], lep1);
+
+
             }
+
             break;
           //algoritmus1vege
           //algoritmus2
           case 2:
             if (gorbetime[0] > 0 ) {
-              bufferbe +=   ketopgenA(sinewaveptr[1], sinewaveptr[9], op1level[0], op2level[0]>>6);
-              bufferbe +=   ketopgenB(sinewaveptr[17], sinewaveptr[25], op3level[0], op4level[0]);
+              bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9], op2level[0], lep2), op1level[0], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[17] + egyopgenD(sinewaveptr[25], op4level[0], lep2), op3level[0], lep1);
 
             }
             if (gorbetime[1] > 0) {
-              bufferbe +=   ketopgenA(sinewaveptr[2], sinewaveptr[10], op1level[1], op2level[1]>>6);
-              bufferbe +=   ketopgenB(sinewaveptr[18], sinewaveptr[26], op3level[1], op4level[1]);
+              bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10], op2level[1], lep2), op1level[1], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[18] + egyopgenD(sinewaveptr[26], op4level[1], lep2), op3level[1], lep1);
 
             }
             if (gorbetime[2] > 0) {
-              bufferbe +=   ketopgenA(sinewaveptr[3], sinewaveptr[11], op1level[2], op2level[2]>>6);
-              bufferbe +=   ketopgenB(sinewaveptr[19], sinewaveptr[27], op3level[2], op4level[2]);
+              bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11], op2level[2], lep2), op1level[2], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[19] + egyopgenD(sinewaveptr[27], op4level[2], lep2), op3level[2], lep1);
 
             }
             if (gorbetime[3] > 0) {
-              bufferbe +=   ketopgenA(sinewaveptr[4], sinewaveptr[12], op1level[3], op2level[3]>>6);
-              bufferbe +=   ketopgenB(sinewaveptr[20], sinewaveptr[28], op3level[3], op4level[3]);
+              bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12], op2level[3], lep2), op1level[3], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[20] + egyopgenD(sinewaveptr[28], op4level[3], lep2), op3level[3], lep1);
 
             }
             if (gorbetime[4] > 0) {
-              bufferbe +=   ketopgenA(sinewaveptr[5], sinewaveptr[13], op1level[4], op2level[4]>>6);
-              bufferbe +=   ketopgenB(sinewaveptr[21], sinewaveptr[29], op3level[4], op4level[4]);
+              bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13], op2level[4], lep2), op1level[4], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[21] + egyopgenD(sinewaveptr[29], op4level[4], lep2), op3level[4], lep1);
 
             }
             if (gorbetime[5] > 0) {
-              bufferbe +=   ketopgenA(sinewaveptr[6], sinewaveptr[14], op1level[5], op2level[5]>>6);
-              bufferbe +=   ketopgenB(sinewaveptr[22], sinewaveptr[30], op3level[5], op4level[5]);
+              bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep2), op3level[5], lep1);
 
             }
             break;
           //algoritmus3
           case 3:
+            //this is fantastic!!!! very good quality clear sound!!!
             if (gorbetime[0] > 0 ) {
-              /*
 
-                      bufferbe1 =   egyopgenA2(sinewaveptr[1], lep1);
-                      if (bufferbe1 >= 0)
-                      {
-                        signwaveop1 = true;
-                      } else
-                      {
-                        signwaveop1 = false;
-                      }
-                      if (signwaveop1 != signwaveop1last) {
-                        bufferbe += bufferbe1 * op1level[0] >> 13;
-                        lastop1level[0] = op1level[0];
-                      } else {
-                        bufferbe += bufferbe1 * lastop1level[0] >> 13;
-                      }
-                      signwaveop1last = signwaveop1;
-              */
-              //this is fantastic!!!! very good quality clear sound!!!
-              bufferbe +=   egyopgenA(sinewaveptr[1]+egyopgenB(sinewaveptr[9]+egyopgenC(sinewaveptr[17], op3level[0], lep3), op2level[0], lep2), op1level[0], lep1);
-           //   bufferbe +=   egyopgenB(sinewaveptr[9], op2level[0], lep2);
-           //   bufferbe +=   egyopgenC(sinewaveptr[17], op3level[0], lep3);
+
+              bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9] + egyopgenC(sinewaveptr[17], op3level[0], lep3), op2level[0], lep2), op1level[0], lep1);
+              //   bufferbe +=   egyopgenB(sinewaveptr[9], op2level[0], lep2);
+              //   bufferbe +=   egyopgenC(sinewaveptr[17], op3level[0], lep3);
 
             }
 
 
             if (gorbetime[1] > 0) {
-              bufferbe +=   egyopgenA(sinewaveptr[2]+egyopgenB(sinewaveptr[10]+egyopgenC(sinewaveptr[18], op3level[1], lep3), op2level[1], lep2), op1level[1], lep1);
-             // bufferbe +=   egyopgenB(sinewaveptr[10], op2level[1], lep2);
-            //  bufferbe +=   egyopgenC(sinewaveptr[18], op3level[1], lep3);
+              bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10] + egyopgenC(sinewaveptr[18], op3level[1], lep3), op2level[1], lep2), op1level[1], lep1);
+              // bufferbe +=   egyopgenB(sinewaveptr[10], op2level[1], lep2);
+              //  bufferbe +=   egyopgenC(sinewaveptr[18], op3level[1], lep3);
 
             }
             if (gorbetime[2] > 0) {
-              bufferbe +=   egyopgenA(sinewaveptr[3]+egyopgenB(sinewaveptr[11]+egyopgenC(sinewaveptr[19], op3level[2], lep3), op2level[2], lep2), op1level[2], lep1);
-           //   bufferbe +=   egyopgenB(sinewaveptr[11], op2level[2], lep2);
-           //   bufferbe +=   egyopgenC(sinewaveptr[19], op3level[2], lep3);
+              bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11] + egyopgenC(sinewaveptr[19], op3level[2], lep3), op2level[2], lep2), op1level[2], lep1);
+              //   bufferbe +=   egyopgenB(sinewaveptr[11], op2level[2], lep2);
+              //   bufferbe +=   egyopgenC(sinewaveptr[19], op3level[2], lep3);
             }
             if (gorbetime[3] > 0) {
-              bufferbe +=   egyopgenA(sinewaveptr[4]+egyopgenB(sinewaveptr[12]+egyopgenC(sinewaveptr[20], op3level[3], lep3), op2level[3], lep2), op1level[3], lep1);
-             // bufferbe +=   egyopgenB(sinewaveptr[12], op2level[3], lep2);
-             // bufferbe +=   egyopgenC(sinewaveptr[20], op3level[3], lep3);
+              bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12] + egyopgenC(sinewaveptr[20], op3level[3], lep3), op2level[3], lep2), op1level[3], lep1);
+              // bufferbe +=   egyopgenB(sinewaveptr[12], op2level[3], lep2);
+              // bufferbe +=   egyopgenC(sinewaveptr[20], op3level[3], lep3);
             }
             if (gorbetime[4] > 0) {
-              bufferbe +=   egyopgenA(sinewaveptr[5]+egyopgenB(sinewaveptr[13]+egyopgenC(sinewaveptr[21], op3level[4], lep3), op2level[4], lep2), op1level[4], lep1);
-             // bufferbe +=   egyopgenB(sinewaveptr[13], op2level[4], lep2);
-             // bufferbe +=   egyopgenC(sinewaveptr[21], op3level[4], lep3);
+              bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13] + egyopgenC(sinewaveptr[21], op3level[4], lep3), op2level[4], lep2), op1level[4], lep1);
+              // bufferbe +=   egyopgenB(sinewaveptr[13], op2level[4], lep2);
+              // bufferbe +=   egyopgenC(sinewaveptr[21], op3level[4], lep3);
             }
             if (gorbetime[5] > 0) {
-              bufferbe +=   egyopgenA(sinewaveptr[6]+egyopgenB(sinewaveptr[14]+egyopgenC(sinewaveptr[22], op3level[5], lep3), op2level[5], lep2), op1level[5], lep1);
-             // bufferbe +=   egyopgenB(sinewaveptr[14], op2level[5], lep2);
-            //  bufferbe +=   egyopgenC(sinewaveptr[22], op3level[5], lep3);
+              bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14] + egyopgenC(sinewaveptr[22], op3level[5], lep3), op2level[5], lep2), op1level[5], lep1);
+              // bufferbe +=   egyopgenB(sinewaveptr[14], op2level[5], lep2);
+              //  bufferbe +=   egyopgenC(sinewaveptr[22], op3level[5], lep3);
             }
 
             break;
           //algoritmus4
           case 4:
             if (gorbetime[0] > 0 ) {
-              bufferbe +=   negyopgenA(sinewaveptr[1], sinewaveptr[9], sinewaveptr[17], sinewaveptr[25], op1level[0], op2level[0], op3level[0], op4level[0]);
-
+              bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9] , op2level[0], lep2) + egyopgenC(sinewaveptr[17], op3level[0], lep3), op1level[0], lep1);
             }
             if (gorbetime[1] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[2], sinewaveptr[10], sinewaveptr[18], sinewaveptr[26], op1level[1], op2level[1], op3level[1], op4level[1]);
-
+              bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10] , op2level[1], lep2) + egyopgenC(sinewaveptr[18], op3level[1], lep3), op1level[1], lep1);
             }
             if (gorbetime[2] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[3], sinewaveptr[11], sinewaveptr[19], sinewaveptr[27], op1level[2], op2level[2], op3level[2], op4level[2]);
-
+              bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11] , op2level[2], lep2) + egyopgenC(sinewaveptr[19], op3level[2], lep3), op1level[2], lep1);
             }
             if (gorbetime[3] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[4], sinewaveptr[12], sinewaveptr[20], sinewaveptr[28], op1level[3], op2level[3], op3level[3], op4level[3]);
-
+              bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12] , op2level[3], lep2) + egyopgenC(sinewaveptr[20], op3level[3], lep3), op1level[3], lep1);
             }
             if (gorbetime[4] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[5], sinewaveptr[13], sinewaveptr[21], sinewaveptr[29], op1level[4], op2level[4], op3level[4], op4level[4]);
-
+              bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13] , op2level[4], lep2) + egyopgenC(sinewaveptr[21], op3level[4], lep3), op1level[4], lep1);
             }
             if (gorbetime[5] > 0) {
-              bufferbe +=   negyopgenA(sinewaveptr[6], sinewaveptr[14], sinewaveptr[22], sinewaveptr[30], op1level[5], op2level[5], op3level[5], op4level[5]);
+              bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14] , op2level[5], lep2) + egyopgenC(sinewaveptr[22], op3level[5], lep3), op1level[5], lep1);
             }
             break;
 
@@ -1351,97 +1328,98 @@ void loop() {
         switch (alg) {
           case 1:
             if (gorbetime[0] > 0 ) {
-              bufferbe += haromopgenB(sinewaveptr[25], sinewaveptr[33], sinewaveptr[41], op4level[0], op5level[0], op6level[0]);
+              bufferbe +=   egyopgenE(sinewaveptr[33] + egyopgenF(sinewaveptr[41], op6level[0], lep2), op5level[0], lep1);
             }
             if (gorbetime[1] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[26], sinewaveptr[34], sinewaveptr[42], op4level[1], op5level[1], op6level[1]);
+              bufferbe +=   egyopgenE(sinewaveptr[34] + egyopgenF(sinewaveptr[42], op6level[1], lep2), op5level[1], lep1);
             }
             if (gorbetime[2] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[27], sinewaveptr[35], sinewaveptr[43],  op4level[2], op5level[2], op6level[2]);
+              bufferbe +=   egyopgenE(sinewaveptr[35] + egyopgenF(sinewaveptr[43], op6level[2], lep2), op5level[2], lep1);
             }
             if (gorbetime[3] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[28], sinewaveptr[36], sinewaveptr[44], op4level[3], op5level[3], op6level[3]);
+              bufferbe +=   egyopgenE(sinewaveptr[36] + egyopgenF(sinewaveptr[44], op6level[3], lep2), op5level[3], lep1);
             }
             if (gorbetime[4] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[29], sinewaveptr[37], sinewaveptr[45],  op4level[4], op5level[4], op6level[4]);
+              bufferbe +=   egyopgenE(sinewaveptr[37] + egyopgenF(sinewaveptr[45], op6level[4], lep2), op5level[4], lep1);
             }
             if (gorbetime[5] > 0) {
-              bufferbe += haromopgenB(sinewaveptr[30], sinewaveptr[38], sinewaveptr[46],  op4level[5], op5level[5], op6level[5]);
+              bufferbe +=   egyopgenE(sinewaveptr[38] + egyopgenF(sinewaveptr[46], op6level[5], lep2), op5level[5], lep1);
             }
             break;
           case 2:
             if (gorbetime[0] > 0 ) {
-              bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
+              bufferbe +=   egyopgenE(sinewaveptr[33] + egyopgenF(sinewaveptr[41], op6level[0], lep2), op5level[0], lep1);
             }
             if (gorbetime[1] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
+              bufferbe +=   egyopgenE(sinewaveptr[34] + egyopgenF(sinewaveptr[42], op6level[1], lep2), op5level[1], lep1);
             }
             if (gorbetime[2] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
+              bufferbe +=   egyopgenE(sinewaveptr[35] + egyopgenF(sinewaveptr[43], op6level[2], lep2), op5level[2], lep1);
             }
             if (gorbetime[3] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+              bufferbe +=   egyopgenE(sinewaveptr[36] + egyopgenF(sinewaveptr[44], op6level[3], lep2), op5level[3], lep1);
             }
             if (gorbetime[4] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+              bufferbe +=   egyopgenE(sinewaveptr[37] + egyopgenF(sinewaveptr[45], op6level[4], lep2), op5level[4], lep1);
             }
             if (gorbetime[5] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+              bufferbe +=   egyopgenE(sinewaveptr[38] + egyopgenF(sinewaveptr[46], op6level[5], lep2), op5level[5], lep1);
             }
             break;
           case 3:
-            /*
-              if (gorbetime[0] > 0 ) {
 
-                bufferbe +=   egyopgenD(sinewaveptr[25], op4level[0], lep4);
-                bufferbe +=   egyopgenE(sinewaveptr[33], op5level[0], lep5);
-                bufferbe +=   egyopgenF(sinewaveptr[41], op6level[0], lep6);
-              }
-              if (gorbetime[1] > 0) {
-                bufferbe +=   egyopgenD(sinewaveptr[26], op4level[1], lep4);
-                bufferbe +=   egyopgenE(sinewaveptr[34], op5level[1], lep5);
-                bufferbe +=   egyopgenF(sinewaveptr[42], op6level[1], lep6);
-              }
-              if (gorbetime[2] > 0) {
-                bufferbe +=   egyopgenD(sinewaveptr[27], op4level[2], lep4);
-                bufferbe +=   egyopgenE(sinewaveptr[35], op5level[2], lep5);
-                bufferbe +=   egyopgenF(sinewaveptr[43], op6level[2], lep6);
-              }
-              if (gorbetime[3] > 0) {
-                bufferbe +=   egyopgenD(sinewaveptr[28], op4level[3], lep4);
-                bufferbe +=   egyopgenE(sinewaveptr[36], op5level[3], lep5);
-                bufferbe +=   egyopgenF(sinewaveptr[44], op6level[3], lep6);
-              }
-              if (gorbetime[4] > 0) {
-                bufferbe +=   egyopgenD(sinewaveptr[29], op4level[4], lep4);
-                bufferbe +=   egyopgenE(sinewaveptr[37], op5level[4], lep5);
-                bufferbe +=   egyopgenF(sinewaveptr[45], op6level[4], lep6);
-              }
-              if (gorbetime[5] > 0) {
-                bufferbe +=   egyopgenD(sinewaveptr[30], op4level[5], lep4);
-                bufferbe +=   egyopgenE(sinewaveptr[38], op5level[5], lep5);
-                bufferbe +=   egyopgenF(sinewaveptr[46], op6level[5], lep6);
-              }
-            */
+            if (gorbetime[0] > 0 ) {
+
+              bufferbe +=   egyopgenD(sinewaveptr[25] + egyopgenE(sinewaveptr[33] + egyopgenF(sinewaveptr[41], op6level[0], lep6), op5level[0], lep5), op4level[0], lep4);
+              //bufferbe +=   egyopgenE(sinewaveptr[33], op5level[0], lep5);
+              //bufferbe +=   egyopgenF(sinewaveptr[41], op6level[0], lep6);
+            }
+            if (gorbetime[1] > 0) {
+              bufferbe +=   egyopgenD(sinewaveptr[26] + egyopgenE(sinewaveptr[34] + egyopgenF(sinewaveptr[42], op6level[1], lep6), op5level[1], lep5), op4level[1], lep4);
+              // bufferbe +=   egyopgenE(sinewaveptr[34], op5level[1], lep5);
+              // bufferbe +=   egyopgenF(sinewaveptr[42], op6level[1], lep6);
+            }
+            if (gorbetime[2] > 0) {
+              bufferbe +=   egyopgenD(sinewaveptr[27] + egyopgenE(sinewaveptr[35] + egyopgenF(sinewaveptr[43], op6level[2], lep6), op5level[2], lep5), op4level[2], lep4);
+              // bufferbe +=   egyopgenE(sinewaveptr[35], op5level[2], lep5);
+              // bufferbe +=   egyopgenF(sinewaveptr[43], op6level[2], lep6);
+            }
+            if (gorbetime[3] > 0) {
+              bufferbe +=   egyopgenD(sinewaveptr[28] + egyopgenE(sinewaveptr[36] + egyopgenF(sinewaveptr[44], op6level[3], lep6), op5level[3], lep5), op4level[3], lep4);
+              //   bufferbe +=   egyopgenE(sinewaveptr[36], op5level[3], lep5);
+              //  bufferbe +=   egyopgenF(sinewaveptr[44], op6level[3], lep6);
+            }
+            if (gorbetime[4] > 0) {
+              bufferbe +=   egyopgenD(sinewaveptr[29] + egyopgenE(sinewaveptr[37] + egyopgenF(sinewaveptr[45], op6level[4], lep6), op5level[4], lep5), op4level[4], lep4);
+              // bufferbe +=   egyopgenE(sinewaveptr[37], op5level[4], lep5);
+              // bufferbe +=   egyopgenF(sinewaveptr[45], op6level[4], lep6);
+            }
+            if (gorbetime[5] > 0) {
+              bufferbe +=   egyopgenD(sinewaveptr[30] + egyopgenE(sinewaveptr[38] + egyopgenF(sinewaveptr[46], op6level[5], lep6), op5level[5], lep5), op4level[5], lep4);
+              //  bufferbe +=   egyopgenE(sinewaveptr[38], op5level[5], lep5);
+              //  bufferbe +=   egyopgenF(sinewaveptr[46], op6level[5], lep6);
+            }
+
             break;
           case 4:
             if (gorbetime[0] > 0 ) {
-              bufferbe +=   ketopgenC(sinewaveptr[33], sinewaveptr[41], op5level[0], op6level[0]);
+              bufferbe +=   egyopgenD(sinewaveptr[25] + egyopgenE(sinewaveptr[33] , op5level[0], lep5)+egyopgenF(sinewaveptr[41], op6level[0], lep6), op4level[0], lep4);
+            
             }
             if (gorbetime[1] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[34], sinewaveptr[42], op5level[1], op6level[1]);
+              bufferbe +=   egyopgenD(sinewaveptr[26] + egyopgenE(sinewaveptr[34] , op5level[1], lep5)+egyopgenF(sinewaveptr[42], op6level[1], lep6), op4level[1], lep4);
             }
             if (gorbetime[2] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[35], sinewaveptr[43], op5level[2], op6level[2]);
+              bufferbe +=   egyopgenD(sinewaveptr[27] + egyopgenE(sinewaveptr[35] , op5level[2], lep5)+egyopgenF(sinewaveptr[43], op6level[2], lep6), op4level[2], lep4);
             }
             if (gorbetime[3] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[36], sinewaveptr[44], op5level[3], op6level[3]);
+              bufferbe +=   egyopgenD(sinewaveptr[28] + egyopgenE(sinewaveptr[36] , op5level[3], lep5)+egyopgenF(sinewaveptr[44], op6level[3], lep6), op4level[3], lep4);
             }
             if (gorbetime[4] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[37], sinewaveptr[45], op5level[4], op6level[4]);
+               bufferbe +=   egyopgenD(sinewaveptr[29] + egyopgenE(sinewaveptr[37] , op5level[4], lep5)+egyopgenF(sinewaveptr[45], op6level[4], lep6), op4level[4], lep4);
             }
             if (gorbetime[5] > 0) {
-              bufferbe +=   ketopgenC(sinewaveptr[38], sinewaveptr[46], op5level[5], op6level[5]);
+            bufferbe +=   egyopgenD(sinewaveptr[30] + egyopgenE(sinewaveptr[38] , op5level[5], lep5)+egyopgenF(sinewaveptr[46], op6level[5], lep6), op4level[5], lep4);
             }
             break;
           //algoritmus5 pwm
