@@ -1136,7 +1136,7 @@ void program8() {
   choruslevel = 8;
   fixfreqstep = 40;
   frame = 2;
-  level = 1;
+  level = 17;
   lfo2freq = 1;
   lfo1max = 103;
   modulation = 0;
@@ -1158,7 +1158,7 @@ void program8() {
   op1rr = 127;
   op1veloc = 3;
   op1volume = 82;  
-  op1waveform = 2;
+  op1waveform = 1;
   op2al = 127;
   op2ar = 32;
   op2ar = 1;
