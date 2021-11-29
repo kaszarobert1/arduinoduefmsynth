@@ -1,5 +1,5 @@
 //-----------------------------------SOUNDBANK----------------------------------------------
-void program0() {
+void program0() { 
   fixfreqstep = 100;
   alg = 1;
   alg2 = 1;
@@ -1136,7 +1136,7 @@ void program8() {
   choruslevel = 8;
   fixfreqstep = 40;
   frame = 2;
-  level = 1;
+  level = 17;
   lfo2freq = 1;
   lfo1max = 103;
   modulation = 0;
@@ -1152,13 +1152,13 @@ void program8() {
   op1d1r = 127;
   op1d2l = 47;
   op1d2r = 127;
-  op1generatorfreq = 14;
+  op1generatorfreq = 12;
   op1generatorfreqfix = 1 << 15;
   op1rl = 0;
   op1rr = 127;
   op1veloc = 3;
   op1volume = 82;  
-  op1waveform = 2;
+  op1waveform = 1;
   op2al = 127;
   op2ar = 32;
   op2ar = 1;
@@ -1166,7 +1166,7 @@ void program8() {
   op2d1r = 46;
   op2d2l = 34;
   op2d2r = 42;
-  op2generatorfreq = 14;
+  op2generatorfreq = 12;
   op2generatorfreqfix = 1 << 15;
   op2veloc = 3;
   op2volume = 25;
@@ -1180,7 +1180,7 @@ void program8() {
   op3d1r = 127;
   op3d2l = 127;
   op3d2r = 127;
-  op3generatorfreq = 104;
+  op3generatorfreq = 96;
   op3generatorfreqfix = 1 << 15;
   op3rl = 0;
   op3rr = 127;
@@ -1193,7 +1193,7 @@ void program8() {
   op4d1r = 72;
   op4d2l = 0;
   op4d2r = 38;
-  op4generatorfreq = 0;
+  op4generatorfreq = 12;
   op4generatorfreqfix = 192 << 15;
   op4rl = 62;
   op4rr = 1;
@@ -1206,7 +1206,7 @@ void program8() {
   op5d1r = 45;
   op5d2l = 50;
   op5d2r = 45;
-  op5generatorfreq = 35;
+  op5generatorfreq = 48;
   op5generatorfreqfix = 1 << 15;
   op5rl = 1;
   op5rr = 50;
@@ -1219,7 +1219,7 @@ void program8() {
   op6d1r = 50;
   op6d2l = 50;
   op6d2r = 50;
-  op6generatorfreq = 14;
+  op6generatorfreq = 12;
   op6generatorfreqfix = 1 << 15;
   op6rl = 1;
   op6rr = 50;

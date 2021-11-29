@@ -1,6 +1,6 @@
 #include <DueFlashStorage.h>
 DueFlashStorage dueFlashStorage;
-
+ 
 void save() {
   //saveprog
   int kezdocim = saveprog * 300;

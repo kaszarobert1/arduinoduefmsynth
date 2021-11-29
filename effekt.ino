@@ -11,6 +11,7 @@ void reverbold(){
       }
   }
 
+  
 long limiter(long ertek, long vagas) {
   long haromnegyed = vagas / 4 * 3;
   if (ertek < vagas && ertek > haromnegyed) {

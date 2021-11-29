@@ -2,7 +2,7 @@
 #define opattackinit(al, i, ar)(al*i*i/(ar*ar))
 
 void pichgorbeinit() {
-  //maxtime = op1ar + op1d1r + op1d2r + op1rr;
+   
   for (int i = 0; i < GORBE_SIZE; i++)
   {
     pichgorbe[i] = 0;
@@ -134,12 +134,12 @@ void maxreleaseset() {
   maxrelease3 = op4ar + op4d1r + op4d2r;
   maxrelease4 = op5ar + op5d1r + op5d2r;
   maxrelease5 = op6ar + op6d1r + op6d2r;
-  maxtime0 = maxrelease0 + op1rr+200;
-  maxtime1 = maxrelease1 + op2rr+200;
-  maxtime2 = maxrelease2 + op3rr+200;
-  maxtime3 = maxrelease3 + op4rr+200;
-  maxtime4 = maxrelease4 + op5rr+200;
-  maxtime5 = maxrelease5 + op6rr+200;
+  maxtime0 = maxrelease0 + 2*op1rr;
+  maxtime1 = maxrelease1 + 2*op2rr;
+  maxtime2 = maxrelease2 + 2*op3rr;
+  maxtime3 = maxrelease3 + 2*op4rr;
+  maxtime4 = maxrelease4 + 2*op5rr;
+  maxtime5 = maxrelease5 + 2*op6rr;
 }
 
 /*

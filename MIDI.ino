@@ -11,32 +11,38 @@ void serialEvent() {
           generatornumber = 0;
         }
         gorbetime[generatornumber] = 0;
+        ptrnullaz(generatornumber);
         wavefreq[generatornumber] = noteertek[noteByte];
         waveveloc[generatornumber]  = MIDI2.getData2();
         oldnoteByte[generatornumber] = noteByte;
         generatornumber++;
-
         break;
       case midi::NoteOff:
         noteByte = MIDI2.getData1();
         //  velocityByte = MIDI2.getData2();
         if (noteByte == oldnoteByte[0]) {
           gorbetime[0] = maxrelease0;
+           Serial.print("0\n");
         }
         if (noteByte == oldnoteByte[1]) {
           gorbetime[1] = maxrelease1;
+           Serial.print("1\n");
         }
         if (noteByte == oldnoteByte[2]) {
           gorbetime[2] = maxrelease2;
+           Serial.print("2\n");
         }
         if (noteByte == oldnoteByte[3]) {
           gorbetime[3] = maxrelease3;
+           Serial.print("3\n");
         }
         if (noteByte == oldnoteByte[4]) {
           gorbetime[4] = maxrelease4;
+           Serial.print("4\n");
         }
         if (noteByte == oldnoteByte[5]) {
           gorbetime[5] = maxrelease5;
+           Serial.print("5\n");
         }
 
         /*
@@ -150,10 +156,10 @@ void pichband( byte value) {
     case 8:  op1volume = op1volumeorig + value; op2volume = op2volumeorig - value;  break;
     case 9:  op1volume = op1volumeorig + value; op3volume = op3volumeorig + value;  break;
     case 10: op1volume = op1volumeorig + value; op3volume = op3volumeorig - value;  break;
-    case 11: op1volume = op1volumeorig + value; op3volume = op4volumeorig + value;  break;
-    case 12: op1volume = op1volumeorig + value; op3volume = op4volumeorig - value;  break;
-    case 13: op1volume = op1volumeorig + value; op3volume = op5volumeorig + value;  break;
-    case 14: op1volume = op1volumeorig + value; op3volume = op5volumeorig + value;  break;
+    case 11: op1volume = op1volumeorig + value; op4volume = op4volumeorig + value;  break;
+    case 12: op1volume = op1volumeorig + value; op4volume = op4volumeorig - value;  break;
+    case 13: op1volume = op1volumeorig + value; op5volume = op5volumeorig + value;  break;
+    case 14: op1volume = op1volumeorig + value; op5volume = op5volumeorig + value;  break;
     case 15: op1volume = op1volumeorig + value; op2volume = op2volumeorig + value; op3volume = op3volumeorig + value; break;
     case 16: op1volume = op1volumeorig + value; op2volume = op2volumeorig - value; op3volume = op3volumeorig + value; break;
     case 17: op2volume = op2volumeorig + value; op4volume = op4volumeorig + value; op6volume = op6volumeorig + value; break;
@@ -592,13 +598,13 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 72:
-      level = value / 8;
+      level = value / 2;
       menuoldal = 19;
       menukiir();
       break;
     case 80:
-      frame = value;
-      menuoldal = 17;
+      feedback_level = value/4-16;
+      menuoldal = 16;
       menukiir();
       break;
     case 82:

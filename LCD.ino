@@ -1,5 +1,4 @@
 //------------------------LCD------------------------------------
-
 String savestring = "NO";
 byte saveprog = 0;
 byte menu = 1;
@@ -1503,7 +1502,7 @@ void menukiir() {
             }
             dec = false;
           }
-          op3volume=op3volumeorig;
+          op3volume = op3volumeorig;
           lcdkiir("Op3: VEL >VOL    ", "     " + String(lcdprint3(op3veloc)) + "  " + String(lcdprint3(op3volumeorig)) + "    ");
           break;
         case 4:
@@ -1523,7 +1522,7 @@ void menukiir() {
             }
             dec = false;
           }
-          op4volume=op4volumeorig;
+          op4volume = op4volumeorig;
           lcdkiir("Op4: VEL >VOL    ", "     " + String(lcdprint3(op4veloc)) + "  " + String(lcdprint3(op4volumeorig)) + "    ");
 
           break;
@@ -1544,7 +1543,7 @@ void menukiir() {
             }
             dec = false;
           }
-          op5volume=op5volumeorig;
+          op5volume = op5volumeorig;
           lcdkiir("Op5: VEL >VOL    ", "     " + String(lcdprint3(op5veloc)) + "  " + String(lcdprint3(op5volumeorig)) + "    ");
           break;
         case 6:
@@ -1564,7 +1563,7 @@ void menukiir() {
             }
             dec = false;
           }
-          op6volume=op6volumeorig;
+          op6volume = op6volumeorig;
           lcdkiir("Op6: VEL >VOL    ", "     " + String(lcdprint3(op6veloc)) + "  " + String(lcdprint3(op6volumeorig)) + "    ");
           break;
         case 7:
@@ -2284,23 +2283,23 @@ void menukiir() {
 
     case 16:
       if (inc) {
-        if (frame < 127) {
-          frame++;
+        if (feedback_level < 127) {
+          feedback_level++;
         } else {
-          frame = 1;
+          feedback_level = 0;
         }
         inc = false;
       }
       if (dec) {
-        if (frame > 0) {
-          frame--;
+        if (feedback_level >= 0) {
+          feedback_level--;
         } else {
-          frame = 127;
+          feedback_level = 127;
         }
         dec = false;
       }
 
-      lcdkiir("GLO: FRM< DIV     ", "     " + String(lcdprint3(frame)) + "  " + String(lcdprint3(szorzo)) + "    "); break;
+      lcdkiir("GLO: FRM< DIV     ", "     " + String(lcdprint3(feedback_level)) + "  " + String(lcdprint3(szorzo)) + "    "); break;
     case 17:
       if (inc) {
         if (szorzo < 127) {
@@ -2343,22 +2342,22 @@ void menukiir() {
       }
       switch (alg) {
         case 1:
-          lcdkiir("A" + String(lcdprint2(alg)) + ": [4]-(5)-(6)", "     [1]-(2)-(3)");
+          lcdkiir("A" + String(lcdprint2(alg)) + ":     [5]-(6)", " [1]-(2)-(3)-(4)");
           break;
         case 2:
           lcdkiir("A" + String(lcdprint2(alg)) + ":     [5]-(6)", " [1]-(2) [3]-(4)");
           break;
         case 3:
-          lcdkiir("A" + String(lcdprint2(alg)) + ": [4] [5] [6]", "     [1] [2] [3]    ");
+          lcdkiir("A" + String(lcdprint2(alg)) + ": [4]-(5)-(6)", "     [1]-(2)-(3)");
           break;
         case 4:
-          lcdkiir("A" + String(lcdprint2(alg)) + ":     [5]-(6)", " [1]-(2)-(3)-(4)");
+          lcdkiir("A" + String(lcdprint2(alg)) + ":/(2)    /(5)", " [1]-(3) [4]-(6)");
           break;
         case 5:
           lcdkiir("A" + String(lcdprint2(alg)) + "  <<5>>-{{6}}   ", "     <PWM OP1>  ");
           break;
         case 6:
-          lcdkiir("A" + String(lcdprint2(alg)) + "      <5>-{6}", " <1>-{2} <3>-{4}  ");
+          lcdkiir("A" + String(lcdprint2(alg)) + ": [4] [5] [6]", "     [1] [2] [3]    ");
           break;
       }
       break;
