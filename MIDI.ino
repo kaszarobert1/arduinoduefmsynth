@@ -22,29 +22,35 @@ void serialEvent() {
         //  velocityByte = MIDI2.getData2();
         if (noteByte == oldnoteByte[0]) {
           gorbetime[0] = maxrelease0;
-           Serial.print("0\n");
+          
+           
         }
         if (noteByte == oldnoteByte[1]) {
           gorbetime[1] = maxrelease1;
-           Serial.print("1\n");
+           
+           
         }
         if (noteByte == oldnoteByte[2]) {
           gorbetime[2] = maxrelease2;
-           Serial.print("2\n");
+        
+          
         }
         if (noteByte == oldnoteByte[3]) {
           gorbetime[3] = maxrelease3;
-           Serial.print("3\n");
+         
+           
         }
         if (noteByte == oldnoteByte[4]) {
           gorbetime[4] = maxrelease4;
-           Serial.print("4\n");
+          
+          
         }
         if (noteByte == oldnoteByte[5]) {
           gorbetime[5] = maxrelease5;
-           Serial.print("5\n");
+       
+          
         }
-
+         
         /*
           switch (noteByte)
           {

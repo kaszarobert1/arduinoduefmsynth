@@ -886,66 +886,70 @@ void loop() {
             if (gorbetime[0] > 0 ) {
               average = (old0[0] + old1[0]) >> 1;
               old1[0] = old0[0];
-              old0[0] = egyopgenB(sinewaveptr[9] + (average << feedback_level), op2level[0], lep2);
-              bufferbe +=  old0[0];            
-              bufferbe +=   egyopgenA(sinewaveptr[1] + old0[0], op1level[0], lep1);
-           
-             // bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9], op2level[0], lep2), op1level[0], lep1);
+              //old0[0] = egyopgenB(sinewaveptr[9] + (average << feedback_level), op2level[0], lep2);
+              old0[0] =  egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9] + (average << feedback_level), op2level[0], lep2), op1level[0], lep1);
+              bufferbe +=  old0[0];
+              //   bufferbe +=   egyopgenA(sinewaveptr[1] + old0[0], op1level[0], lep1);
+              // bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9], op2level[0], lep2), op1level[0], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[17] + egyopgenD(sinewaveptr[25], op4level[0], lep4), op3level[0], lep3);
             }
+            
             if (gorbetime[1] > 0) {
               average = (old0[1] + old1[1]) >> 1;
               old1[1] = old0[1];
-              old0[1] = egyopgenB(sinewaveptr[10] + (average << feedback_level), op2level[1], lep2);
-              bufferbe +=  old0[1];            
-              bufferbe +=   egyopgenA(sinewaveptr[2] + old0[1], op1level[1], lep1);
-              
-             // bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10], op2level[1], lep2), op1level[1], lep1);
+              // old0[1] = egyopgenB(sinewaveptr[10] + (average << feedback_level), op2level[1], lep2);
+              old0[1] = egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10] + (average << feedback_level), op2level[1], lep2), op1level[1], lep1);
+              bufferbe +=  old0[1];
+              //  bufferbe +=   egyopgenA(sinewaveptr[2] + old0[1], op1level[1], lep1);
+              // bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10], op2level[1], lep2), op1level[1], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[18] + egyopgenD(sinewaveptr[26], op4level[1], lep4), op3level[1], lep3);
             }
+            
             if (gorbetime[2] > 0) {
               average = (old0[2] + old1[2]) >> 1;
               old1[2] = old0[2];
-              old0[2] = egyopgenB(sinewaveptr[11] + (average << feedback_level), op2level[2], lep2);
-              bufferbe +=  old0[2];            
-              bufferbe +=   egyopgenA(sinewaveptr[3] + old0[2], op1level[2], lep1);
-              
-              
-          //    bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11], op2level[2], lep2), op1level[2], lep1);
+              // old0[2] = egyopgenB(sinewaveptr[11] + (average << feedback_level), op2level[2], lep2);
+              old0[2] = egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11] + (average << feedback_level), op2level[2], lep2), op1level[2], lep1);
+              bufferbe +=  old0[2];
+              // bufferbe +=   egyopgenA(sinewaveptr[3] + old0[2], op1level[2], lep1);
+              //    bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11], op2level[2], lep2), op1level[2], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[19] + egyopgenD(sinewaveptr[27], op4level[2], lep4), op3level[2], lep3);
             }
+            
             if (gorbetime[3] > 0) {
               average = (old0[3] + old1[3]) >> 1;
               old1[3] = old0[3];
-              old0[3] = egyopgenB(sinewaveptr[12] + (average << feedback_level), op2level[3], lep2);
-              bufferbe +=  old0[3];            
-              bufferbe +=   egyopgenA(sinewaveptr[4] + old0[3], op1level[3], lep1);
-              
-
-              
-              bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12], op2level[3], lep2), op1level[3], lep1);
+              //old0[3] = egyopgenB(sinewaveptr[12] + (average << feedback_level), op2level[3], lep2);
+              old0[3] = egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12] + (average << feedback_level), op2level[3], lep2), op1level[3], lep1);
+              bufferbe +=  old0[3];
+              // bufferbe +=   egyopgenA(sinewaveptr[4] + old0[3], op1level[3], lep1);
+              // bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12], op2level[3], lep2), op1level[3], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[20] + egyopgenD(sinewaveptr[28], op4level[3], lep4), op3level[3], lep3);
             }
+            
             if (gorbetime[4] > 0) {
               average = (old0[4] + old1[4]) >> 1;
               old1[4] = old0[4];
-              old0[4] = egyopgenB(sinewaveptr[13] + (average << feedback_level), op2level[4], lep2);
-              bufferbe +=  old0[4];            
-              bufferbe +=   egyopgenA(sinewaveptr[5] + old0[4], op1level[4], lep1);
-        
-         //     bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13], op2level[4], lep2), op1level[4], lep1);
+              // old0[4] = egyopgenB(sinewaveptr[13] + (average << feedback_level), op2level[4], lep2);
+              old0[4] = egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13] + (average << feedback_level), op2level[4], lep2), op1level[4], lep1);
+              bufferbe +=  old0[4];
+              // bufferbe +=   egyopgenA(sinewaveptr[5] + old0[4], op1level[4], lep1);
+              // bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13], op2level[4], lep2), op1level[4], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[21] + egyopgenD(sinewaveptr[29], op4level[4], lep4), op3level[4], lep3);
             }
+            
             if (gorbetime[5] > 0) {
               average = (old0[5] + old1[5]) >> 1;
               old1[5] = old0[5];
-              old0[5] = egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2);
-              bufferbe +=  old0[5];            
-              bufferbe +=   egyopgenA(sinewaveptr[6] + old0[5], op1level[5], lep1);
-             // bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
-              bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep4), op3level[5], lep3);
+              // old0[5] = egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2);
+              old0[5] =  egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2), op1level[5], lep1);
+               bufferbe +=  old0[5];
+            // bufferbe +=   egyopgenA(sinewaveptr[6] + old0[5], op1level[5], lep1);
+            // bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
+            bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep4), op3level[5], lep3);
             }
-            break;
+            
+                       break;
           //algoritmus3
           case 3:
             //this is fantastic!!!! very good quality clear sound!!!
@@ -1170,8 +1174,8 @@ void loop() {
               old0[0] = egyopgenA(sinewaveptr[1] + (average << feedback_level), op1level[0], lep1);
               bufferbe +=  old0[0];
               // bufferbe +=   egyopgenA(sinewaveptr[1], op1level[0], lep1);
-               bufferbe +=   egyopgenB(sinewaveptr[9], op2level[0], lep2);
-               bufferbe +=   egyopgenC(sinewaveptr[17], op3level[0], lep3);
+              bufferbe +=   egyopgenB(sinewaveptr[9], op2level[0], lep2);
+              bufferbe +=   egyopgenC(sinewaveptr[17], op3level[0], lep3);
             }
             if (gorbetime[1] > 0) {
               average = (old0[1] + old1[1]) >> 1;
@@ -1198,7 +1202,7 @@ void loop() {
               old1[3] = old0[3];
               old0[3] = egyopgenA(sinewaveptr[4] + (average << feedback_level), op1level[3], lep1);
               bufferbe +=  old0[3];
-           //   bufferbe +=   egyopgenA(sinewaveptr[4] , op1level[3], lep1);
+              //   bufferbe +=   egyopgenA(sinewaveptr[4] , op1level[3], lep1);
               bufferbe +=   egyopgenB(sinewaveptr[12], op2level[3], lep2);
               bufferbe +=   egyopgenC(sinewaveptr[20], op3level[3], lep3);
             }
@@ -1216,7 +1220,7 @@ void loop() {
               old1[5] = old0[5];
               old0[5] = egyopgenA(sinewaveptr[6] + (average << feedback_level), op1level[5], lep1);
               bufferbe +=  old0[5];
-            //  bufferbe +=   egyopgenA(sinewaveptr[6] , op1level[5], lep1);
+              //  bufferbe +=   egyopgenA(sinewaveptr[6] , op1level[5], lep1);
               bufferbe +=   egyopgenB(sinewaveptr[14], op2level[5], lep2);
               bufferbe +=   egyopgenC(sinewaveptr[22], op3level[5], lep3);
             }
