@@ -1130,10 +1130,11 @@ void program7() {
 void program8() {
   gorbeszorzo=2;
 //shift=1;
-  alg = 3;
+  alg = 2;
   alg2 = 3;
   chorusalg = 64;
   choruslevel = 8;
+  feedback_level=3;
   fixfreqstep = 40;
   frame = 2;
   level = 17;
@@ -1146,12 +1147,14 @@ void program8() {
   notefixedop4 = true;
   notefixedop5 = true;
   notefixedop6 = true;
-  op1al = 51;
-  op1ar = 1;
-  op1d1l = 56;
+  op1al = 127;
+  op1ar = 0;
+  op1d1l = 127;
   op1d1r = 127;
-  op1d2l = 47;
+  op1d2l = 50;
   op1d2r = 127;
+  op1rl = 0;
+  op1rr = 127;
   op1generatorfreq = 12;
   op1generatorfreqfix = 1 << 15;
   op1rl = 0;
@@ -1160,12 +1163,13 @@ void program8() {
   op1volume = 82;  
   op1waveform = 1;
   op2al = 127;
-  op2ar = 32;
   op2ar = 1;
-  op2d1l = 56;
-  op2d1r = 46;
-  op2d2l = 34;
-  op2d2r = 42;
+  op2d1l = 127;
+  op2d1r = 127;
+  op2d2l = 50;
+  op2d2r = 127;
+  op2rl = 0;
+  op3rr = 127;
   op2generatorfreq = 12;
   op2generatorfreqfix = 1 << 15;
   op2veloc = 3;
@@ -1185,7 +1189,7 @@ void program8() {
   op3rl = 0;
   op3rr = 127;
   op3veloc = 3;
-  op3volume = 11;
+  op3volume = 0;
   op3waveform = 2;
   op4al = 127;
   op4ar = 97;
@@ -1198,7 +1202,7 @@ void program8() {
   op4rl = 62;
   op4rr = 1;
   op4veloc = 3;
-  op4volume = 68;
+  op4volume = 0;
   op4waveform = 2;
   op5al = 127;
   op5ar = 1;
@@ -1211,7 +1215,7 @@ void program8() {
   op5rl = 1;
   op5rr = 50;
   op5veloc = 3;
-  op5volume = 24;
+  op5volume = 0;
   op5waveform = 2;
   op6al = 50;
   op6ar = 1;
@@ -1224,7 +1228,7 @@ void program8() {
   op6rl = 1;
   op6rr = 50;
   op6veloc = 3;
-  op6volume = 59;
+  op6volume = 0;
   op6waveform = 2;
   oplfo = 1;
   oplfo2max = 127;

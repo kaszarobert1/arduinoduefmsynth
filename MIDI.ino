@@ -21,62 +21,56 @@ void serialEvent() {
         noteByte = MIDI2.getData1();
         //  velocityByte = MIDI2.getData2();
         if (noteByte == oldnoteByte[0]) {
-          gorbetime[0] = maxrelease0;
+          gorbetime[0] = maxrelease;
            oldnoteByte[0]=0;
-           generatornumber=0;
-        /*
-         Serial.print(0);
-         Serial.print("\n");
-         */ 
+        //   generatornumber=0;
+        
+        
+         
            
         }
         if (noteByte == oldnoteByte[1]) {
-          gorbetime[1] = maxrelease1;
+          gorbetime[1] = maxrelease;
            oldnoteByte[1]=0;
-           generatornumber=1;
-         /*
-           Serial.print(1);
-         Serial.print("\n");
-         */
+         //  generatornumber=1;
+         
+           
+         
            
         }
         if (noteByte == oldnoteByte[2]) {
-          gorbetime[2] = maxrelease2;
+          gorbetime[2] = maxrelease;
           oldnoteByte[2]=0;
-          generatornumber=2;
-          /*
-        Serial.print(2);
-         Serial.print("\n");
-         */
+        //  generatornumber=2;
+          
+       
+         
           
         }
         if (noteByte == oldnoteByte[3]) {
-          gorbetime[3] = maxrelease3;
+          gorbetime[3] = maxrelease;
           oldnoteByte[3]=0;
-          generatornumber=3;
-        /*
-         Serial.print(3);
-         Serial.print("\n");
-        */   
+        //  generatornumber=3;
+        
+         
+          
         }
         if (noteByte == oldnoteByte[4]) {
-          gorbetime[4] = maxrelease4;
+          gorbetime[4] = maxrelease;
           oldnoteByte[4]=0;
-          generatornumber=4;
-         /*
-          Serial.print(4);
-         Serial.print("\n");
-         */
+       //   generatornumber=4;
+         
+          
+         
           
         }
         if (noteByte == oldnoteByte[5]) {
-          gorbetime[5] = maxrelease5;
+          gorbetime[5] = maxrelease;
           oldnoteByte[5]=0;
-          generatornumber=5;
-          /*
-       Serial.print(5);
-         Serial.print("\n");
-         */
+       //   generatornumber=5;
+          
+      
+         
           
         }
          
@@ -105,10 +99,12 @@ void serialEvent() {
         velocityByte = MIDI2.getData2();
         //pichband(44, noteByte);
         parameterchange2(noteByte, velocityByte);
+       /*
         Serial.print(noteByte);
         Serial.print(" ");
         Serial.print(velocityByte);
         Serial.print("\n");
+        */
         break;
       case midi:: Clock:
         sendmidiclock();

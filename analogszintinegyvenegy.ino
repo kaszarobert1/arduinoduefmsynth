@@ -59,7 +59,8 @@ long limitgain = 65535;
 byte revalg = 8;
 //tva
 int gorbetime[8] = { -1, -1, -1, -1, -1, -1, -1, -1};
-//uint16_t maxrelease = 0;
+uint16_t maxrelease = 0;
+uint16_t maxtime = 0;
 uint16_t maxrelease0 = 0;
 uint16_t maxrelease1 = 0;
 uint16_t maxrelease2 = 0;
@@ -486,12 +487,12 @@ void loop() {
         szamlalo++;
       }
       //gorbe leptetese ill leallitasa
-      if (gorbetime[0] == maxtime0) {
+      if (gorbetime[0] == maxtime) {
         gorbetime[0] = -1;
 
       } else {
         if (gorbetime[0] >= 0) {
-          if (gorbetime[0] != maxrelease0 - 1)  //what is the fuck :)
+          if (gorbetime[0] != maxrelease - 1)  //what is the fuck :)
             gorbetime[0]++;
           op1level[0] = op1gorbe[gorbetime[0]] * op1volume;
           /* uint16_t kiir=op1level[0];
@@ -505,13 +506,13 @@ void loop() {
           op6level[0] = op6gorbe[gorbetime[0]] * op6volume  ;
         }
       }
-      if (gorbetime[1] == maxtime1) {
+      if (gorbetime[1] == maxtime) {
         gorbetime[1] = -1;
         //ptrnullaz(1);
       } else {
         if (gorbetime[1] >= 0) {
 
-          if (gorbetime[1] != maxrelease1 - 1)
+          if (gorbetime[1] != maxrelease - 1)
             gorbetime[1]++;
           op1level[1] = op1gorbe[gorbetime[1]] * op1volume ;
           op2level[1] = op2gorbe[gorbetime[1]] * op2volume ;
@@ -521,12 +522,12 @@ void loop() {
           op6level[1] = op6gorbe[gorbetime[1]] * op6volume ;
         }
       }
-      if (gorbetime[2] == maxtime2) {
+      if (gorbetime[2] == maxtime) {
         gorbetime[2] = -1;
         //ptrnullaz(2);
       } else {
         if (gorbetime[2] >= 0) {
-          if (gorbetime[2] != maxrelease2 - 1)
+          if (gorbetime[2] != maxrelease - 1)
             gorbetime[2]++;
           op1level[2] = op1gorbe[gorbetime[2]] * op1volume ;
           op2level[2] = op2gorbe[gorbetime[2]] * op2volume ;
@@ -536,12 +537,12 @@ void loop() {
           op6level[2] = op6gorbe[gorbetime[2]] * op6volume ;
         }
       }
-      if (gorbetime[3] == maxtime3) {
+      if (gorbetime[3] == maxtime) {
         gorbetime[3] = -1;
         // ptrnullaz(3);
       } else {
         if (gorbetime[3] >= 0) {
-          if (gorbetime[3] != maxrelease3 - 1)
+          if (gorbetime[3] != maxrelease - 1)
             gorbetime[3]++;
           op1level[3] = op1gorbe[gorbetime[3]] * op1volume ;
           op2level[3] = op2gorbe[gorbetime[3]] * op2volume ;
@@ -551,13 +552,13 @@ void loop() {
           op6level[3] = op6gorbe[gorbetime[3]] * op6volume ;
         }
       }
-      if (gorbetime[4] == maxtime4) {
+      if (gorbetime[4] == maxtime) {
         gorbetime[4] = -1;
         //ptrnullaz(4);
       } else {
         if (gorbetime[4] >= 0) {
 
-          if (gorbetime[4] != maxrelease4 - 1)
+          if (gorbetime[4] != maxrelease - 1)
             gorbetime[4]++;
           op1level[4] = op1gorbe[gorbetime[4]] * op1volume ;
           op2level[4] = op2gorbe[gorbetime[4]] * op2volume ;
@@ -567,12 +568,12 @@ void loop() {
           op6level[4] = op6gorbe[gorbetime[4]] * op6volume ;
         }
       }
-      if (gorbetime[5] == maxtime5) {
+      if (gorbetime[5] == maxtime) {
         gorbetime[5] = -1;
         // ptrnullaz(5);
       } else {
         if (gorbetime[5] >= 0) {
-          if (gorbetime[5] != maxrelease5 - 1)
+          if (gorbetime[5] != maxrelease - 1)
             gorbetime[5]++;
           op1level[5] = op1gorbe[gorbetime[5]] * op1volume  ;
           op2level[5] = op2gorbe[gorbetime[5]] * op2volume ;
@@ -893,7 +894,7 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9], op2level[0], lep2), op1level[0], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[17] + egyopgenD(sinewaveptr[25], op4level[0], lep4), op3level[0], lep3);
             }
-
+            
             if (gorbetime[1] > 0) {
               average = (old0[1] + old1[1]) >> 1;
               old1[1] = old0[1];
@@ -904,7 +905,7 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10], op2level[1], lep2), op1level[1], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[18] + egyopgenD(sinewaveptr[26], op4level[1], lep4), op3level[1], lep3);
             }
-
+            
             if (gorbetime[2] > 0) {
               average = (old0[2] + old1[2]) >> 1;
               old1[2] = old0[2];
@@ -915,7 +916,7 @@ void loop() {
               //    bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11], op2level[2], lep2), op1level[2], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[19] + egyopgenD(sinewaveptr[27], op4level[2], lep4), op3level[2], lep3);
             }
-
+            
             if (gorbetime[3] > 0) {
               average = (old0[3] + old1[3]) >> 1;
               old1[3] = old0[3];
@@ -926,7 +927,7 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12], op2level[3], lep2), op1level[3], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[20] + egyopgenD(sinewaveptr[28], op4level[3], lep4), op3level[3], lep3);
             }
-
+            
             if (gorbetime[4] > 0) {
               average = (old0[4] + old1[4]) >> 1;
               old1[4] = old0[4];
@@ -937,19 +938,19 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13], op2level[4], lep2), op1level[4], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[21] + egyopgenD(sinewaveptr[29], op4level[4], lep4), op3level[4], lep3);
             }
-
+            
             if (gorbetime[5] > 0) {
               average = (old0[5] + old1[5]) >> 1;
               old1[5] = old0[5];
               // old0[5] = egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2);
               old0[5] =  egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2), op1level[5], lep1);
-              bufferbe +=  old0[5];
-              // bufferbe +=   egyopgenA(sinewaveptr[6] + old0[5], op1level[5], lep1);
-              // bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
-              bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep4), op3level[5], lep3);
+               bufferbe +=  old0[5];
+            // bufferbe +=   egyopgenA(sinewaveptr[6] + old0[5], op1level[5], lep1);
+            // bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
+            bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep4), op3level[5], lep3);
             }
-
-            break;
+            
+                       break;
           //algoritmus3
           case 3:
             //this is fantastic!!!! very good quality clear sound!!!
@@ -1540,52 +1541,53 @@ void loop() {
 void ptrnullaz(byte gorbe) {
   switch (gorbe) {
     case 0:
-      sinewaveptr[1] = 512;
-      sinewaveptr[9] = 0;
-      sinewaveptr[17] = 0;
-      sinewaveptr[25] = 0;
-      sinewaveptr[33] = 0;
-      sinewaveptr[41] = 0;
+    
+      sinewaveptr[1] =  0- sinewave1freq + pich[1];
+      sinewaveptr[9] =  0- sinewave9freq + pich[1];
+      sinewaveptr[17] = 0- sinewave17freq + pich[1];
+      sinewaveptr[25] = 0- sinewave25freq + pich[1];
+      sinewaveptr[33] = 0- sinewave33freq + pich[1];
+      sinewaveptr[41] = 0- sinewave41freq + pich[1];
       break;
     case 1:
-      sinewaveptr[2] = 0;
-      sinewaveptr[10] = 0;
-      sinewaveptr[18] = 0;
-      sinewaveptr[26] = 0;
-      sinewaveptr[34] = 0;
-      sinewaveptr[42] = 0;
+      sinewaveptr[2] =  0- sinewave2freq + pich[2];
+      sinewaveptr[10] = 0- sinewave10freq + pich[2];
+      sinewaveptr[18] = 0- sinewave18freq + pich[2];
+      sinewaveptr[26] = 0- sinewave26freq + pich[2];
+      sinewaveptr[34] = 0- sinewave34freq + pich[2];
+      sinewaveptr[42] = 0- sinewave42freq + pich[2];
       break;
     case 2:
-      sinewaveptr[3] = 0;
-      sinewaveptr[11] = 0;
-      sinewaveptr[19] = 0;
-      sinewaveptr[27] = 0;
-      sinewaveptr[35] = 0;
-      sinewaveptr[43] = 0;
+      sinewaveptr[3] =  0- sinewave3freq + pich[3];
+      sinewaveptr[11] = 0- sinewave11freq + pich[3];
+      sinewaveptr[19] = 0- sinewave19freq + pich[3];
+      sinewaveptr[27] = 0- sinewave27freq + pich[3];
+      sinewaveptr[35] = 0- sinewave35freq + pich[3];
+      sinewaveptr[43] = 0- sinewave43freq + pich[3];
       break;
     case 3:
-      sinewaveptr[4] = 0;
-      sinewaveptr[12] = 0;
-      sinewaveptr[20] = 0;
-      sinewaveptr[28] = 0;
-      sinewaveptr[36] = 0;
-      sinewaveptr[44] = 0;
+      sinewaveptr[4] = 0- sinewave4freq + pich[4];
+      sinewaveptr[12] = 0- sinewave12freq + pich[4];
+      sinewaveptr[20] = 0- sinewave20freq + pich[4];
+      sinewaveptr[28] = 0- sinewave28freq + pich[4];
+      sinewaveptr[36] = 0- sinewave36freq + pich[4];
+      sinewaveptr[44] = 0- sinewave44freq + pich[4];
       break;
     case 4:
-      sinewaveptr[5] = 0;
-      sinewaveptr[13] = 0;
-      sinewaveptr[21] = 0;
-      sinewaveptr[29] = 0;
-      sinewaveptr[37] = 0;
-      sinewaveptr[45] = 0;
+      sinewaveptr[5] = 0- sinewave5freq + pich[5];
+      sinewaveptr[13] = 0- sinewave13freq + pich[5];
+      sinewaveptr[21] = 0- sinewave21freq + pich[5];
+      sinewaveptr[29] = 0- sinewave29freq + pich[5];
+      sinewaveptr[37] = 0- sinewave37freq + pich[5];
+      sinewaveptr[45] = 0- sinewave45freq + pich[5];
       break;
     case 5:
-      sinewaveptr[6] = 0;
-      sinewaveptr[14] = 0;
-      sinewaveptr[22] = 0;
-      sinewaveptr[30] = 0;
-      sinewaveptr[38] = 0;
-      sinewaveptr[46] = 0;
+      sinewaveptr[6] = 0- sinewave6freq + pich[6];
+      sinewaveptr[14] = 0- sinewave14freq + pich[6];
+      sinewaveptr[22] = 0- sinewave22freq + pich[6];
+      sinewaveptr[30] = 0- sinewave30freq + pich[6];
+      sinewaveptr[38] = 0- sinewave38freq + pich[6];
+      sinewaveptr[46] = 0- sinewave46freq + pich[6];
       break;
   }
 }

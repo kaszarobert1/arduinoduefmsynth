@@ -7,15 +7,15 @@ void sinusinit() {
 } 
 
 void fmsinusinit() {
-  Serial.print("Szinuszkicsi: \n");
+ // Serial.print("Szinuszkicsi: \n");
   for (int i = 0; i < FG_SIZE; i++)
   { 
     fmsinusfg[i] = (sin(i *  PI / 512) * 32767) ;
     
-    Serial.print(fmsinusfg[i]);
-    Serial.print(" ");
+  //  Serial.print(fmsinusfg[i]);
+   // Serial.print(" ");
   }
-  Serial.print("\n");
+ // Serial.print("\n");
 }
 
 void negyszoginit() {

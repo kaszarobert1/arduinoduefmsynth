@@ -2,7 +2,7 @@
 #define opattackinit(al, i, ar)(al*i*i/(ar*ar))
 
 void pichgorbeinit() {
-   
+  
   for (int i = 0; i < GORBE_SIZE; i++)
   {
     pichgorbe[i] = 0;
@@ -129,17 +129,31 @@ void opgorbekiir(uint16_t  opgorbe[], String nev) {
 }
 void maxreleaseset() {
   maxrelease0 = op1ar + op1d1r + op1d2r;
+  if (maxrelease<maxrelease0) {maxrelease= maxrelease0;}
   maxrelease1 = op2ar + op2d1r + op2d2r;
+  if (maxrelease<maxrelease1) {maxrelease= maxrelease1;}
   maxrelease2 = op3ar + op3d1r + op3d2r;
+  if (maxrelease<maxrelease2) {maxrelease= maxrelease2;}
   maxrelease3 = op4ar + op4d1r + op4d2r;
+  if (maxrelease<maxrelease3) {maxrelease= maxrelease3;}
   maxrelease4 = op5ar + op5d1r + op5d2r;
+  if (maxrelease<maxrelease4) {maxrelease= maxrelease4;}
   maxrelease5 = op6ar + op6d1r + op6d2r;
-  maxtime0 = maxrelease0 + 2*op1rr;
-  maxtime1 = maxrelease1 + 2*op2rr;
-  maxtime2 = maxrelease2 + 2*op3rr;
-  maxtime3 = maxrelease3 + 2*op4rr;
-  maxtime4 = maxrelease4 + 2*op5rr;
-  maxtime5 = maxrelease5 + 2*op6rr;
+  if (maxrelease<maxrelease5) {maxrelease= maxrelease5;}
+ 
+ 
+  maxtime0 = maxrelease + op1rr;+1;
+  if (maxtime<maxtime0) {maxtime= maxtime0;}
+  maxtime1 = maxrelease + op2rr+1;
+   if (maxtime<maxtime1) {maxtime= maxtime1;}
+  maxtime2 = maxrelease + op3rr+1;
+   if (maxtime<maxtime2) {maxtime= maxtime2;}
+  maxtime3 = maxrelease + op4rr+1;
+   if (maxtime<maxtime3) {maxtime= maxtime3;}
+  maxtime4 = maxrelease + op5rr+1;
+   if (maxtime<maxtime4) {maxtime= maxtime4;}
+  maxtime5 = maxrelease + op6rr+1;
+   if (maxtime<maxtime5) {maxtime= maxtime5;}
 }
 
 /*
