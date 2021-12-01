@@ -22,32 +22,61 @@ void serialEvent() {
         //  velocityByte = MIDI2.getData2();
         if (noteByte == oldnoteByte[0]) {
           gorbetime[0] = maxrelease0;
-          
+           oldnoteByte[0]=0;
+           generatornumber=0;
+        /*
+         Serial.print(0);
+         Serial.print("\n");
+         */ 
            
         }
         if (noteByte == oldnoteByte[1]) {
           gorbetime[1] = maxrelease1;
-           
+           oldnoteByte[1]=0;
+           generatornumber=1;
+         /*
+           Serial.print(1);
+         Serial.print("\n");
+         */
            
         }
         if (noteByte == oldnoteByte[2]) {
           gorbetime[2] = maxrelease2;
-        
+          oldnoteByte[2]=0;
+          generatornumber=2;
+          /*
+        Serial.print(2);
+         Serial.print("\n");
+         */
           
         }
         if (noteByte == oldnoteByte[3]) {
           gorbetime[3] = maxrelease3;
-         
-           
+          oldnoteByte[3]=0;
+          generatornumber=3;
+        /*
+         Serial.print(3);
+         Serial.print("\n");
+        */   
         }
         if (noteByte == oldnoteByte[4]) {
           gorbetime[4] = maxrelease4;
-          
+          oldnoteByte[4]=0;
+          generatornumber=4;
+         /*
+          Serial.print(4);
+         Serial.print("\n");
+         */
           
         }
         if (noteByte == oldnoteByte[5]) {
           gorbetime[5] = maxrelease5;
-       
+          oldnoteByte[5]=0;
+          generatornumber=5;
+          /*
+       Serial.print(5);
+         Serial.print("\n");
+         */
           
         }
          
@@ -76,6 +105,10 @@ void serialEvent() {
         velocityByte = MIDI2.getData2();
         //pichband(44, noteByte);
         parameterchange2(noteByte, velocityByte);
+        Serial.print(noteByte);
+        Serial.print(" ");
+        Serial.print(velocityByte);
+        Serial.print("\n");
         break;
       case midi:: Clock:
         sendmidiclock();
@@ -508,6 +541,37 @@ void parameterchange2(byte parameter, byte value) {
           }
           menuoldal = 13;
         }
+        if (value == 32)
+        {
+          switch (opmenuoldal)
+          {
+            case 1: pichop1 = 1;  break;
+            case 2: pichop2 = 1; break;
+            case 3: pichop3 = 1; break;
+            case 4: pichop4 = 1; break;
+            case 5: pichop5 = 1; break;
+            case 6: pichop6 = 1; break;
+          }
+         // menuoldal = 13;
+        }
+        if (value == 33)
+        {
+          switch (opmenuoldal)
+          {
+            case 1: pichop1 = 2; break;
+            case 2: pichop2 = 2; break;
+            case 3: pichop3 = 2; break;
+            case 4: pichop4 = 2; break;
+            case 5: pichop5 = 2; break;
+            case 6: pichop6 = 2; break;
+          }
+          //menuoldal = 13;
+        }
+        
+
+
+
+        
         if (value == 52)
         {
           if (opmenuoldal < 7)

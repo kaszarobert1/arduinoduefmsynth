@@ -716,12 +716,12 @@ void loop() {
           pich[6] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
-          pich[1] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-          pich[2] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-          pich[3] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-          pich[4] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-          pich[5] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-          pich[6] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          pich[1] = ~((pichgorbe[gorbetime[0]]) * picheglevel - 1);
+          pich[2] = ~((pichgorbe[gorbetime[1]]) * picheglevel - 1);
+          pich[3] = ~((pichgorbe[gorbetime[2]]) * picheglevel - 1);
+          pich[4] = ~((pichgorbe[gorbetime[3]]) * picheglevel - 1);
+          pich[5] = ~((pichgorbe[gorbetime[4]]) * picheglevel - 1);
+          pich[6] = ~((pichgorbe[gorbetime[5]]) * picheglevel - 1);
           break;
       }
       switch (pichop2) {
@@ -734,20 +734,20 @@ void loop() {
           pich[14] = 0;
           break;
         case 1:
-          pich[9] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-          pich[10] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-          pich[11] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-          pich[12] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-          pich[13] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-          pich[14] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          pich[9]  = ( pichgorbe[gorbetime[0]]) * picheglevel;
+          pich[10] = (pichgorbe[gorbetime[1]]) * picheglevel;
+          pich[11] = (pichgorbe[gorbetime[2]]) * picheglevel;
+          pich[12] = (pichgorbe[gorbetime[3]]) * picheglevel;
+          pich[13] = (pichgorbe[gorbetime[4]]) * picheglevel;
+          pich[14] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
-          pich[9] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-          pich[10] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-          pich[11] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-          pich[12] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-          pich[13] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-          pich[14] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          pich[9]  = ~((pichgorbe[gorbetime[0]]) * picheglevel - 1);
+          pich[10] = ~((pichgorbe[gorbetime[1]]) * picheglevel - 1);
+          pich[11] = ~((pichgorbe[gorbetime[2]]) * picheglevel - 1);
+          pich[12] = ~((pichgorbe[gorbetime[3]]) * picheglevel - 1);
+          pich[13] = ~((pichgorbe[gorbetime[4]]) * picheglevel - 1);
+          pich[14] = ~((pichgorbe[gorbetime[5]]) * picheglevel - 1);
           break;
       }
       switch (pichop3) {
@@ -760,20 +760,20 @@ void loop() {
           pich[22] = 0;
           break;
         case 1:
-          pich[17] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-          pich[18] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-          pich[19] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-          pich[20] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-          pich[21] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-          pich[22] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          pich[17] = (pichgorbe[gorbetime[0]]) * picheglevel;
+          pich[18] = (pichgorbe[gorbetime[1]]) * picheglevel;
+          pich[19] = (pichgorbe[gorbetime[2]]) * picheglevel;
+          pich[20] = (pichgorbe[gorbetime[3]]) * picheglevel;
+          pich[21] = (pichgorbe[gorbetime[4]]) * picheglevel;
+          pich[22] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
-          pich[17] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-          pich[18] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-          pich[19] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-          pich[20] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-          pich[21] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-          pich[22] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          pich[17] = ~((pichgorbe[gorbetime[0]]) * picheglevel - 1);
+          pich[18] = ~((pichgorbe[gorbetime[1]]) * picheglevel - 1);
+          pich[19] = ~((pichgorbe[gorbetime[2]]) * picheglevel - 1);
+          pich[20] = ~((pichgorbe[gorbetime[3]]) * picheglevel - 1);
+          pich[21] = ~((pichgorbe[gorbetime[4]]) * picheglevel - 1);
+          pich[22] = ~((pichgorbe[gorbetime[5]]) * picheglevel - 1);
           break;
       }
       switch (pichop4) {
@@ -786,20 +786,20 @@ void loop() {
           pich[30] = 0;
           break;
         case 1:
-          pich[25] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-          pich[26] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-          pich[27] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-          pich[28] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-          pich[29] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-          pich[30] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          pich[25] = (pichgorbe[gorbetime[0]]) * picheglevel;
+          pich[26] = (pichgorbe[gorbetime[1]]) * picheglevel;
+          pich[27] = (pichgorbe[gorbetime[2]]) * picheglevel;
+          pich[28] = (pichgorbe[gorbetime[3]]) * picheglevel;
+          pich[29] = (pichgorbe[gorbetime[4]]) * picheglevel;
+          pich[30] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
-          pich[25] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-          pich[26] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-          pich[27] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-          pich[28] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-          pich[29] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-          pich[30] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          pich[25] = ~((pichgorbe[gorbetime[0]]) * picheglevel - 1);
+          pich[26] = ~((pichgorbe[gorbetime[1]]) * picheglevel - 1);
+          pich[27] = ~((pichgorbe[gorbetime[2]]) * picheglevel - 1);
+          pich[28] = ~((pichgorbe[gorbetime[3]]) * picheglevel - 1);
+          pich[29] = ~((pichgorbe[gorbetime[4]]) * picheglevel - 1);
+          pich[30] = ~((pichgorbe[gorbetime[5]]) * picheglevel - 1);
           break;
       }
       switch (pichop5) {
@@ -812,20 +812,20 @@ void loop() {
           pich[38] = 0;
           break;
         case 1:
-          pich[33] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-          pich[34] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-          pich[35] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-          pich[36] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-          pich[37] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-          pich[38] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          pich[33] = (pichgorbe[gorbetime[0]]) * picheglevel;
+          pich[34] = (pichgorbe[gorbetime[1]]) * picheglevel;
+          pich[35] = (pichgorbe[gorbetime[2]]) * picheglevel;
+          pich[36] = (pichgorbe[gorbetime[3]]) * picheglevel;
+          pich[37] = (pichgorbe[gorbetime[4]]) * picheglevel;
+          pich[38] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
-          pich[33] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-          pich[34] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-          pich[35] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-          pich[36] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-          pich[37] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-          pich[38] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          pich[33] = ~((pichgorbe[gorbetime[0]]) * picheglevel - 1);
+          pich[34] = ~((pichgorbe[gorbetime[1]]) * picheglevel - 1);
+          pich[35] = ~((pichgorbe[gorbetime[2]]) * picheglevel - 1);
+          pich[36] = ~((pichgorbe[gorbetime[3]]) * picheglevel - 1);
+          pich[37] = ~((pichgorbe[gorbetime[4]]) * picheglevel - 1);
+          pich[38] = ~((pichgorbe[gorbetime[5]]) * picheglevel - 1);
           break;
       }
       switch (pichop6) {
@@ -838,20 +838,20 @@ void loop() {
           pich[46] = 0;
           break;
         case 1:
-          pich[41] = (pichgorbe[gorbetime[0]] - 50) * picheglevel;
-          pich[42] = (pichgorbe[gorbetime[1]] - 50) * picheglevel;
-          pich[43] = (pichgorbe[gorbetime[2]] - 50) * picheglevel;
-          pich[44] = (pichgorbe[gorbetime[3]] - 50) * picheglevel;
-          pich[45] = (pichgorbe[gorbetime[4]] - 50) * picheglevel;
-          pich[46] = (pichgorbe[gorbetime[5]] - 50) * picheglevel;
+          pich[41] = (pichgorbe[gorbetime[0]]) * picheglevel;
+          pich[42] = (pichgorbe[gorbetime[1]]) * picheglevel;
+          pich[43] = (pichgorbe[gorbetime[2]]) * picheglevel;
+          pich[44] = (pichgorbe[gorbetime[3]]) * picheglevel;
+          pich[45] = (pichgorbe[gorbetime[4]]) * picheglevel;
+          pich[46] = (pichgorbe[gorbetime[5]]) * picheglevel;
           break;
         case 2:
-          pich[41] = ~((pichgorbe[gorbetime[0]] - 50) * picheglevel - 1);
-          pich[42] = ~((pichgorbe[gorbetime[1]] - 50) * picheglevel - 1);
-          pich[43] = ~((pichgorbe[gorbetime[2]] - 50) * picheglevel - 1);
-          pich[44] = ~((pichgorbe[gorbetime[3]] - 50) * picheglevel - 1);
-          pich[45] = ~((pichgorbe[gorbetime[4]] - 50) * picheglevel - 1);
-          pich[46] = ~((pichgorbe[gorbetime[5]] - 50) * picheglevel - 1);
+          pich[41] = ~((pichgorbe[gorbetime[0]]) * picheglevel - 1);
+          pich[42] = ~((pichgorbe[gorbetime[1]]) * picheglevel - 1);
+          pich[43] = ~((pichgorbe[gorbetime[2]]) * picheglevel - 1);
+          pich[44] = ~((pichgorbe[gorbetime[3]]) * picheglevel - 1);
+          pich[45] = ~((pichgorbe[gorbetime[4]]) * picheglevel - 1);
+          pich[46] = ~((pichgorbe[gorbetime[5]]) * picheglevel - 1);
           break;
       }
     }
@@ -893,7 +893,7 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[1] + egyopgenB(sinewaveptr[9], op2level[0], lep2), op1level[0], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[17] + egyopgenD(sinewaveptr[25], op4level[0], lep4), op3level[0], lep3);
             }
-            
+
             if (gorbetime[1] > 0) {
               average = (old0[1] + old1[1]) >> 1;
               old1[1] = old0[1];
@@ -904,7 +904,7 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[2] + egyopgenB(sinewaveptr[10], op2level[1], lep2), op1level[1], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[18] + egyopgenD(sinewaveptr[26], op4level[1], lep4), op3level[1], lep3);
             }
-            
+
             if (gorbetime[2] > 0) {
               average = (old0[2] + old1[2]) >> 1;
               old1[2] = old0[2];
@@ -915,7 +915,7 @@ void loop() {
               //    bufferbe +=   egyopgenA(sinewaveptr[3] + egyopgenB(sinewaveptr[11], op2level[2], lep2), op1level[2], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[19] + egyopgenD(sinewaveptr[27], op4level[2], lep4), op3level[2], lep3);
             }
-            
+
             if (gorbetime[3] > 0) {
               average = (old0[3] + old1[3]) >> 1;
               old1[3] = old0[3];
@@ -926,7 +926,7 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[4] + egyopgenB(sinewaveptr[12], op2level[3], lep2), op1level[3], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[20] + egyopgenD(sinewaveptr[28], op4level[3], lep4), op3level[3], lep3);
             }
-            
+
             if (gorbetime[4] > 0) {
               average = (old0[4] + old1[4]) >> 1;
               old1[4] = old0[4];
@@ -937,19 +937,19 @@ void loop() {
               // bufferbe +=   egyopgenA(sinewaveptr[5] + egyopgenB(sinewaveptr[13], op2level[4], lep2), op1level[4], lep1);
               bufferbe +=   egyopgenC(sinewaveptr[21] + egyopgenD(sinewaveptr[29], op4level[4], lep4), op3level[4], lep3);
             }
-            
+
             if (gorbetime[5] > 0) {
               average = (old0[5] + old1[5]) >> 1;
               old1[5] = old0[5];
               // old0[5] = egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2);
               old0[5] =  egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14] + (average << feedback_level), op2level[5], lep2), op1level[5], lep1);
-               bufferbe +=  old0[5];
-            // bufferbe +=   egyopgenA(sinewaveptr[6] + old0[5], op1level[5], lep1);
-            // bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
-            bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep4), op3level[5], lep3);
+              bufferbe +=  old0[5];
+              // bufferbe +=   egyopgenA(sinewaveptr[6] + old0[5], op1level[5], lep1);
+              // bufferbe +=   egyopgenA(sinewaveptr[6] + egyopgenB(sinewaveptr[14], op2level[5], lep2), op1level[5], lep1);
+              bufferbe +=   egyopgenC(sinewaveptr[22] + egyopgenD(sinewaveptr[30], op4level[5], lep4), op3level[5], lep3);
             }
-            
-                       break;
+
+            break;
           //algoritmus3
           case 3:
             //this is fantastic!!!! very good quality clear sound!!!
