@@ -10,7 +10,7 @@ void fmsinusinit() {
  // Serial.print("Szinuszkicsi: \n");
   for (int i = 0; i < FG_SIZE; i++)
   { 
-    fmsinusfg[i] = (sin(i *  PI / 512) * 32767) ;
+    fmsinusfg[i] = (tan(i *  PI / 512) * 32767) ;
     
   //  Serial.print(fmsinusfg[i]);
    // Serial.print(" ");

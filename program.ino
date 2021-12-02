@@ -1160,7 +1160,7 @@ void program8() {
   op1rl = 0;
   op1rr = 127;
   op1veloc = 3;
-  op1volume = 82;  
+  op1volume = 48;  
   op1waveform = 1;
   op2al = 127;
   op2ar = 1;
@@ -1173,7 +1173,7 @@ void program8() {
   op2generatorfreq = 12;
   op2generatorfreqfix = 1 << 15;
   op2veloc = 3;
-  op2volume = 25;
+  op2volume = 72;
   op2waveform = 2;
   op3al = 127;
   op3ar = 1;
