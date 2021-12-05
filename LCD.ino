@@ -2668,7 +2668,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("GLO: CHRL >CHRT     ", "     " + String(lcdprint3(reverblevel)) + "  " + String(lcdprint3( choruslevel)) + "    ");
+      lcdkiir("GLO: CHRL >CHRT     ", "     " + String(lcdprint3(chorusfreq)) + "  " + String(lcdprint3( choruslevel)) + "    ");
       break;
     case 35:
       if (inc) {

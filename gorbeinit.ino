@@ -115,6 +115,7 @@ void tvagorbegenerator (uint16_t ar, uint16_t al, uint16_t d1l, uint16_t d1r, ui
   }
   opgorbe[0] = opgorbe[1];
 }
+
 void opgorbekiir(uint16_t  opgorbe[], String nev) {
   Serial.print("Opgorbe: ") ;
   Serial.print(nev);

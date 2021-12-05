@@ -10,8 +10,8 @@ void fmsinusinit() {
  // Serial.print("Szinuszkicsi: \n");
   for (int i = 0; i < FG_SIZE; i++)
   { 
-    fmsinusfg[i] = (tan(i *  PI / 512) * 32767) ;
-    
+  //  fmsinusfg[i] = (tan(i *  PI / 512) * 32767) ;
+   // fmsinusfg[i]=pianosample[i];
   //  Serial.print(fmsinusfg[i]);
    // Serial.print(" ");
   }
@@ -39,7 +39,7 @@ void negyszoginit() {
 }
 
 void fmnegyszoginit() {
-  int db = FG_SIZE;
+  /*int db = FG_SIZE;
   int fel = db / 2;
   int max = 1023;
   int min = -1023;
@@ -56,17 +56,19 @@ void fmnegyszoginit() {
   }
   //fmnegyszogfg[0] = 0;
   //negyszogfg[FG_SIZE] = 0;
+  */
 }
 
 
  void pwminit()
         {
+          /*
             for (int i = 0; i < FG_SIZE; i++)
             {
               pwmfg[i] = 2;
             }
            pwmfg[0] = -2;
-/*
+
             for (int i = 0; i < FG_SIZE; i++)
             {
      //           pwmfg[i] = 255;
@@ -88,14 +90,7 @@ void fureszoginit() {
 }
 
 void fmfureszoginit() {
-  int db = FG_SIZE;
-  int ertek = 0;
-  for (int i = 0; i < db; i++) {
-    ertek = i - (FG_SIZE / 2);
-    fureszfg[i] = ertek;
-  }
-  fmfureszfg[0] = 0;
-  fmfureszfg[FG_SIZE] = 0;
+ 
 }
 
 void haromszoginit() {
@@ -114,11 +109,12 @@ void haromszoginit() {
     if (i > haromnegyed) {
       ertek = i - db;
     }
-    haromszogfg[i] = ertek * 33;
+    haromszogfg[i] = ertek * 66;
   }
 }
 
 void fmharomszoginit() {
+ /*
   int db = FG_SIZE;
   for (int i = 0; i < db; i++) {
     int16_t haromnegyed = db / 4 * 3;
@@ -135,8 +131,9 @@ void fmharomszoginit() {
       ertek = i - db;
     }
     fmharomszogfg[i] = ertek;
+    */   
   }
-}
+
 
 void fmharomszoginitold() {
   int db = FG_SIZE;

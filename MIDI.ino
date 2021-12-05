@@ -11,7 +11,7 @@ void serialEvent() {
           generatornumber = 0;
         }
         gorbetime[generatornumber] = 0;
-        ptrnullaz(generatornumber);
+        ptrnullaz();
         wavefreq[generatornumber] = noteertek[noteByte];
         waveveloc[generatornumber]  = MIDI2.getData2();
         oldnoteByte[generatornumber] = noteByte;
@@ -187,7 +187,7 @@ void pichband() {
     else
     {
     op1generatorfreq = op1generatorfreqorig; op2generatorfreq = op2generatorfreqorig; op3generatorfreq = op3generatorfreqorig; op4generatorfreq = op4generatorfreqorig;
-    op5generatorfreq = op5generatorfreqorig; op6generatorfreq = op6generatorfreqorig;   
+    op5generatorfreq = op5generatorfreqorig; op6generatorfreq = op1generatorfreqorig;   
      }
     lastmodulation = modulation;
   } else {
@@ -389,9 +389,11 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case  9:
+    /*
       choruslevel = value;
       menuoldal = 34;
       menukiir();
+      */
       break;
     case 25:
 
@@ -438,13 +440,22 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 41:
+     /*
       szorzo = value;
       menuoldal = 17;
       menukiir();
+      */
+       chorusfreq = value;     
+      menuoldal = 34;
+      menukiir();
+      break;
+      case 42:
+     
       break;
     case 43:
-      released = value / 8;
-      menuoldal = 39;
+      choruslevel = value;
+  //    chorusfreq =value;
+      menuoldal = 34;
       menukiir();
       break;
     case 44:
@@ -935,6 +946,7 @@ void initprog() {
       Audio.begin(mintavetelifreqstereo, buffermeret);
 
   }
+}
   /*
     void parameterchange(byte parameter, byte value) {
     switch (parameter) {
@@ -1120,4 +1132,3 @@ void initprog() {
     }
     }
   */
-}
