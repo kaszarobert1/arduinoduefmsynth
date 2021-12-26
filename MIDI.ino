@@ -283,7 +283,7 @@ void parameterchange2(byte parameter, byte value) {
       break;
     case 1:
 
-      picheglevel = value << 8;
+      picheglevel = value << 6;
       break;
     case 5:
       switch (opmenuoldal) {
@@ -365,10 +365,22 @@ void parameterchange2(byte parameter, byte value) {
           //menuoldal = 13;
         }
 
+        if (value == 34)
+        {
+          switch (opmenuoldal)
+          {
+            case 1: pichop1 = 0; break;
+            case 2: pichop2 = 0; break;
+            case 3: pichop3 = 0; break;
+            case 4: pichop4 = 0; break;
+            case 5: pichop5 = 0; break;
+            case 6: pichop6 = 0; break;
+          }
+          //menuoldal = 13;
+        }
 
 
-
-
+        //opmenuincrement
         if (value == 52)
         {
           if (opmenuoldal < 7)
@@ -378,6 +390,42 @@ void parameterchange2(byte parameter, byte value) {
           {
             opmenuoldal = 1;
           }
+        }
+        //opmenudecrement
+         if (value == 53)
+        {
+          if (opmenuoldal > 1)
+          {
+            opmenuoldal--;
+          } else
+          {
+            opmenuoldal = 7;
+          }
+        }
+        //opmenuset
+         if (value == 54)
+        {
+           opmenuoldal=1;        
+        }
+         if (value == 55)
+        {
+           opmenuoldal=2;        
+        }
+         if (value == 56)
+        {
+           opmenuoldal=3;        
+        }
+         if (value == 57)
+        {
+           opmenuoldal=4;        
+        }
+         if (value == 58)
+        {
+           opmenuoldal=5;        
+        }
+         if (value == 59)
+        {
+           opmenuoldal=6;        
         }
 
       }
@@ -500,6 +548,11 @@ void parameterchange2(byte parameter, byte value) {
     case 102:
       modulation = value / 4;
       menuoldal = 40;
+      menukiir();
+      break;
+        case 103:
+      pichkezd = value;
+      menuoldal = 37;
       menukiir();
       break;
     case 104:
