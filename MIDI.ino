@@ -182,51 +182,58 @@ byte lastmodulation = 0;
 void pichband() {
   if (lastmodulation != modulation)
   {
-    if (modulation<21)
-    {op1volumeorig + op1volumeorig; op2volume = op2volumeorig; op3volume = op3volumeorig; op4volume = op4volumeorig; op5volume = op5volumeorig; op6volume = op6volumeorig;}
+    if (modulation < 21)
+    {
+      op1volumeorig + op1volumeorig;
+      op2volume = op2volumeorig;
+      op3volume = op3volumeorig;
+      op4volume = op4volumeorig;
+      op5volume = op5volumeorig;
+      op6volume = op6volumeorig;
+    }
     else
     {
-    op1generatorfreq = op1generatorfreqorig; op2generatorfreq = op2generatorfreqorig; op3generatorfreq = op3generatorfreqorig; op4generatorfreq = op4generatorfreqorig;
-    op5generatorfreq = op5generatorfreqorig; op6generatorfreq = op1generatorfreqorig;   
-     }
+      op1generatorfreq = op1generatorfreqorig; op2generatorfreq = op2generatorfreqorig; op3generatorfreq = op3generatorfreqorig; op4generatorfreq = op4generatorfreqorig;
+      op5generatorfreq = op5generatorfreqorig; op6generatorfreq = op1generatorfreqorig;
+    }
     lastmodulation = modulation;
   } else {
-    switch (modulation) {    
-    case 1:  op1volume = op1volumeorig + lfo2value;  break;
-    case 2:  op2volume = op2volumeorig + lfo2value;  break;
-    case 3:  op3volume = op3volumeorig + lfo2value;  break;
-    case 4:  op4volume = op4volumeorig + lfo2value;  break;
-    case 5:  op5volume = op5volumeorig + lfo2value;  break;
-    case 6:  op6volume = op6volumeorig + lfo2value;  break;
-    case 7:  op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig + lfo2value;  break;
-    case 8:  op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig - lfo2value;  break;
-    case 9:  op1volume = op1volumeorig + lfo2value; op3volume = op3volumeorig + lfo2value;  break;
-    case 10: op1volume = op1volumeorig + lfo2value; op3volume = op3volumeorig - lfo2value;  break;
-    case 11: op1volume = op1volumeorig + lfo2value; op4volume = op4volumeorig + lfo2value;  break;
-    case 12: op1volume = op1volumeorig + lfo2value; op4volume = op4volumeorig - lfo2value;  break;
-    case 13: op1volume = op1volumeorig + lfo2value; op5volume = op5volumeorig + lfo2value;  break;
-    case 14: op1volume = op1volumeorig + lfo2value; op5volume = op5volumeorig + lfo2value;  break;
-    case 15: op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig + lfo2value; op3volume = op3volumeorig + lfo2value; break;
-    case 16: op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig - lfo2value; op3volume = op3volumeorig + lfo2value; break;
-    case 17: op2volume = op2volumeorig + lfo2value; op4volume = op4volumeorig + lfo2value; op6volume = op6volumeorig + lfo2value; break;
-    case 18: op2volume = op2volumeorig + lfo2value; op4volume = op4volumeorig - lfo2value; op6volume = op6volumeorig + lfo2value; break;
-    case 19: op2volume = op2volumeorig + lfo2value; op3volume = op3volumeorig + lfo2value; op5volume = op5volumeorig + lfo2value; break;
-    case 20: op2volume = op2volumeorig + lfo2value; op3volume = op3volumeorig - lfo2value; op5volume = op5volumeorig + lfo2value; break;
-    case 21: op1generatorfreq = op1generatorfreqorig + lfo2value; break;
-    case 22: op2generatorfreq = op2generatorfreqorig + lfo2value; break;
-    case 23: op3generatorfreq = op3generatorfreqorig + lfo2value; break;
-    case 24: op4generatorfreq = op4generatorfreqorig + lfo2value; break;
-    case 25: op5generatorfreq = op5generatorfreqorig + lfo2value; break;
-    case 26: op6generatorfreq = op6generatorfreqorig + lfo2value; break;
-    case 27: op1generatorfreq = op1generatorfreqorig + lfo2value; op2generatorfreq = op2generatorfreqorig + lfo2value; break;
-    case 28: op1generatorfreq = op1generatorfreqorig + lfo2value; op2generatorfreq = op2generatorfreqorig - lfo2value; break;
-    case 29: op1generatorfreq = op1generatorfreqorig + lfo2value; op3generatorfreq = op3generatorfreqorig + lfo2value; break;
-    case 30: op1generatorfreq = op1generatorfreqorig + lfo2value; op3generatorfreq = op3generatorfreqorig - lfo2value; break;
-    case 31: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig + lfo2value; break;
-    case 32: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig - lfo2value; break;
-    case 33: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig + lfo2value; op3generatorfreq = op3generatorfreqorig + lfo2value; break;
-    case 34: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig - lfo2value; op3generatorfreq = op3generatorfreqorig + lfo2value; break;
-        
+    switch (modulation) {
+      case 1:  op1volume = op1volumeorig + lfo2value;  break;
+      case 2:  op2volume = op2volumeorig + lfo2value;  break;
+      case 3:  op3volume = op3volumeorig + lfo2value;  break;
+      case 4:  op4volume = op4volumeorig + lfo2value;  break;
+      case 5:  op5volume = op5volumeorig + lfo2value;  break;
+      case 6:  op6volume = op6volumeorig + lfo2value;  break;
+      case 7:  op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig + lfo2value;  break;
+      case 8:  op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig - lfo2value;  break;
+      case 9:  op1volume = op1volumeorig + lfo2value; op3volume = op3volumeorig + lfo2value;  break;
+      case 10: op1volume = op1volumeorig + lfo2value; op3volume = op3volumeorig - lfo2value;  break;
+      case 11: op1volume = op1volumeorig + lfo2value; op4volume = op4volumeorig + lfo2value;  break;
+      case 12: op1volume = op1volumeorig + lfo2value; op4volume = op4volumeorig - lfo2value;  break;
+      case 13: op1volume = op1volumeorig + lfo2value; op5volume = op5volumeorig + lfo2value;  break;
+      case 14: op1volume = op1volumeorig + lfo2value; op5volume = op5volumeorig + lfo2value;  break;
+      case 15: op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig + lfo2value; op3volume = op3volumeorig + lfo2value; break;
+      case 16: op1volume = op1volumeorig + lfo2value; op2volume = op2volumeorig - lfo2value; op3volume = op3volumeorig + lfo2value; break;
+      case 17: op2volume = op2volumeorig + lfo2value; op4volume = op4volumeorig + lfo2value; op6volume = op6volumeorig + lfo2value; break;
+      case 18: op2volume = op2volumeorig + lfo2value; op4volume = op4volumeorig - lfo2value; op6volume = op6volumeorig + lfo2value; break;
+      case 19: op2volume = op2volumeorig + lfo2value; op3volume = op3volumeorig + lfo2value; op5volume = op5volumeorig + lfo2value; break;
+      case 20: op2volume = op2volumeorig + lfo2value; op3volume = op3volumeorig - lfo2value; op5volume = op5volumeorig + lfo2value; break;
+      case 21: op1generatorfreq = op1generatorfreqorig + lfo2value; break;
+      case 22: op2generatorfreq = op2generatorfreqorig + lfo2value; break;
+      case 23: op3generatorfreq = op3generatorfreqorig + lfo2value; break;
+      case 24: op4generatorfreq = op4generatorfreqorig + lfo2value; break;
+      case 25: op5generatorfreq = op5generatorfreqorig + lfo2value; break;
+      case 26: op6generatorfreq = op6generatorfreqorig + lfo2value; break;
+      case 27: op1generatorfreq = op1generatorfreqorig + lfo2value; op2generatorfreq = op2generatorfreqorig + lfo2value; break;
+      case 28: op1generatorfreq = op1generatorfreqorig + lfo2value; op2generatorfreq = op2generatorfreqorig - lfo2value; break;
+      case 29: op1generatorfreq = op1generatorfreqorig + lfo2value; op3generatorfreq = op3generatorfreqorig + lfo2value; break;
+      case 30: op1generatorfreq = op1generatorfreqorig + lfo2value; op3generatorfreq = op3generatorfreqorig - lfo2value; break;
+      case 31: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig + lfo2value; break;
+      case 32: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig - lfo2value; break;
+      case 33: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig + lfo2value; op3generatorfreq = op3generatorfreqorig + lfo2value; break;
+      case 34: op1generatorfreq = op1generatorfreqorig + lfo2value; op4generatorfreq = op4generatorfreqorig - lfo2value; op3generatorfreq = op3generatorfreqorig + lfo2value; break;
+
     }
     //hangokinit();
   }
@@ -282,18 +289,42 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 1:
-
-      picheglevel = value << 6;
+      picheglevel = value << 8;
       break;
     case 5:
       switch (opmenuoldal) {
-        case 1: op1volumeorig = value;  break;
-        case 2: op2volumeorig = value; break;
-        case 3: op3volumeorig = value; break;
-        case 4: op4volumeorig = value; break;
-        case 5: op5volumeorig = value; break;
-        case 6: op6volumeorig = value; break;
+        case 1: op1volumeorig = value; if (op1volumeorig == 0) {
+            op1 = false;
+          } else {
+            op1 = true;
+          } break;
+        case 2: op2volumeorig = value; if (op2volumeorig == 0) {
+            op2 = false;
+          } else {
+            op2 = true;
+          } break;
+        case 3: op3volumeorig = value; if (op3volumeorig == 0) {
+            op3 = false;
+          } else {
+            op3 = true;
+          } break;
+        case 4: op4volumeorig = value; if (op4volumeorig == 0) {
+            op4 = false;
+          } else {
+            op4 = true;
+          } break;
+        case 5: op5volumeorig = value; if (op5volumeorig == 0) {
+            op5 = false;
+          } else {
+            op5 = true;
+          } break;
+        case 6: op6volumeorig = value; if (op6volumeorig == 0) {
+            op6 = false;
+          } else {
+            op6 = true;
+          } break;
       }
+      ops = String(op1) + String(op2) + String(op3) + String(op4) + String(op5) + String(op6);
       menuoldal = 11;
       menukiir();
       break;
@@ -349,7 +380,7 @@ void parameterchange2(byte parameter, byte value) {
             case 5: pichop5 = 1; break;
             case 6: pichop6 = 1; break;
           }
-          // menuoldal = 13;
+           menuoldal = 23;
         }
         if (value == 33)
         {
@@ -362,7 +393,7 @@ void parameterchange2(byte parameter, byte value) {
             case 5: pichop5 = 2; break;
             case 6: pichop6 = 2; break;
           }
-          //menuoldal = 13;
+          menuoldal = 23;
         }
 
         if (value == 34)
@@ -376,7 +407,7 @@ void parameterchange2(byte parameter, byte value) {
             case 5: pichop5 = 0; break;
             case 6: pichop6 = 0; break;
           }
-          //menuoldal = 13;
+          menuoldal = 23;
         }
 
 
@@ -392,7 +423,7 @@ void parameterchange2(byte parameter, byte value) {
           }
         }
         //opmenudecrement
-         if (value == 53)
+        if (value == 53)
         {
           if (opmenuoldal > 1)
           {
@@ -403,29 +434,29 @@ void parameterchange2(byte parameter, byte value) {
           }
         }
         //opmenuset
-         if (value == 54)
+        if (value == 54)
         {
-           opmenuoldal=1;        
+          opmenuoldal = 1;
         }
-         if (value == 55)
+        if (value == 55)
         {
-           opmenuoldal=2;        
+          opmenuoldal = 2;
         }
-         if (value == 56)
+        if (value == 56)
         {
-           opmenuoldal=3;        
+          opmenuoldal = 3;
         }
-         if (value == 57)
+        if (value == 57)
         {
-           opmenuoldal=4;        
+          opmenuoldal = 4;
         }
-         if (value == 58)
+        if (value == 58)
         {
-           opmenuoldal=5;        
+          opmenuoldal = 5;
         }
-         if (value == 59)
+        if (value == 59)
         {
-           opmenuoldal=6;        
+          opmenuoldal = 6;
         }
 
       }
@@ -437,10 +468,10 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case  9:
-    /*
-      choruslevel = value;
-      menuoldal = 34;
-      menukiir();
+      /*
+        choruslevel = value;
+        menuoldal = 34;
+        menukiir();
       */
       break;
     case 25:
@@ -488,21 +519,18 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 41:
-     /*
+      chorusfreq = value;
+      menuoldal = 35;
+      menukiir();
+      break;
+    case 42:
       szorzo = value;
       menuoldal = 17;
       menukiir();
-      */
-       chorusfreq = value;     
-      menuoldal = 34;
-      menukiir();
-      break;
-      case 42:
-     
       break;
     case 43:
       choruslevel = value;
-  //    chorusfreq =value;
+      //    chorusfreq =value;
       menuoldal = 34;
       menukiir();
       break;
@@ -550,9 +578,9 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 40;
       menukiir();
       break;
-        case 103:
+    case 103:
       pichkezd = value;
-      menuoldal = 37;
+      menuoldal = 36;
       menukiir();
       break;
     case 104:
@@ -566,7 +594,7 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 106:
-      picheglevel = value * 4096;
+      picheglevel = value << 10;
       menuoldal = 21;
       menukiir();
       break;
@@ -584,9 +612,8 @@ void parameterchange2(byte parameter, byte value) {
         case 5: op5al = value; break;
         case 6: op6al = value; break;
         case 7: pichal = value; break;
-
       }
-      menuoldal = 2;
+      menuoldal = 3;
       opgorbeinittry();
       break;
     case 109:
@@ -625,7 +652,7 @@ void parameterchange2(byte parameter, byte value) {
         case 6: op6rl = value; break;
         case 7: pichrl = value; break;
       }
-      menuoldal = 8;
+      menuoldal = 9;
       opgorbeinittry();
       break;
     case 112:
@@ -640,6 +667,18 @@ void parameterchange2(byte parameter, byte value) {
       }
       menukiir();
       break;
+    case 113:
+      switch (opmenuoldal) {
+        case 1: op1detune = value << 12; break;
+        case 2: op2detune = value << 12;  break;
+        case 3: op3detune = value << 12; break;
+        case 4: op4detune = value << 12;  break;
+        case 5: op5detune = value << 12;  break;
+        case 6: op6detune = value << 12;  break;
+      }
+      menuoldal = 22; //!!!!
+      menukiir();
+      break;
     case 114:
       switch (opmenuoldal) {
         case 1: op1ar = value * 4; break;
@@ -650,7 +689,7 @@ void parameterchange2(byte parameter, byte value) {
         case 6: op6ar = value * 4; break;
         case 7: pichar = value * 4; break;
       }
-      menuoldal = 3;
+      menuoldal = 2;
       opgorbeinittry();
       break;
     case 115:
@@ -689,7 +728,7 @@ void parameterchange2(byte parameter, byte value) {
         case 6: op6rr = value * 4; break;
         case 7: pichrr = value * 4; break;
       }
-      menuoldal = 9;
+      menuoldal = 8;
       opgorbeinittry();
       break;
     case 126:
@@ -1000,188 +1039,188 @@ void initprog() {
 
   }
 }
-  /*
-    void parameterchange(byte parameter, byte value) {
-    switch (parameter) {
-    case 0: op1waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 1: op2waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 2: op3waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 3: op4waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 4: op1al = value;  lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 5: op1ar = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 6: op1d1l = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 7: op1d1r = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 8: op1d2l = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 9: op1d2r = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 10: op1rl = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 11: op1rr = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
-    case 12: op2al = value; op2gorbeinit(); break;
-    case 13: op2ar = value; op2gorbeinit(); break;
-    case 14: op2d1l = value; op2gorbeinit(); break;
-    case 15: op2d1r = value; op2gorbeinit(); break;
-    case 16: op2d2l = value; op2gorbeinit(); break;
-    case 17: op2d2r = value; op2gorbeinit(); break;
-    case 18: op2rl = value; op2gorbeinit(); break;
-    case 19: op2rr = value; op2gorbeinit(); break;
-    case 20: op3al = value; op3gorbeinit(); break;
-    case 21: op3ar = value; op3gorbeinit(); break;
-    case 22: op3d1l = value; op3gorbeinit(); break;
-    case 23: op3d1r = value; op3gorbeinit(); break;
-    case 24: op3d2l = value; op3gorbeinit(); break;
-    case 25: op3d2r = value; op3gorbeinit(); break;
-    case 26: op3rl = value; op3gorbeinit(); break;
-    case 27: op3rr = value; op3gorbeinit(); break;
-    case 28: op4al = value; op4gorbeinit(); break;
-    case 29: op4ar = value; op4gorbeinit(); break;
-    case 30: op4d1l = value; op4gorbeinit(); break;
-    case 31: op4d1r = value; op4gorbeinit(); break;
-    case 32: op4d2l = value; op4gorbeinit(); break;
-    case 33: op4d2r = value; op4gorbeinit(); break;
-    case 34: op4rl = value; op4gorbeinit(); break;
-    case 35: op4rr = value; op4gorbeinit(); break;
-    case 36: pichkezd = value; pichgorbeinit(); break;
-    case 37: pichal = value; pichgorbeinit(); break;
-    case 38: pichar = value; pichgorbeinit(); break;
-    case 39: pichd1l = value; pichgorbeinit(); break;
-    case 40: pichd1r = value; pichgorbeinit(); break;
-    case 41: pichd2l = value; pichgorbeinit(); break;
-    case 42: pichd2r = value; pichgorbeinit(); break;
-    case 43: pichrl = value; pichgorbeinit(); break;
-    case 44: pichrr = value; pichgorbeinit(); break;
-    case 45: op1volume = value; break;
-    case 46: op2volume = value; break;
-    case 47: op3volume = value; break;
-    case 48: op4volume = value; break;
-    case 49: frame = value; break;
-    case 50: picheglevel = value * 200; break;
-    case 51: fixfreqstep = value * 40; break;
-    case 52: modulation = value; break;
-    case 53: op1generatorfreq = value; break;
-    case 54: op2generatorfreq = value; break;
-    case 55: op3generatorfreq = value; break;
-    case 56: op4generatorfreq = value;  break;
-    case 57: szorzo = value; hangokinit();  break;
-    case 58: pichop1 = value; break;
-    case 59: pichop2 = value; break;
-    case 60: pichop3 = value;  break;
-    case 61: pichop4 = value;  break;
-    case 62: if (value == 1) {
-        notefixedop1 = true;
-      } else {
-        notefixedop1 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 63: if (value == 1) {
-        notefixedop2 = true;
-      } else {
-        notefixedop2 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 64: if (value == 1) {
-        notefixedop3 = true;
-      } else {
-        notefixedop3 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 65: if (value == 1) {
-        notefixedop4 = true;
-      } else {
-        notefixedop4 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 66: if (value == 1) {
-        notefixedop5 = true;
-      } else {
-        notefixedop5 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-    case 67: if (value == 1) {
-        notefixedop6 = true;
-      } else {
-        notefixedop6 = false;
-      }
-      lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
-      break;
-
-    case 68: op1generatorfreqfix = value * 40000; break;
-    case 69: op2generatorfreqfix = value * 40000; break;
-    case 70: op3generatorfreqfix = value * 40000; break;
-    case 71: op4generatorfreqfix = value * 40000;  break;
-    case 72: pichop5 = value;  break;
-    case 73: pichop6 = value;  break;
-    case 74: op5generatorfreq = value; break;
-    case 75: op6generatorfreq = value;  break;
-    case 76: op5volume = value; break;
-    case 77: op6volume = value; break;
-    case 78: op5al = value; op5gorbeinit(); break;
-    case 79: op5ar = value; op5gorbeinit(); break;
-    case 80: op5d1l = value; op5gorbeinit(); break;
-    case 81: op5d1r = value; op5gorbeinit(); break;
-    case 82: op5d2l = value; op5gorbeinit(); break;
-    case 83: op5d2r = value; op5gorbeinit(); break;
-    case 84: op5rl = value; op5gorbeinit(); break;
-    case 85: op5rr = value; op5gorbeinit(); break;
-    case 86: op6al = value; op6gorbeinit(); break;
-    case 87: op6ar = value; op6gorbeinit(); break;
-    case 88: op6d1l = value; op6gorbeinit(); break;
-    case 89: op6d1r = value; op6gorbeinit(); break;
-    case 90: op6d2l = value; op6gorbeinit(); break;
-    case 91: op6d2r = value; op6gorbeinit(); break;
-    case 92: op6rl = value; op6gorbeinit(); break;
-    case 93: op6rr = value; op6gorbeinit(); break;
-    case 94: op5waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 95: op6waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
-    case 96: op5generatorfreqfix = value * 40000; break;
-    case 97: op6generatorfreqfix = value * 40000;  break;
-    case 98: op5volume = value; break;
-    case 99: op6volume = value; break;
-    case 100: op1veloc = value; break;
-    case 101: op2veloc = value; break;
-    case 102: op3veloc = value; break;
-    case 103: op4veloc = value; break;
-    case 104: op5veloc = value; break;
-    case 105: op6veloc = value; break;
-    case 106: if (value == 1) {
-        pachname = "";
-      } else {
-        char myChar = value;
-        pachname += myChar;
-
-
-      }
-      lcdkiir(pachname, generatorkiir());
-      audiorestart();
-      break;
-    case 107: reverbtime = value * 26; break;
-    case 108: reverblevel = value; break;
-    case 109: level = value; break;
-    case 110: volume = value * 9; break;
-    case 111: alg = value; break;
-    case 112: revalg = value; break;
-    case 113: choruslevel = value; break;
-    case 114: chorusalg = value; break;
-    case 115: chorustime = value; break;
-    case 116:  break;
-    case 117: break;
-    //    case 118: oplfo = value; break;
-    case 119: oplfo2max = value; break;
-    case 120: oplfo4max = value; break;
-    case 121: oplfo6max = value; break;
-    case 122: lfo2freq = value; break;
-    case 123: freq1 = value * 100;  break;
-    case 124: freq2 = value * 100;  break;
-    case 125: break;
-    case 126:
-      if (value == 1) {
-        sendparameter();
-      }
-      break;
-    case 127: break;
-      //MIDI!!!
+/*
+  void parameterchange(byte parameter, byte value) {
+  switch (parameter) {
+  case 0: op1waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 1: op2waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 2: op3waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 3: op4waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 4: op1al = value;  lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 5: op1ar = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 6: op1d1l = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 7: op1d1r = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 8: op1d2l = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 9: op1d2r = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 10: op1rl = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 11: op1rr = value; lcdkiir(pachname, op1kiir()); op1gorbeinit(); audiorestart(); break;
+  case 12: op2al = value; op2gorbeinit(); break;
+  case 13: op2ar = value; op2gorbeinit(); break;
+  case 14: op2d1l = value; op2gorbeinit(); break;
+  case 15: op2d1r = value; op2gorbeinit(); break;
+  case 16: op2d2l = value; op2gorbeinit(); break;
+  case 17: op2d2r = value; op2gorbeinit(); break;
+  case 18: op2rl = value; op2gorbeinit(); break;
+  case 19: op2rr = value; op2gorbeinit(); break;
+  case 20: op3al = value; op3gorbeinit(); break;
+  case 21: op3ar = value; op3gorbeinit(); break;
+  case 22: op3d1l = value; op3gorbeinit(); break;
+  case 23: op3d1r = value; op3gorbeinit(); break;
+  case 24: op3d2l = value; op3gorbeinit(); break;
+  case 25: op3d2r = value; op3gorbeinit(); break;
+  case 26: op3rl = value; op3gorbeinit(); break;
+  case 27: op3rr = value; op3gorbeinit(); break;
+  case 28: op4al = value; op4gorbeinit(); break;
+  case 29: op4ar = value; op4gorbeinit(); break;
+  case 30: op4d1l = value; op4gorbeinit(); break;
+  case 31: op4d1r = value; op4gorbeinit(); break;
+  case 32: op4d2l = value; op4gorbeinit(); break;
+  case 33: op4d2r = value; op4gorbeinit(); break;
+  case 34: op4rl = value; op4gorbeinit(); break;
+  case 35: op4rr = value; op4gorbeinit(); break;
+  case 36: pichkezd = value; pichgorbeinit(); break;
+  case 37: pichal = value; pichgorbeinit(); break;
+  case 38: pichar = value; pichgorbeinit(); break;
+  case 39: pichd1l = value; pichgorbeinit(); break;
+  case 40: pichd1r = value; pichgorbeinit(); break;
+  case 41: pichd2l = value; pichgorbeinit(); break;
+  case 42: pichd2r = value; pichgorbeinit(); break;
+  case 43: pichrl = value; pichgorbeinit(); break;
+  case 44: pichrr = value; pichgorbeinit(); break;
+  case 45: op1volume = value; break;
+  case 46: op2volume = value; break;
+  case 47: op3volume = value; break;
+  case 48: op4volume = value; break;
+  case 49: frame = value; break;
+  case 50: picheglevel = value * 200; break;
+  case 51: fixfreqstep = value * 40; break;
+  case 52: modulation = value; break;
+  case 53: op1generatorfreq = value; break;
+  case 54: op2generatorfreq = value; break;
+  case 55: op3generatorfreq = value; break;
+  case 56: op4generatorfreq = value;  break;
+  case 57: szorzo = value; hangokinit();  break;
+  case 58: pichop1 = value; break;
+  case 59: pichop2 = value; break;
+  case 60: pichop3 = value;  break;
+  case 61: pichop4 = value;  break;
+  case 62: if (value == 1) {
+      notefixedop1 = true;
+    } else {
+      notefixedop1 = false;
     }
+    lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
+    break;
+  case 63: if (value == 1) {
+      notefixedop2 = true;
+    } else {
+      notefixedop2 = false;
     }
-  */
+    lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
+    break;
+  case 64: if (value == 1) {
+      notefixedop3 = true;
+    } else {
+      notefixedop3 = false;
+    }
+    lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
+    break;
+  case 65: if (value == 1) {
+      notefixedop4 = true;
+    } else {
+      notefixedop4 = false;
+    }
+    lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 66: if (value == 1) {
+      notefixedop5 = true;
+    } else {
+      notefixedop5 = false;
+    }
+    lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
+    break;
+  case 67: if (value == 1) {
+      notefixedop6 = true;
+    } else {
+      notefixedop6 = false;
+    }
+    lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart();
+    break;
+
+  case 68: op1generatorfreqfix = value * 40000; break;
+  case 69: op2generatorfreqfix = value * 40000; break;
+  case 70: op3generatorfreqfix = value * 40000; break;
+  case 71: op4generatorfreqfix = value * 40000;  break;
+  case 72: pichop5 = value;  break;
+  case 73: pichop6 = value;  break;
+  case 74: op5generatorfreq = value; break;
+  case 75: op6generatorfreq = value;  break;
+  case 76: op5volume = value; break;
+  case 77: op6volume = value; break;
+  case 78: op5al = value; op5gorbeinit(); break;
+  case 79: op5ar = value; op5gorbeinit(); break;
+  case 80: op5d1l = value; op5gorbeinit(); break;
+  case 81: op5d1r = value; op5gorbeinit(); break;
+  case 82: op5d2l = value; op5gorbeinit(); break;
+  case 83: op5d2r = value; op5gorbeinit(); break;
+  case 84: op5rl = value; op5gorbeinit(); break;
+  case 85: op5rr = value; op5gorbeinit(); break;
+  case 86: op6al = value; op6gorbeinit(); break;
+  case 87: op6ar = value; op6gorbeinit(); break;
+  case 88: op6d1l = value; op6gorbeinit(); break;
+  case 89: op6d1r = value; op6gorbeinit(); break;
+  case 90: op6d2l = value; op6gorbeinit(); break;
+  case 91: op6d2r = value; op6gorbeinit(); break;
+  case 92: op6rl = value; op6gorbeinit(); break;
+  case 93: op6rr = value; op6gorbeinit(); break;
+  case 94: op5waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 95: op6waveform = value; lcdkiir(pachname, generatorkiir()); generatorinit(op1waveform, op2waveform, op3waveform, op4waveform, op5waveform, op6waveform); audiorestart(); break;
+  case 96: op5generatorfreqfix = value * 40000; break;
+  case 97: op6generatorfreqfix = value * 40000;  break;
+  case 98: op5volume = value; break;
+  case 99: op6volume = value; break;
+  case 100: op1veloc = value; break;
+  case 101: op2veloc = value; break;
+  case 102: op3veloc = value; break;
+  case 103: op4veloc = value; break;
+  case 104: op5veloc = value; break;
+  case 105: op6veloc = value; break;
+  case 106: if (value == 1) {
+      pachname = "";
+    } else {
+      char myChar = value;
+      pachname += myChar;
+
+
+    }
+    lcdkiir(pachname, generatorkiir());
+    audiorestart();
+    break;
+  case 107: reverbtime = value * 26; break;
+  case 108: reverblevel = value; break;
+  case 109: level = value; break;
+  case 110: volume = value * 9; break;
+  case 111: alg = value; break;
+  case 112: revalg = value; break;
+  case 113: choruslevel = value; break;
+  case 114: chorusalg = value; break;
+  case 115: chorustime = value; break;
+  case 116:  break;
+  case 117: break;
+  //    case 118: oplfo = value; break;
+  case 119: oplfo2max = value; break;
+  case 120: oplfo4max = value; break;
+  case 121: oplfo6max = value; break;
+  case 122: lfo2freq = value; break;
+  case 123: freq1 = value * 100;  break;
+  case 124: freq2 = value * 100;  break;
+  case 125: break;
+  case 126:
+    if (value == 1) {
+      sendparameter();
+    }
+    break;
+  case 127: break;
+    //MIDI!!!
+  }
+  }
+*/

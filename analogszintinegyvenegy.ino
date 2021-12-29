@@ -139,6 +139,13 @@ byte  op5waveform = 1;
 byte  op4waveform = 1;
 byte  op6waveform = 1;
 byte szorzo = 10;
+bool op1=true;
+bool op2=true;
+bool op3=true;
+bool op4=true;
+bool op5=true;
+bool op6=true;
+String ops="111111";
 uint16_t op1al = 40;
 uint16_t op1ar = 1;
 uint16_t op1d1l = 20;
@@ -232,6 +239,12 @@ byte op5generatorfreq;
 byte op5generatorfreqorig;
 byte op6generatorfreq;
 byte op6generatorfreqorig;
+int32_t op1detune=0;
+int32_t op2detune=0;
+int32_t op3detune=0;
+int32_t op4detune=0;
+int32_t op5detune=0;
+int32_t op6detune=0;
 String pachname;
 uint16_t frame = 8;
 byte modulation = 0;
@@ -292,7 +305,6 @@ byte oplfo = 1;
 byte lfo1max = 10;
 byte lfo1min = 0;
 byte lfo1step = 2;
-
 byte invlfo1volume = 127;
 bool lfo1fel = true;
 byte oplfo2max = 127;
@@ -719,12 +731,12 @@ void loop() {
       //picheg
       switch (pichop1) {
         case 0:
-          pich[1] = 0;
-          pich[2] = 0;
-          pich[3] = 0;
-          pich[4] = 0;
-          pich[5] = 0;
-          pich[6] = 0;
+          pich[1] = op1detune;//detune??? and before calculatid proginit!
+          pich[2] = op1detune;
+          pich[3] = op1detune;
+          pich[4] = op1detune;
+          pich[5] = op1detune;
+          pich[6] = op1detune;
           break;
         case 1:
           pich[1] = (pichgorbe[gorbetime[0]]) * picheglevel;
@@ -745,12 +757,12 @@ void loop() {
       }
       switch (pichop2) {
         case 0:
-          pich[9] = 0;
-          pich[10] = 0;
-          pich[11] = 0;
-          pich[12] = 0;
-          pich[13] = 0;
-          pich[14] = 0;
+          pich[9] = op2detune;
+          pich[10] = op2detune;
+          pich[11] = op2detune;
+          pich[12] = op2detune;
+          pich[13] = op2detune;
+          pich[14] = op2detune;
           break;
         case 1:
           pich[9]  = ( pichgorbe[gorbetime[0]]) * picheglevel;
@@ -771,12 +783,12 @@ void loop() {
       }
       switch (pichop3) {
         case 0:
-          pich[17] = 0;
-          pich[18] = 0;
-          pich[19] = 0;
-          pich[20] = 0;
-          pich[21] = 0;
-          pich[22] = 0;
+          pich[17] = op3detune;
+          pich[18] = op3detune;
+          pich[19] = op3detune;
+          pich[20] = op3detune;
+          pich[21] = op3detune;
+          pich[22] = op3detune;
           break;
         case 1:
           pich[17] = (pichgorbe[gorbetime[0]]) * picheglevel;
@@ -797,12 +809,12 @@ void loop() {
       }
       switch (pichop4) {
         case 0:
-          pich[25] = 0;
-          pich[26] = 0;
-          pich[27] = 0;
-          pich[28] = 0;
-          pich[29] = 0;
-          pich[30] = 0;
+          pich[25] = op4detune;
+          pich[26] = op4detune;
+          pich[27] = op4detune;
+          pich[28] = op4detune;
+          pich[29] = op4detune;
+          pich[30] = op4detune;
           break;
         case 1:
           pich[25] = (pichgorbe[gorbetime[0]]) * picheglevel;
@@ -823,12 +835,12 @@ void loop() {
       }
       switch (pichop5) {
         case 0:
-          pich[33] = 0;
-          pich[34] = 0;
-          pich[35] = 0;
-          pich[36] = 0;
-          pich[37] = 0;
-          pich[38] = 0;
+          pich[33] = op5detune;
+          pich[34] = op5detune;
+          pich[35] = op5detune;
+          pich[36] = op5detune;
+          pich[37] = op5detune;
+          pich[38] = op5detune;
           break;
         case 1:
           pich[33] = (pichgorbe[gorbetime[0]]) * picheglevel;
@@ -849,12 +861,12 @@ void loop() {
       }
       switch (pichop6) {
         case 0:
-          pich[41] = 0;
-          pich[42] = 0;
-          pich[43] = 0;
-          pich[44] = 0;
-          pich[45] = 0;
-          pich[46] = 0;
+          pich[41] = op6detune;
+          pich[42] = op6detune;
+          pich[43] = op6detune;
+          pich[44] = op6detune;
+          pich[45] = op6detune;
+          pich[46] = op6detune;
           break;
         case 1:
           pich[41] = (pichgorbe[gorbetime[0]]) * picheglevel;
