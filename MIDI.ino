@@ -24,54 +24,31 @@ void serialEvent() {
           gorbetime[0] = maxrelease;
           oldnoteByte[0] = 0;
           //   generatornumber=0;
-
-
-
-
         }
         if (noteByte == oldnoteByte[1]) {
           gorbetime[1] = maxrelease;
           oldnoteByte[1] = 0;
           //  generatornumber=1;
-
-
-
-
         }
         if (noteByte == oldnoteByte[2]) {
           gorbetime[2] = maxrelease;
           oldnoteByte[2] = 0;
           //  generatornumber=2;
-
-
-
-
         }
         if (noteByte == oldnoteByte[3]) {
           gorbetime[3] = maxrelease;
           oldnoteByte[3] = 0;
           //  generatornumber=3;
-
-
-
         }
         if (noteByte == oldnoteByte[4]) {
           gorbetime[4] = maxrelease;
           oldnoteByte[4] = 0;
           //   generatornumber=4;
-
-
-
-
         }
         if (noteByte == oldnoteByte[5]) {
           gorbetime[5] = maxrelease;
           oldnoteByte[5] = 0;
           //   generatornumber=5;
-
-
-
-
         }
 
         /*
@@ -552,7 +529,7 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 72:
-      level = value / 2;
+      level = value;
       menuoldal = 19;
       menukiir();
       break;

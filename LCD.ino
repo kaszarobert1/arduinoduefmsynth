@@ -2353,19 +2353,19 @@ void menukiir() {
           lcdkiir(String(lcdprint2(alg)) + "       [5]-(6)", " [1]-(2)-(3)-(4)");
           break;
         case 2:
-          lcdkiir(String(lcdprint2(alg)) + "       [5]-(6)", " [1]-(2) [3]-(4)");
+          lcdkiir(String(lcdprint2(alg)) + "    F[[1]-(2)]", " [3]-(4) [5]-(6)");
           break;
         case 3:
-          lcdkiir(String(lcdprint2(alg)) + "   [4]-(5)-(6)", "     [1]-(2)-(3)");
+          lcdkiir(String(lcdprint2(alg)) + "   [1]-(2)-(3)", "     [4]-(5)-(6)");
           break;
         case 4:
           lcdkiir(String(lcdprint2(alg)) + "  /(2)    /(5)", " [1]-(3) [4]-(6)");
           break;
         case 5:
-          lcdkiir(String(lcdprint2(alg)) + "   <<5>>-{{6}}   ", "     <PWM OP1>  ");
+          lcdkiir(String(lcdprint2(alg)) + " F[[1]-(2)-(3)] ", "    [4]-(5)-(6) ");
           break;
         case 6:
-          lcdkiir(String(lcdprint2(alg)) + "   [4] [5] [6]", "     [1] [2] [3]    ");
+          lcdkiir(String(lcdprint2(alg)) + "   [4] [5] [6]", "     [1] [2] [3]");
           break;
       }
       break;
