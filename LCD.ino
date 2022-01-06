@@ -91,7 +91,7 @@ void menukiir() {
   switch (menuoldal) {
     case 1:
       lcdkiir (pachname, "Algorithm:" + String(lcdprint3(alg)) + "  ");
-      //lcdkiir("PCH: 1   >  2     ", "     " + String(lcdprint3( eltelttime)) + "  " + String(lcdprint3( eltelttime2)) + "    ");
+      //lcdkiir("PCH: 1   >  2     ", "     " + lcdprint3( eltelttime) + "  " +lcdprint3( eltelttime2) + "    ");
       break;
     case 2:
       switch (opmenuoldal) {
@@ -114,7 +114,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "AR = " + String(lcdprint3(op1ar)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "AR = " + lcdprint3(op1ar) + "        ");
 
           break;
         case 2:
@@ -136,7 +136,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "AR = " + String(lcdprint3(op2ar)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "AR = " + lcdprint3(op2ar) + "        ");
 
           break;
         case 3:
@@ -158,7 +158,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "AR = " + String(lcdprint3(op3ar)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "AR = " + lcdprint3(op3ar) + "        ");
 
           break;
         case 4:
@@ -179,7 +179,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "AR = " + String(lcdprint3(op4ar)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "AR = " +lcdprint3(op4ar) + "        ");
 
           break;
         case 5:
@@ -200,7 +200,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "AR = " + String(lcdprint3(op5ar)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "AR = " + lcdprint3(op5ar) + "        ");
 
           break;
         case 6:
@@ -221,7 +221,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "AR = " + String(lcdprint3(op6ar)) + "        ");
+          lcdkiir("Alg" +lcdprint2(alg) + " " + ops + " OP6", "AR = " + lcdprint3(op6ar) + "        ");
 
 
           break;
@@ -243,7 +243,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHAR = " + String(lcdprint3(pichar)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHAR = " + lcdprint3(pichar) + "        ");
 
           break;
       }
@@ -271,7 +271,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "AL = " + String(lcdprint3(op1al)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "AL = " + lcdprint3(op1al) + "        ");
 
           break;
         case 2:
@@ -293,7 +293,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "AL = " + String(lcdprint3(op2al)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "AL = " + lcdprint3(op2al) + "        ");
 
           break;
         case 3:
@@ -315,7 +315,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "AL = " + String(lcdprint3(op3al)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "AL = " + lcdprint3(op3al) + "        ");
 
           break;
         case 4:
@@ -337,7 +337,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "AL = " + String(lcdprint3(op4al)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "AL = " + lcdprint3(op4al) + "        ");
 
           break;
         case 5:
@@ -360,7 +360,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "AL = " + String(lcdprint3(op5al)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "AL = " + lcdprint3(op5al) + "        ");
 
           break;
         case 6:
@@ -382,7 +382,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "PICHAL = " + String(lcdprint3(op6al)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "PICHAL = " + lcdprint3(op6al) + "        ");
 
           break;
         case 7:
@@ -405,7 +405,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "AL = " + String(lcdprint3(pichal)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "AL = " + lcdprint3(pichal) + "        ");
           break;
       }
       break;
@@ -428,7 +428,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "D1L = " + String(lcdprint3(op1d1l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "D1L = " + lcdprint3(op1d1l) + "        ");
 
 
           break;
@@ -449,7 +449,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "D1L = " + String(lcdprint3(op2d1l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "D1L = " + lcdprint3(op2d1l) + "        ");
 
           break;
         case 3: //op3d1l
@@ -469,7 +469,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "D1L = " + String(lcdprint3(op3d1l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "D1L = " + lcdprint3(op3d1l) + "        ");
 
           break;
         case 4: //op4d1l
@@ -489,7 +489,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "D1L = " + String(lcdprint3(op4d1l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "D1L = " + lcdprint3(op4d1l) + "        ");
 
           break;
         case 5: //op5d1l
@@ -509,7 +509,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "D1L = " + String(lcdprint3(op5d1l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "D1L = " + lcdprint3(op5d1l) + "        ");
 
           break;
         case 6: //op6d1l
@@ -529,7 +529,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "D1L = " + String(lcdprint3(op6d1l)));
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "D1L = " + lcdprint3(op6d1l));
 
           break;
         case 7: //op6d1l
@@ -549,7 +549,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHD1L = " + String(lcdprint3(pichd1l)));
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHD1L = " + lcdprint3(pichd1l));
 
           break;
       }
@@ -574,7 +574,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "D1R = " + String(lcdprint3(op1d1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "D1R = " + lcdprint3(op1d1r) + "        ");
 
 
           break;
@@ -596,7 +596,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "D1R = " + String(lcdprint3(op2d1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "D1R = " + lcdprint3(op2d1r) + "        ");
 
           break;
         case 3:
@@ -618,7 +618,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "D1R = " + String(lcdprint3(op3d1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "D1R = " + lcdprint3(op3d1r) + "        ");
 
           break;
         case 4:
@@ -640,7 +640,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "D1R = " + String(lcdprint3(op4d1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "D1R = " + lcdprint3(op4d1r) + "        ");
 
           break;
         case 5:
@@ -662,7 +662,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "D1R = " + String(lcdprint3(op5d1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "D1R = " + lcdprint3(op5d1r) + "        ");
 
           break;
         case 6:
@@ -683,7 +683,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "D1R = " + String(lcdprint3(op6d1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "D1R = " + lcdprint3(op6d1r) + "        ");
 
           break;
         case 7:
@@ -704,7 +704,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHD1R = " + String(lcdprint3(pichd1r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHD1R = " + lcdprint3(pichd1r) + "        ");
 
           break;
       }
@@ -732,7 +732,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "D2L = " + String(lcdprint3(op1d2l)) + "        ");
+          lcdkiir("Alg" +lcdprint2(alg) + " " + ops + " OP1", "D2L = " + lcdprint3(op1d2l) + "        ");
 
           break;
         case 2:
@@ -754,7 +754,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "D2L = " + String(lcdprint3(op2d2l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "D2L = " + lcdprint3(op2d2l) + "        ");
 
           break;
         case 3:
@@ -778,7 +778,7 @@ void menukiir() {
           }
 
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "D2L = " + String(lcdprint3(op3d2l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "D2L = " + lcdprint3(op3d2l) + "        ");
 
           break;
         case 4:
@@ -800,7 +800,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "D2L = " + String(lcdprint3(op4d2l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "D2L = " + lcdprint3(op4d2l) + "        ");
 
           break;
         case 5:
@@ -822,7 +822,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "D2L = " + String(lcdprint3(op5d2l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "D2L = " + lcdprint3(op5d2l) + "        ");
           break;
         case 6:
           //op6d2l
@@ -843,7 +843,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "D2L = " + String(lcdprint3(op6d2l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "D2L = " + lcdprint3(op6d2l) + "        ");
 
           break;
         case 7:
@@ -866,7 +866,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHD2L = " + String(lcdprint3(pichd2l)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHD2L = " + lcdprint3(pichd2l) + "        ");
           break;
       }
       break;
@@ -890,7 +890,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "D2R = " + String(lcdprint3(op1d2r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "D2R = " + lcdprint3(op1d2r) + "        ");
 
           break;
         case 2:
@@ -912,7 +912,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "D2R = " + String(lcdprint3(op2d2r)) + "        ");
+          lcdkiir("Alg" +lcdprint2(alg) + " " + ops + " OP2", "D2R = " + lcdprint3(op2d2r) + "        ");
 
           break;
         case 3:
@@ -933,7 +933,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "D2R = " + String(lcdprint3(op3d2r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "D2R = " + lcdprint3(op3d2r) + "        ");
 
           break;
         case 4:
@@ -954,7 +954,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "D2R = " + String(lcdprint3(op4d2r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "D2R = " + lcdprint3(op4d2r) + "        ");
 
           break;
         case 5:
@@ -975,7 +975,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "D2R = " + String(lcdprint3(op5d2r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "D2R = " + lcdprint3(op5d2r) + "        ");
 
           break;
         case 6:
@@ -996,7 +996,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "D2R = " + String(lcdprint3(op6d2r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "D2R = " + lcdprint3(op6d2r) + "        ");
           break;
         case 7:
           //pichd2r
@@ -1017,7 +1017,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHD2R = " + String(lcdprint3(pichd2r)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHD2R = " + lcdprint3(pichd2r) + "        ");
 
           break;
       }
@@ -1043,7 +1043,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "RR = " + String(lcdprint3(op1rr)) + "        ");
+          lcdkiir("Alg" +lcdprint2(alg) + " " + ops + " OP1", "RR = " + lcdprint3(op1rr) + "        ");
 
           break;
         case 2:
@@ -1063,7 +1063,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "RR = " + String(lcdprint3(op2rr)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "RR = " + lcdprint3(op2rr) + "        ");
 
           break;
         case 3:
@@ -1083,7 +1083,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "RR = " + String(lcdprint3(op3rr)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "RR = " + lcdprint3(op3rr) + "        ");
 
           break;
         case 4:
@@ -1103,7 +1103,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "RR = " + String(lcdprint3(op4rr)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "RR = " + lcdprint3(op4rr) + "        ");
 
           break;
         case 5:
@@ -1123,7 +1123,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "RR = " + String(lcdprint3(op5rr)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "RR = " + lcdprint3(op5rr) + "        ");
 
           break;
         case 6:
@@ -1143,7 +1143,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "RR = " + String(lcdprint3(op6rr)));
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "RR = " + lcdprint3(op6rr));
 
 
           break;
@@ -1166,7 +1166,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHRR = " + String(lcdprint3(pichrr)));
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHRR = " + lcdprint3(pichrr));
 
           break;
       }
@@ -1190,7 +1190,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "RL = " + String(lcdprint3(op1rl)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "RL = " + lcdprint3(op1rl) + "        ");
 
           break;
         case 2:
@@ -1210,7 +1210,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "RL = " + String(lcdprint3(op2rl)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "RL = " + lcdprint3(op2rl) + "        ");
 
 
           break;
@@ -1231,7 +1231,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "RL = " + String(lcdprint3(op3rl)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "RL = " + lcdprint3(op3rl) + "        ");
 
           break;
         case 4:
@@ -1271,7 +1271,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "RL = " + String(lcdprint3(op5rl)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "RL = " + lcdprint3(op5rl) + "        ");
 
           break;
         case 6:
@@ -1291,7 +1291,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "RL = " + String(lcdprint3(op6rl)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "RL = " + lcdprint3(op6rl) + "        ");
 
           break;
         case 7:
@@ -1312,7 +1312,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " PCH", "PICHRL = " + String(lcdprint3(pichrl)) + "        ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " PCH", "PICHRL = " + lcdprint3(pichrl) + "        ");
 
           break;
       }
@@ -1758,7 +1758,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Op1: FRQ >FIX     ", "     " + String(lcdprint3(op1generatorfreq)) + "  " + String(lcdprint3(notefixedop1)) + "    ");
+          lcdkiir("Op1: FRQ >FIX     ", "     " + lcdprint3(op1generatorfreq) + "  " + lcdprint3(notefixedop1) + "    ");
           break;
         case 2:
           if (inc) {
@@ -1777,7 +1777,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Op2: FRQ >FIX     ", "     " + String(lcdprint3(op2generatorfreq)) + "  " + String(lcdprint3(notefixedop2)) + "    ");
+          lcdkiir("Op2: FRQ >FIX     ", "     " + lcdprint3(op2generatorfreq) + "  " + lcdprint3(notefixedop2) + "    ");
           break;
         case 3:
           if (inc) {
@@ -1796,7 +1796,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Op3: FRQ >FIX     ", "     " + String(lcdprint3(op3generatorfreq)) + "  " + String(lcdprint3(notefixedop3)) + "    ");
+          lcdkiir("Op3: FRQ >FIX     ", "     " + lcdprint3(op3generatorfreq) + "  " + lcdprint3(notefixedop3) + "    ");
           break;
         case 4:
           if (inc) {
@@ -1815,7 +1815,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Op4: FRQ >FIX     ", "     " + String(lcdprint3(op4generatorfreq)) + "  " + String(lcdprint3(notefixedop4)) + "    ");
+          lcdkiir("Op4: FRQ >FIX     ", "     " + lcdprint3(op4generatorfreq) + "  " + lcdprint3(notefixedop4) + "    ");
           break;
         case 5:
           if (inc) {
@@ -1834,7 +1834,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Op5: FRQ >FIX     ", "     " + String(lcdprint3(op5generatorfreq)) + "  " + String(lcdprint3(notefixedop5)) + "    ");
+          lcdkiir("Op5: FRQ >FIX     ", "     " + lcdprint3(op5generatorfreq) + "  " + lcdprint3(notefixedop5) + "    ");
           break;
         case 6:
           if (inc) {
@@ -1853,7 +1853,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Op6: FRQ >FIX     ", "     " + String(lcdprint3(op6generatorfreq)) + "  " + String(lcdprint3(notefixedop6)) + "    ");
+          lcdkiir("Op6: FRQ >FIX     ", "     " + lcdprint3(op6generatorfreq) + "  " + lcdprint3(notefixedop6) + "    ");
           break;
         case 7:
           if (inc) {
@@ -1872,7 +1872,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("PCH: PC3 >PC4     ", "     " + String(lcdprint3( pichop3)) + "  " + String(lcdprint3( pichop4)) + "    ");
+          lcdkiir("PCH: PC3 >PC4     ", "     " + lcdprint3( pichop3) + "  " + lcdprint3( pichop4) + "    ");
           pichgorbeinit();
           break;
       }
@@ -2326,7 +2326,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("Alg" + String("FREQ DIV        "), String(lcdprint3(szorzo)) + "             ");
+      lcdkiir("FREQ DIV        ", lcdprint3(szorzo) + "             ");
       hangokinit();
       break;
 
@@ -2390,23 +2390,23 @@ void menukiir() {
       break;
     case 20:
       if (inc) {
-        if (pichkezd < 127) {
-          pichkezd++;
+        if (frame < 127) {
+          frame++;
         } else {
-          pichkezd = 1;
+          frame = 1;
         }
         inc = false;
       }
       if (dec) {
-        if (pichkezd > 0) {
-          pichkezd--;
+        if (frame > 0) {
+          frame--;
         } else {
-          pichkezd = 127;
+          frame = 127;
         }
         dec = false;
       }
-      lcdkiir("GLO: PCH0< PEG     ", "     " + String(lcdprint3(pichkezd)) + "   " + String(lcdprint3(picheglevel / 500)) + "    ");
-      pichgorbeinit();
+       lcdkiir("EG SPEED        ", lcdprint3(frame) + "             ");
+      
       break;
     case 21:
       if (inc) {
@@ -2425,7 +2425,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("GLO: PCH0 >PEG     ", "     " + String(lcdprint3(pichkezd)) + "   " + String(lcdprint3(picheglevel / 8192)) + "    ");
+      lcdkiir("PICHEG LEVEL    ", lcdprint3(picheglevel) + "             ");
 
       pichgorbeinit();
       break;
@@ -2827,7 +2827,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("GLO: MX1 >MI1     ", "     " + String(lcdprint3(lfo1max)) + "  " + String(lcdprint3(lfo1min)) + "    ");
+     
       break;
     case 32:
       if (inc) {
@@ -2949,7 +2949,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("GLO: LFQ2<       ", "     " + String(lcdprint3(lfo2freq)) + "      "  + "    ");
+       lcdkiir("LFO FREQ        ", lcdprint3(lfo2freq) + "             ");
       break;
 
 
@@ -2995,8 +2995,7 @@ void menukiir() {
       }
 
 
-      lcdkiir("GLO: TVA >LFO2       ", "     " + String(lcdprint3(gorbeszorzo)) + "   " + String(lcdprint3( lfo2volume)) + "    ");
-
+     lcdkiir("LFO VOLUME      ", lcdprint3(modulation) + "             (0)");
       break;
 
 
@@ -3019,7 +3018,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("MOD<       ", "      " + String(lcdprint3(modulation)) + "   " + String(lcdprint3(modulation)) + "    ");
+    lcdkiir("MODULATION MODE ", lcdprint3(modulation) + "             (0)");
 
       break;
     case 41:
@@ -3041,7 +3040,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP1", "STEP BIT = " + String(lcdprint3(lep1)) + "  ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "STEP BIT = " + lcdprint3(lep1) + "  ");
 
           break;
         case 2:
@@ -3061,7 +3060,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP2", "STEP BIT = " + String(lcdprint3(lep2)) + "  ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "STEP BIT = " + lcdprint3(lep2) + "  ");
 
           break;
         case 3:
@@ -3081,7 +3080,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP3", "STEP BIT = " + String(lcdprint3(lep3)) + "  ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "STEP BIT = " + lcdprint3(lep3) + "  ");
           break;
         case 4:
           if (inc) {
@@ -3100,7 +3099,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP4", "STEP BIT = " + String(lcdprint3(lep4)) + "  ");
+          lcdkiir("Alg" +lcdprint2(alg) + " " + ops + " OP4", "STEP BIT = " + lcdprint3(lep4) + "  ");
           break;
         case 5:
           if (inc) {
@@ -3119,7 +3118,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP5", "STEP BIT = " + String(lcdprint3(lep5)) + "  ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "STEP BIT = " + lcdprint3(lep5) + "  ");
           break;
         case 6:
           if (inc) {
@@ -3139,7 +3138,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + String(lcdprint2(alg)) + " " + ops + " OP6", "STEP BIT = " + String(lcdprint3(lep6)) + "  ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "STEP BIT = " + lcdprint3(lep6) + "  ");
           break;
       }
       break;
@@ -3160,7 +3159,7 @@ void menukiir() {
         }
         dec = false;
       }
-      lcdkiir("Save: PRG<       ", "      " + String(lcdprint3(saveprog)) + "  " + savestring + "    ");
+      lcdkiir("Save: PRG<       ", "      " + lcdprint3(saveprog) + "  " + savestring + "    ");
       break;
 
     case 43:
@@ -3178,7 +3177,7 @@ void menukiir() {
         savestring = "NO";
         dec = false;
       }
-      lcdkiir("Save: PRG >      ", "      " + String(lcdprint3(saveprog)) + "  " + savestring + "  ");
+      lcdkiir("Save: PRG >      ", "      " + lcdprint3(saveprog) + "  " + savestring + "  ");
       break;
 
 

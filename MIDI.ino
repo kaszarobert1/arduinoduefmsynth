@@ -550,6 +550,11 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 41;
       menukiir();
       break;
+    case 101:
+        frame=value;
+        menuoldal = 20;
+        menukiir();
+    break;
     case 102:
       modulation = value / 4;
       menuoldal = 40;
