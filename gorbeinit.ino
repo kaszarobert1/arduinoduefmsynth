@@ -14,7 +14,7 @@ void pichgorbeinit() {
     }
   }
   else {
-    pichgorbe[0] = op1al;
+    pichgorbe[0] = pichal;
   }
   for (uint16_t i = 0; i <= pichd1r; i++)
   {
@@ -78,7 +78,6 @@ void tvagorbegenerator (uint16_t ar, uint16_t al, uint16_t d1l, uint16_t d1r, ui
   d1l *= gorbeszorzo;
   d2l *= gorbeszorzo;
   rl *= gorbeszorzo;
-  // ar*=gorbeszorzo;
   rr *= released;
 
   for (int i = 0; i < GORBE_SIZE; i++)
