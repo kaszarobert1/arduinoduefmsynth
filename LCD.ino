@@ -2167,7 +2167,7 @@ void menukiir() {
             dec = false;
           }
 
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "FREQFIX = " + lcdprint3(op1generatorfreqfix >> 4) + "      ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "FREQFIX =" + lcdprint7(op1generatorfreqfix));
           break;
         case 2:
           if (inc) {
@@ -2186,7 +2186,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "FREQFIX = " + lcdprint3(op2generatorfreqfix >> 4) + "      ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "FREQFIX =" + lcdprint7(op2generatorfreqfix));
           break;
         case 3:
           if (inc) {
@@ -2205,7 +2205,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "FREQFIX = " + lcdprint3(op3generatorfreqfix >> 4) + "      ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "FREQFIX =" + lcdprint7(op3generatorfreqfix));
           break;
         case 4:
           if (inc) {
@@ -2224,7 +2224,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "FREQFIX = " + lcdprint3(op4generatorfreqfix >> 4) + "      ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "FREQFIX =" + lcdprint7(op4generatorfreqfix));
           break;
         case 5:
           if (inc) {
@@ -2243,7 +2243,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "FREQFIX = " + lcdprint3(op5generatorfreqfix >> 4) + "      ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "FREQFIX =" + lcdprint7(op5generatorfreqfix));
           break;
 
         case 6:
@@ -2263,7 +2263,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "FREQFIX = " + lcdprint3(op6generatorfreqfix >> 4) + "      ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "FREQFIX =" + lcdprint7(op6generatorfreqfix));
           break;
         case 7:
           if (inc) {
@@ -2449,7 +2449,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "DETUNE = " + lcdprint3(op1detune >> 12)+ "    ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP1", "DETUNE = " + lcdprint7(op1detune));
 
           break;
         case 2:
@@ -2469,7 +2469,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "DETUNE = " + lcdprint3(op2detune >> 12)+ "    ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP2", "DETUNE = " + lcdprint7(op2detune));
 
           break;
         case 3:
@@ -2489,7 +2489,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "DETUNE = " + lcdprint3(op3detune >> 12)+ "    ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP3", "DETUNE = " + lcdprint7(op3detune));
 
 
           break;
@@ -2510,7 +2510,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "DETUNE = " + lcdprint3(op4detune >> 12)+ "    ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP4", "DETUNE = " + lcdprint7(op4detune));
 
           break;
         case 5:
@@ -2530,7 +2530,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "DETUNE = " + lcdprint3(op5detune >> 12)+ "    ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP5", "DETUNE = " + lcdprint7(op5detune));
 
           break;
         case 6:
@@ -2550,7 +2550,7 @@ void menukiir() {
             }
             dec = false;
           }
-          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "DETUNE = " + lcdprint3(op6detune >> 12) + "    ");
+          lcdkiir("Alg" + lcdprint2(alg) + " " + ops + " OP6", "DETUNE = " + lcdprint7(op6detune));
           break;
         case 7:
           //notset
@@ -3142,7 +3142,72 @@ void menukiir() {
           break;
       }
       break;
-    case 42:
+
+ case 42:
+
+      if (inc) {
+        if (limitplus < 65535) {
+          limitplus+=1024;
+        } else {
+          limitplus = -1;
+        }
+        limitminus=-limitplus;
+        inc = false;
+      }
+      if (dec) {
+        if (limitplus > -1) {
+          limitplus-=1024;
+        } else {
+          limitplus = 65535;
+        }
+        limitminus=-limitplus;
+        dec = false;
+      }
+    lcdkiir("LIMITGAIN       ", lcdprint6(limitplus) + "     (65535)");
+      break;
+      case 43:
+
+      if (inc) {
+        if (reverbtime < 4096) {
+          reverbtime+=128;
+        } else {
+          reverbtime = 0;
+        }      
+        inc = false;
+      }
+      if (dec) {
+        if (reverbtime > 0) {
+          reverbtime-=128;
+        } else {
+          reverbtime = 4096;
+        }     
+        dec = false;
+      }
+    lcdkiir("REVERBTIME      ", lcdprint6(reverbtime) + "    (1024)");
+      break;
+
+  case 44:
+
+      if (inc) {
+        if (ofset < 65536) {
+          ofset+=128;
+        } else {
+          ofset = 0;
+        }      
+        inc = false;
+      }
+      if (dec) {
+        if (ofset > 0) {
+          ofset-=128;
+        } else {
+          ofset = 65536;
+        }     
+        dec = false;
+      }
+    lcdkiir("OFSET      ", lcdprint6(ofset) + "    (2048)");
+      break;
+      
+    case 49:
       if (inc) {
         if (saveprog < 10) {
           saveprog++;
@@ -3162,7 +3227,7 @@ void menukiir() {
       lcdkiir("Save: PRG<       ", "      " + lcdprint3(saveprog) + "  " + savestring + "    ");
       break;
 
-    case 43:
+    case 50:
       if (inc) {
         if (savestring == "YES") {
           save();
@@ -3206,17 +3271,53 @@ String lcdprint2(int cc)
   return eredmeny;
 }
 
-
-/*
-  void lcdprint4(int cc)
+String lcdprint7(int cc)
   {
-  lcd.print(cc / 1000);
-  lcd.print((cc % 1000) / 100);
-
-  lcd.print((cc % 100) / 10);
-  lcd.print(cc % 10);
+  String eredmeny = "";
+  eredmeny +=cc / 1000000;
+  eredmeny +=(cc % 1000000) / 100000;
+  eredmeny +=(cc % 100000) / 10000;
+  eredmeny +=(cc % 10000) / 1000;
+  eredmeny +=(cc % 1000) / 100;
+  eredmeny +=(cc % 100) / 10;
+  eredmeny +=cc % 10;
+  return eredmeny;
   }
-*/
+
+String lcdprint6(int cc)
+  {
+  String eredmeny = "";
+  eredmeny +=cc / 100000;
+  eredmeny +=(cc % 100000) / 10000;
+  eredmeny +=(cc % 10000) / 1000;
+  eredmeny +=(cc % 1000) / 100;
+  eredmeny +=(cc % 100) / 10;
+  eredmeny +=cc % 10;
+  return eredmeny;
+  }
+
+String lcdprint5(int cc)
+  {
+  String eredmeny = "";
+  eredmeny +=cc / 10000;
+  eredmeny +=(cc % 10000) / 1000;
+  eredmeny +=(cc % 1000) / 100;
+  eredmeny +=(cc % 100) / 10;
+  eredmeny +=cc % 10;
+  return eredmeny;
+  }
+
+
+  String lcdprint4(int cc)
+  {
+  String eredmeny = "";
+  eredmeny +=cc / 1000;
+  eredmeny +=(cc % 1000) / 100;
+  eredmeny +=(cc % 100) / 10;
+  eredmeny +=cc % 10;
+  return eredmeny;
+  }
+
 String lcdprint3(int cc)
 {
   String eredmeny = "";

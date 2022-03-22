@@ -57,7 +57,7 @@ void vezerlok() {
   //menufel
   if (elozogomb1val != gomb1val) {
     if (gomb1val == false) {
-      if (menuoldal < 41)
+      if (menuoldal < 50)
       {
         menuoldal++;
       } else {
@@ -92,7 +92,7 @@ void vezerlok() {
       {
         menuoldal--;
       } else {
-        menuoldal = 41;
+        menuoldal = 50;
       }
       menukiir();
     }

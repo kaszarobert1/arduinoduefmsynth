@@ -64,10 +64,12 @@ void serialEvent() {
         */
         break;
       case midi:: ProgramChange:
+      /*
         noteByte = MIDI2.getData1();
         velocityByte = MIDI2.getData2();
         programchange(noteByte);
         break;
+      */
       case midi:: AfterTouchPoly:
 
         break;
@@ -75,7 +77,7 @@ void serialEvent() {
         noteByte = MIDI2.getData1();
         velocityByte = MIDI2.getData2();
         //pichband(44, noteByte);
-        parameterchange2(noteByte, velocityByte);
+        parameterchange2();
         /*
           Serial.print(noteByte);
           Serial.print(" ");
@@ -251,8 +253,9 @@ void pichband() {
 
 
 */
-void parameterchange2(byte parameter, byte value) {
-  switch (parameter) {
+void parameterchange2() {
+  byte value = velocityByte;
+  switch (noteByte) {
     case 0:
       switch (opmenuoldal) {
         case 1: op1generatorfreqfix = value << 15; break;
@@ -357,7 +360,7 @@ void parameterchange2(byte parameter, byte value) {
             case 5: pichop5 = 1; break;
             case 6: pichop6 = 1; break;
           }
-           menuoldal = 23;
+          menuoldal = 23;
         }
         if (value == 33)
         {
@@ -528,6 +531,32 @@ void parameterchange2(byte parameter, byte value) {
       menuoldal = 38;
       menukiir();
       break;
+    case 46:
+      limitplus = value<<10;
+      limitminus = -limitplus;
+      menuoldal = 42;
+      menukiir();
+      break;
+   case 47:
+      reverbtime2 = value<<5; 
+      if (reverbtime>3000){reverbtime=3000;}
+      if (reverbtime2>3000){reverbtime2=3000;}
+      reverbtime = value<<5; 
+      delaybufferindex = 2;
+      delaybufferindex2 = 3; 
+      elozodelaybufferindex=0;
+      elozodelaybufferindex2=1;
+      for(int i=0;i<3000;i++){
+      delaybuffer[i]=0;
+      }
+      menuoldal = 43;
+      menukiir();
+      break;
+    case 48:
+      ofset = value<<10;  
+      menuoldal = 44;
+      menukiir();
+      break;
     case 72:
       level = value;
       menuoldal = 19;
@@ -551,10 +580,10 @@ void parameterchange2(byte parameter, byte value) {
       menukiir();
       break;
     case 101:
-        frame=value;
-        menuoldal = 20;
-        menukiir();
-    break;
+      frame = value;
+      menuoldal = 20;
+      menukiir();
+      break;
     case 102:
       modulation = value / 4;
       menuoldal = 40;
@@ -750,7 +779,7 @@ void sendmidiclock() {
   */
 
 
-  Serial2.write(0xF8);
+   Serial2.write(0xF8);
 }
 
 

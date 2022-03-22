@@ -5,31 +5,32 @@ void pichgorbeinit() {
   
   for (int i = 0; i < GORBE_SIZE; i++)
   {
-    pichgorbe[i] = 0;
+    pichgorbe[i] = 64;
   }
   if (pichar > 0) {
     for (uint16_t i = 0; i <= pichar; i++)
     {
-      pichgorbe[i] = (pichal - pichkezd) / pichar * i + pichkezd;
+     
+      pichgorbe[i] = (pichal * i +pichkezd*(pichar-i))/pichar-64;
     }
   }
   else {
-    pichgorbe[0] = pichal;
+    pichgorbe[0] = pichal-64;
   }
   for (uint16_t i = 0; i <= pichd1r; i++)
   {
-    pichgorbe[pichar + i] = (pichal - (pichal - pichd1l) * i / pichd1r);
+    pichgorbe[pichar + i] = (pichal - (pichal - pichd1l) * i / pichd1r)-64;
   }
   uint16_t segedindex = pichar + pichd1r;
   for (uint16_t i = 0; i <= pichd2r; i++)
   {
-    pichgorbe[segedindex + i] = (pichd1l - (pichd1l - pichd2l) * i / pichd2r);
+    pichgorbe[segedindex + i] = (pichd1l - (pichd1l - pichd2l) * i / pichd2r)-64;
   }
   segedindex = pichar + pichd1r + pichd2r;
   uint16_t temprr = released * pichrr;
   for (uint16_t i = 0; i <= temprr; i++)
   {
-    pichgorbe[segedindex + i] = (pichd2l - (pichd2l - pichrl) * i / temprr);
+    pichgorbe[segedindex + i] = (pichd2l - (pichd2l - pichrl) * i / temprr)-64;
   }
 }
 
