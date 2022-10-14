@@ -126,11 +126,10 @@ void opgorbekiir(uint16_t  opgorbe[], String nev) {
     Serial.print(" ") ;
   }
   Serial.print("\n");
-
 }
+
 void maxreleaseset() {
-  maxrelease0 = op1ar + op1d1r + op1d2r;
-  if (maxrelease<maxrelease0) {maxrelease= maxrelease0;}
+  maxrelease = op1ar + op1d1r + op1d2r;
   maxrelease1 = op2ar + op2d1r + op2d2r;
   if (maxrelease<maxrelease1) {maxrelease= maxrelease1;}
   maxrelease2 = op3ar + op3d1r + op3d2r;
@@ -141,10 +140,8 @@ void maxreleaseset() {
   if (maxrelease<maxrelease4) {maxrelease= maxrelease4;}
   maxrelease5 = op6ar + op6d1r + op6d2r;
   if (maxrelease<maxrelease5) {maxrelease= maxrelease5;}
- 
- 
-  maxtime0 = maxrelease + op1rr;+1;
-  if (maxtime<maxtime0) {maxtime= maxtime0;}
+  
+  maxtime = maxrelease + op1rr+1;
   maxtime1 = maxrelease + op2rr+1;
    if (maxtime<maxtime1) {maxtime= maxtime1;}
   maxtime2 = maxrelease + op3rr+1;

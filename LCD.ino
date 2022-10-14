@@ -3206,6 +3206,26 @@ void menukiir() {
       }
     lcdkiir("OFSET      ", lcdprint6(ofset) + "    (2048)");
       break;
+      case 45:
+
+      if (inc) {
+        if (released < 16) {
+          released++;;
+        } else {
+          released = 0;
+        }      
+        inc = false;
+      }
+      if (dec) {
+        if (released > 0) {
+          ofset--;
+        } else {
+        released = 16;
+        }     
+        dec = false;
+      }
+    lcdkiir("RELEASED   ", lcdprint3(released) + "       (2)");
+      break;
       
     case 49:
       if (inc) {

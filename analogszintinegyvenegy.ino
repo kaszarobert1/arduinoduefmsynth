@@ -1,3 +1,6 @@
+
+
+
 //Arduino Due fm polyphonic synthesizer 2019-2020 by Robert Laszlo Kasza
 /*
   #pragma GCC push_options
@@ -427,6 +430,22 @@ byte lep5 = 22;
 byte lep6 = 22;
 
 void setup() {
+#define SYS_BOARD_PLLAR (CKGR_PLLAR_ONE | CKGR_PLLAR_MULA(18UL) | CKGR_PLLAR_PLLACOUNT(0x3fUL) | CKGR_PLLAR_DIVA(1UL))
+#define SYS_BOARD_MCKR ( PMC_MCKR_PRES_CLK_2 | PMC_MCKR_CSS_PLLA_CLK)
+        
+/* Set FWS according to SYS_BOARD_MCKR configuration */
+EFC0->EEFC_FMR = EEFC_FMR_FWS(4); //4 waitstate flash access
+EFC1->EEFC_FMR = EEFC_FMR_FWS(4);
+
+/* Initialize PLLA to (15+1)*6=96MHz */
+PMC->CKGR_PLLAR = SYS_BOARD_PLLAR;
+while (!(PMC->PMC_SR & PMC_SR_LOCKA)) {}
+
+PMC->PMC_MCKR = SYS_BOARD_MCKR;
+while (!(PMC->PMC_SR & PMC_SR_MCKRDY)) {}  
+  
+// your other setup code goes here
+  
   pinMode(gomb1, INPUT);
   pinMode(gomb2, INPUT);
   pinMode(gomb3, INPUT);
@@ -453,7 +472,9 @@ void setup() {
   MIDI2.turnThruOff();
   Serial.begin(115200);
   Serial.print("Start serial!");
-  Serial2.begin(31250);
+  //Serial2.begin(31250);
+  //Serial2.begin(27400);
+  Serial2.begin(23100);
   // maxtime = maxtime;
   op1gorbeinit();
   op2gorbeinit();
@@ -1205,10 +1226,10 @@ void loop() {
         if (delaybufferindex >= reverbtime) {
           delaybufferindex = 0;
         }
-        /*
+        
         if (bufferbe>limitplus){bufferbe=limitplus;}
         if (bufferbe<limitminus){bufferbe=limitminus;}
-        */
+        
         buffer[ bufferindex] = bufferbe;
       }
       else {
@@ -1433,8 +1454,8 @@ void loop() {
       */  
 
         //stereo mode
-      /*  if (bufferbe>limitplus){bufferbe=limitplus;}
-        if (bufferbe<limitminus){bufferbe=limitminus;}*/
+        if (bufferbe>limitplus){bufferbe=limitplus;}
+        if (bufferbe<limitminus){bufferbe=limitminus;}
         buffer[bufferindex] = bufferbe;
 
       }
@@ -1592,8 +1613,10 @@ void hangokinit() {
     int cisz = 6052; //6051,651716040021
     int c = 5712;
     //21,83272584945816
-  *//*
+  */
+  
   //6os-g
+  /*
   int h = 10435;
   int b = 9850;
   int a = 9297;
@@ -1610,7 +1633,7 @@ void hangokinit() {
   //5712->5528
   //6os-jav
 */
-
+/*
   int h = 12410;
   int b = 11714;
   int a = 11056;
@@ -1625,22 +1648,22 @@ void hangokinit() {
   int c = 6574;
   //21,83272584945816
   //5712->5528
-
-  /*
-    uint32_t c = 5712;
-    int lepes = c / 12;
-    uint32_t cisz = c * 25 / 24;
-    uint32_t d = c * 9 / 8;
-    uint32_t disz = c * 6/ 5 ;
-    uint32_t e = c * 5/ 4 ;
-    uint32_t f = c * 4/ 3 ;
-    uint32_t fisz = c * 25/ 18 ;
-    uint32_t g = c * 3/ 2 ;
-    uint32_t gisz = c * 8/ 5 ;
-    uint32_t a = c * 5/ 3 ;
-    uint32_t b = c * 9/ 5 ;
-    uint32_t h = c * 15/ 8 ;
-  */
+*/
+  
+    float c = 5800;
+    //int lepes = c / 12;
+    float cisz = c * 25 / 24;
+    float d = c * 9 / 8;
+    float disz = c * 6/ 5 ;
+    float e = c * 5/ 4 ;
+    float f = c * 4/ 3 ;
+    float fisz = c * 25/ 18 ;
+    float g = c * 3/ 2 ;
+    float gisz = c * 8/ 5 ;
+    float a = c * 5/ 3 ;
+    float b = c * 9/ 5 ;
+    float h = c * 15/ 8 ;
+  
   //Tune global pitch
   int szorzo2 = szorzo;
   for (int i = 0; i < 127; i += 12)

@@ -532,28 +532,40 @@ void parameterchange2() {
       menukiir();
       break;
     case 46:
-      limitplus = value<<10;
+      limitplus = value << 10;
       limitminus = -limitplus;
       menuoldal = 42;
       menukiir();
       break;
-   case 47:
-      reverbtime2 = value<<5; 
-      if (reverbtime>3000){reverbtime=3000;}
-      if (reverbtime2>3000){reverbtime2=3000;}
-      reverbtime = value<<5; 
+    case 47:
+      reverbtime2 = value << 5;
+      if (reverbtime > 3000) {
+        reverbtime = 3000;
+      }
+      if (reverbtime2 > 3000) {
+        reverbtime2 = 3000;
+      }
+      reverbtime = value << 5;
       delaybufferindex = 2;
-      delaybufferindex2 = 3; 
-      elozodelaybufferindex=0;
-      elozodelaybufferindex2=1;
-      for(int i=0;i<3000;i++){
-      delaybuffer[i]=0;
+      delaybufferindex2 = 3;
+      elozodelaybufferindex = 0;
+      elozodelaybufferindex2 = 1;
+      for (int i = 0; i < 3000; i++) {
+        delaybuffer[i] = 0;
       }
       menuoldal = 43;
       menukiir();
       break;
     case 48:
-      ofset = value<<10;  
+    /*
+      ofset = value << 10;
+      */
+      released=value >> 4;
+      menuoldal = 45;
+      menukiir();
+      break;
+      case 49:
+      ofset = value << 10;
       menuoldal = 44;
       menukiir();
       break;
@@ -731,11 +743,11 @@ void parameterchange2() {
       break;
     case 117:
       switch (opmenuoldal) {
-        case 1:  op1rr = value * 4; break;
-        case 2:  op2rr = value * 4; break;
+        case 1: op1rr = value * 4; break;
+        case 2: op2rr = value * 4; break;
         case 3: op3rr = value * 4; break;
-        case 4:  op4rr = value * 4; break;
-        case 5:  op5rr = value * 4; break;
+        case 4: op4rr = value * 4; break;
+        case 5: op5rr = value * 4; break;
         case 6: op6rr = value * 4; break;
         case 7: pichrr = value * 4; break;
       }
@@ -753,6 +765,7 @@ void parameterchange2() {
 }
 
 void opgorbeinittry() {
+  //preroll
   if (ido - elozoinit > 1000) {
     switch (opmenuoldal) {
       case 1: op1gorbeinit(); break;
@@ -779,7 +792,7 @@ void sendmidiclock() {
   */
 
 
-   Serial2.write(0xF8);
+  Serial2.write(0xF8);
 }
 
 
